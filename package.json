@@ -1,0 +1,31 @@
+{
+  "name": "matside",
+  "version": "1.0.0",
+  "description": "Samling av oppskrifter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elgskred/Matside.git"
+  },
+  "keywords": [
+    "mat",
+    "oppskrifter"
+  ],
+  "author": "Christoffer Antonsen, Mathias Sommerstad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elgskred/Matside/issues"
+  },
+  "homepage": "https://github.com/elgskred/Matside#readme",
+  "dependencies": {
+    "async": "^2.1.4",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-react-views": "^0.10.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}
