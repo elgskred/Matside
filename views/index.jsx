@@ -5,7 +5,10 @@ class HelloMessage extends React.Component {
   render() {
     return (
       <DefaultLayout title={this.props.title}>
-        <div>Hello {this.props.name}</div>
+        <div>Hello {this.props.name} <br />
+        	Occupation {this.props.occupation} <br />
+        	Age of {this.props.name} is {this.props.age} <br />
+        </div>
       </DefaultLayout>
     );
   }
