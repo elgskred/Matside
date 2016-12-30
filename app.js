@@ -1,6 +1,7 @@
 // app.js
 var express = require('express');
 var reactViews = require('express-react-views');
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -8,6 +9,8 @@ var app = express();
 app.set('view engine', 'js');
 app.engine('js', reactViews.createEngine());
 
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static(__dirname + '/public'));
 
 var routes = require('./routes');
@@ -27,7 +30,8 @@ app.get('/', function (req, res) {
 });
 
 app.post('/oppskrift', function (req, res) {
-	console.log("Received");
+	console.log(req.body);
+	res.send("OK");
 });
 
 

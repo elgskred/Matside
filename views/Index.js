@@ -30,7 +30,7 @@ class TodoApp extends React.Component {
       url: "http://localhost:3333/oppskrift",
       data: this.state,
       success: (data) => {
-        console.log("OK");
+        console.log(data);
       }
     });
 

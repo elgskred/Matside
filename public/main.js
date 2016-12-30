@@ -20504,7 +20504,7 @@ var TodoApp = (function (_React$Component) {
         url: "http://localhost:3333/oppskrift",
         data: this.state,
         success: function success(data) {
-          console.log("OK");
+          console.log(data);
         }
       });
     }
