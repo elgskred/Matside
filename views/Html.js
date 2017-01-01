@@ -1,13 +1,24 @@
 var React = require('react');
 var ReactDOMServer = require('react-dom/server');
 var Index = require('./Index');
+var List = require('./List');
 
 class Html extends React.Component {
 
   render() {
     var data = this.props.data;
-    var contentHtml = ReactDOMServer.renderToString(<Index {...data}/>);
-    var initScript = 'main(' + JSON.stringify(data).replace(/script/g, 'scr"+"ipt') + ')';
+    var rend = this.props.render;
+    if (rend == 'Index') {
+      console.log("Index");
+      var contentHtml = ReactDOMServer.renderToString(<Index {...data}/>);
+      var initScript = 'main(' + JSON.stringify(data).replace(/script/g, 'scr"+"ipt') + ')';
+    } else if (rend == 'List') {
+      var contentHtml = ReactDOMServer.renderToString(<List {...data}/>);
+      var initScript = 'ListScript(' + JSON.stringify(data).replace(/script/g, 'scr"+"ipt') + ')';
+      console.log("List");
+    };
+    
+    
 
     return (
       <html lang="en">

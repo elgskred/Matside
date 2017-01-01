@@ -2,6 +2,16 @@
 var express = require('express');
 var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
+var async = require('async');
+var mysql = require('mysql');
+var sizeof = require('object-sizeof');
+
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'matUser',
+  password : 'mat',
+  database : 'mat'
+});
 
 var app = express();
 
@@ -15,25 +25,12 @@ app.use(express.static(__dirname + '/public'));
 
 var routes = require('./routes');
 
-//app.get('/', routes.index);
-app.get('/', function (req, res) {
-  var initialState = {
-    items: [
-      'document your code',
-      'drop the kids off at the pool',
-      '</script><script>alert(666)</script>'
-    ],
-    text: ''
-  };
-  console.log("Get");
-  res.render('Html', { data: initialState });
-});
-
-app.post('/oppskrift', function (req, res) {
-	console.log(req.body);
-	res.send("OK");
-});
-
+//Front page
+app.get('/', routes.index);
+//Submited recipe
+app.post('/oppskrift', routes.oppskrift);
+//Se oppskrifter
+app.get('/list', routes.list);
 
 
 

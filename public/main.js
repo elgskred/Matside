@@ -20466,13 +20466,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var React = require('react');
 
-var TodoApp = (function (_React$Component) {
-  _inherits(TodoApp, _React$Component);
+var Submit = (function (_React$Component) {
+  _inherits(Submit, _React$Component);
 
-  function TodoApp() {
-    _classCallCheck(this, TodoApp);
+  function Submit() {
+    _classCallCheck(this, Submit);
 
-    _get(Object.getPrototypeOf(TodoApp.prototype), "constructor", this).call(this);
+    _get(Object.getPrototypeOf(Submit.prototype), "constructor", this).call(this);
     this.onChange = this.onChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     //Inital data
@@ -20483,7 +20483,7 @@ var TodoApp = (function (_React$Component) {
     };
   }
 
-  _createClass(TodoApp, [{
+  _createClass(Submit, [{
     key: "onChange",
     value: function onChange(e) {
       console.log(e.target.id);
@@ -20530,15 +20530,20 @@ var TodoApp = (function (_React$Component) {
           React.createElement("br", null),
           React.createElement("br", null),
           React.createElement("input", { type: "submit" })
+        ),
+        React.createElement(
+          "a",
+          { href: "/list" },
+          "Liste over oppskrifter"
         )
       );
     }
   }]);
 
-  return TodoApp;
+  return Submit;
 })(React.Component);
 
-module.exports = TodoApp;
+module.exports = Submit;
 
 },{"react":177}],179:[function(require,module,exports){
 'use strict';

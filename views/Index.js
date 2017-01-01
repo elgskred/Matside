@@ -2,7 +2,7 @@ var React = require('react');
 
 
 
-class TodoApp extends React.Component {
+class Submit extends React.Component {
   constructor() {
     super();
     this.onChange = this.onChange.bind(this);
@@ -54,9 +54,10 @@ class TodoApp extends React.Component {
           <br />
           <input type="submit" />
         </form>
+        <a href="/list">Liste over oppskrifter</a>
       </div>
     );
   }
 }
 
-module.exports = TodoApp;
+module.exports = Submit;
