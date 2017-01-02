@@ -1,5 +1,6 @@
-var React = require('react');
-
+import React from 'react';
+import {render} from 'react-dom';
+import { Link } from 'react-router';
 
 
 class Submit extends React.Component {
@@ -54,10 +55,9 @@ class Submit extends React.Component {
           <br />
           <input type="submit" />
         </form>
-        <a href="/list">Liste over oppskrifter</a>
+        <Link to="/list">Se oppskrifter</Link>
       </div>
     );
   }
 }
-
 module.exports = Submit;

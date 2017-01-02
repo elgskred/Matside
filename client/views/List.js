@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 class List extends React.Component {
 
@@ -10,7 +10,7 @@ class List extends React.Component {
 	render() {
 		return(
 			<div id="testDIV">
-				Dette er en testside
+				Dette er en testside som jeg vil at skal fungere
 				{this.props.data}
 				<button type="button" onClick={this.printConsole}>Push me</button>
 			</div>
@@ -18,5 +18,4 @@ class List extends React.Component {
 	}
 
 }
-
 module.exports = List;
