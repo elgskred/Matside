@@ -4,7 +4,8 @@
   "description": "Samling av oppskrifter",
   "main": "app.js",
   "scripts": {
-    "start": "browserify -t babelify --standalone main views/main.js -o public/main.js && node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",

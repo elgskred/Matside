@@ -6,9 +6,10 @@ var bodyParser = require('body-parser');
 var app = express();
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control");
+  next();
 });
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -18,6 +19,7 @@ var routes = require('./routes');
 
 //Submited recipe
 app.post('/oppskrift', routes.oppskrift);
+app.post('/uploadHandler', routes.uploadHandler);
 
 
 

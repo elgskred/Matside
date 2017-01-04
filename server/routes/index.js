@@ -6,3 +6,9 @@ exports.oppskrift = function(req, res) {
 	recipeNames[recipeNames.length] = req.body.navn;
 	res.send(recipeNames);
 }
+
+exports.uploadHandler = function(req, res) {
+	console.log("received");
+	console.log(req);
+	res.send("Ok");
+}
