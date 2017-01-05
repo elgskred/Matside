@@ -9,6 +9,5 @@ exports.oppskrift = function(req, res) {
 
 exports.uploadHandler = function(req, res) {
 	console.log("received");
-	console.log(req);
 	res.send("Ok");
 }

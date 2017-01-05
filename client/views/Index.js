@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
+import request from 'superagent';
+import DropzoneComponent from '../components/DropzoneComponent';
 
 class AddIngredient extends React.Component {
   constructor(){
@@ -31,38 +33,42 @@ class AddIngredient extends React.Component {
   }
 };
 
-var DropzoneDemo = React.createClass({
-    getInitialState: function () {
-        return {
-          files: []
-        };
-    },
+// var DropzoneDemo = React.createClass({
+//     getInitialState: function () {
+//         return {
+//           files: []
+//         };
+//     },
  
-    onDrop: function (acceptedFiles) {
-      this.setState({
-        files: acceptedFiles
-      });
-      console.log(this.state.files);
-    },
+//     onDrop: function (acceptedFiles) {
+//       this.setState({
+//         files: acceptedFiles
+//       });
+//       var req = request.post('http://localhost:3333/uploadHandler');
+//         acceptedFiles.forEach((file)=> {
+//             req.attach(file.name, file);
+//         });
+//       req.end("callback");
+//     },
+    
+//     onOpenClick: function () {
+//       this.dropzone.open();
+//     },
  
-    onOpenClick: function () {
-      this.dropzone.open();
-    },
- 
-    render: function () {
-        return (
-            <div>
-                <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} multiple={true}>
-                    <div>Try dropping some files here, or click to select files to upload.</div>
-                </Dropzone>
-                {this.state.files.length > 0 ? <div>
-                <h2>Uploading {this.state.files.length} files...</h2>
-                <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
-                </div> : null}
-            </div>
-        );
-    }
-});
+//     render: function () {
+//         return (
+//             <div>
+//                 <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} multiple={true}>
+//                     <div>Try dropping some files here, or click to select files to upload.</div>
+//                 </Dropzone>
+//                 {this.state.files.length > 0 ? <div>
+//                 <h2>Uploading {this.state.files.length} files...</h2>
+//                 <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
+//                 </div> : null}
+//             </div>
+//         );
+//     }
+// });
 
 class Submit extends React.Component {
   constructor() {
@@ -100,19 +106,24 @@ class Submit extends React.Component {
     var len = this.state.testing.length;
     var tempArrayI = [];
     var tempArrayA = [];
+    var tempArrayD = [];
     for (var i = 0; i < len; i++) {
       tempArrayI[i] = document.getElementById("ingredient" + i).value;
       tempArrayA[i] = document.getElementById("amount" + i).value;
     }
-    console.log(this.refs.aTest);
-    console.log(this.refs.aTest.state.files[0]);
-    //console.log(this.state.keywords);
-    //console.log(this.state.testing);
+    var successArray = this.refs.aTest.state.success;
+    console.log(successArray.length);
+    for (var j = 0; j < successArray.length; j++) {
+      tempArrayD[j] = successArray[j].xhr.response;
+      console.log(successArray[j].xhr.response);
+    }
+    console.log(tempArrayD);
     var postData = {
       navn: this.state.navn,
       Oppskrift: this.state.oppskrift,
       Ingredients: tempArrayI,
       Amount: tempArrayA,
+      Files: tempArrayD
       
     }
 
@@ -160,7 +171,7 @@ class Submit extends React.Component {
           <input type="submit" />
           <br />
           <br />
-          <DropzoneDemo ref="aTest"/>
+          <DropzoneComponent ref="aTest"/>
         </form>
         <Link to="/list">Se oppskrifter</Link>
       </div>
