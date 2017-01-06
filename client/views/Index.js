@@ -33,43 +33,6 @@ class AddIngredient extends React.Component {
   }
 };
 
-// var DropzoneDemo = React.createClass({
-//     getInitialState: function () {
-//         return {
-//           files: []
-//         };
-//     },
- 
-//     onDrop: function (acceptedFiles) {
-//       this.setState({
-//         files: acceptedFiles
-//       });
-//       var req = request.post('http://localhost:3333/uploadHandler');
-//         acceptedFiles.forEach((file)=> {
-//             req.attach(file.name, file);
-//         });
-//       req.end("callback");
-//     },
-    
-//     onOpenClick: function () {
-//       this.dropzone.open();
-//     },
- 
-//     render: function () {
-//         return (
-//             <div>
-//                 <Dropzone ref={(node) => { this.dropzone = node; }} onDrop={this.onDrop} multiple={true}>
-//                     <div>Try dropping some files here, or click to select files to upload.</div>
-//                 </Dropzone>
-//                 {this.state.files.length > 0 ? <div>
-//                 <h2>Uploading {this.state.files.length} files...</h2>
-//                 <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
-//                 </div> : null}
-//             </div>
-//         );
-//     }
-// });
-
 class Submit extends React.Component {
   constructor() {
     super();
@@ -78,11 +41,11 @@ class Submit extends React.Component {
     this.addIngredientField = this.addIngredientField.bind(this);
     //Inital data
     this.state = {
-      navn: "",
-      oppskrift: "",
+      name: "",
+      recipe: "",
       ingredient: "",
       amount: "",
-      oppskriftListe: [],
+      recipeListe: [],
       testing: [],
       keywords: ""
     };
@@ -119,22 +82,23 @@ class Submit extends React.Component {
     }
     console.log(tempArrayD);
     var postData = {
-      navn: this.state.navn,
-      Oppskrift: this.state.oppskrift,
-      Ingredients: tempArrayI,
-      Amount: tempArrayA,
-      Files: tempArrayD
+      name: this.state.name,
+      recipe: this.state.recipe,
+      ingredients: tempArrayI,
+      amount: tempArrayA,
+      files: tempArrayD,
+      author: ""
       
-    }
-
+    };
+    console.log(postData);
     $.ajax ({
       method: 'POST',
-      url: "http://localhost:3333/oppskrift",
+      url: "http://localhost:3333/recipe",
       data: postData,
       success: (data) => {
         console.log(data);
         this.setState({
-          oppskriftListe: data
+          recipeListe: data
         });
       }
     });
@@ -150,7 +114,7 @@ class Submit extends React.Component {
       <div id="recipe">
         <form onSubmit={this.submitForm}>
           <br />
-          <input type="text" placeholder="Oppskrift" id="navn" onChange={this.onChange} value={this.state.navn}/>
+          <input type="text" placeholder="recipe" id="name" onChange={this.onChange} value={this.state.name}/>
           <br />
           <br />
           <div id="ingredients">
@@ -162,7 +126,7 @@ class Submit extends React.Component {
           </div>
           <br />
           <br />
-          <textarea rows="5" cols="50" id="oppskrift" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.oppskrift}/>
+          <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
           <br />
           <input type="text" id="keywords" placeholder="Nøkkelord" onChange={this.onChange} value={this.state.keywords}/>
@@ -173,7 +137,7 @@ class Submit extends React.Component {
           <br />
           <DropzoneComponent ref="aTest"/>
         </form>
-        <Link to="/list">Se oppskrifter</Link>
+        <Link to="/list">Se recipeer</Link>
       </div>
     );
   }

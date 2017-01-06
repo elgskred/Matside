@@ -3,6 +3,8 @@ var express = require('express');
 var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var mysql = require('mysql');
+var functions = require('./functions/handleDisconnect.js');
 
 var app = express();
 const storage = multer.diskStorage({
@@ -25,6 +27,13 @@ const storage = multer.diskStorage({
     }
   });
 const upload = multer({storage: storage});
+var connection = mysql.createConnection({
+  host     : '192.168.10.50',
+  user     : 'matUser',
+  password : 'mat123',
+  database : 'mat',
+  port     : '3306'
+});
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -41,7 +50,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var routes = require('./routes');
 
 //Submited recipe
-app.post('/oppskrift', routes.oppskrift);
+app.post('/recipe', routes.recipe);
 //app.post('/uploadHandler', routes.uploadHandler);
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {
@@ -51,8 +60,7 @@ app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     res.send(req.file.path); // You can send any response to the user here
   });
 
-
-
+functions.handleDisconnect();
 
 var port = process.env.PORT || 3333;
 app.listen(port, function () {
