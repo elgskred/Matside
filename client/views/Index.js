@@ -70,24 +70,35 @@ class Submit extends React.Component {
     var tempArrayI = [];
     var tempArrayA = [];
     var tempArrayD = [];
+
+    //Getting ingredients and ingretient amounts and placing the values in two arrays
     for (var i = 0; i < len; i++) {
       tempArrayI[i] = document.getElementById("ingredient" + i).value;
       tempArrayA[i] = document.getElementById("amount" + i).value;
     }
+    //Getting successfull image uploads and placing the imageID in a array
     var successArray = this.refs.aTest.state.success;
     console.log(successArray.length);
     for (var j = 0; j < successArray.length; j++) {
       tempArrayD[j] = successArray[j].xhr.response;
       console.log(successArray[j].xhr.response);
     }
-    console.log(tempArrayD);
+    //Getting the keywords and separates the words before they are put in a array
+    var tempArrayS = this.state.keywords.split(",");
+    console.log(tempArrayS);
+    for (var s = 0; s < tempArrayS.length; s++) {
+      tempArrayS[s] = tempArrayS[s].trim();
+    }
+    console.log(tempArrayS);
+
     var postData = {
       name: this.state.name,
       recipe: this.state.recipe,
       ingredients: tempArrayI,
       amount: tempArrayA,
       files: tempArrayD,
-      author: ""
+      author: "",
+      keywords: tempArrayS
       
     };
     console.log(postData);

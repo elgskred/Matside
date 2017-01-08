@@ -1,0 +1,27 @@
+.headerBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+.liSearchBar {
+	float: right;
+}
+.searchBar {
+	width: 350px;
+}
+.liHeaderBar {
+    float: left;
+}
+.liHeaderBar a, .liSearchBar {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.liHeaderBar a:hover {
+    background-color: red;
+}
+

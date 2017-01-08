@@ -4,7 +4,7 @@ var async = require("async");
 var multer = require('multer');
 
 const storage = multer.diskStorage({
-    destination: './uploads/',
+    destination: './public/uploads/',
     filename: function (req, file, cb) {
       // Mimetype stores the file type, set extensions according to filetype
       switch (file.mimetype) {
