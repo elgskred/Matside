@@ -49,3 +49,5 @@ Temporary Items
 server/node_modules
 client/node_modules
 server/uploads
+server/public/uploads
+client/public/img
