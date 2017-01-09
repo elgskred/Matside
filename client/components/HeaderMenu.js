@@ -8,8 +8,8 @@ class HeaderMenuDropdown extends React.Component {
 			return(
 				<div className="dropdown-content-menu">
 					<ul>
-						<li><Link to="/index">Last opp</Link></li>
-						<li><Link to="/list">Liste</Link></li>
+						<li><Link to="/index">Loff</Link></li>
+						<li><Link to="/list">Papir</Link></li>
 					</ul>
 				</div>
 				);
