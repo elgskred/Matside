@@ -56,7 +56,6 @@ class Submit extends React.Component {
     t[id] = e.target.value
     this.setState(t);
   };
-  //If the ingredients field is filled and tab is pressed while in the "amount" field, add a new one
   addIngredientField (e) {
     e.preventDefault();
     const testing = this.state.testing.concat(AddIngredient);
