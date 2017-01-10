@@ -14,6 +14,7 @@
 .liHeaderBar {
     float: left;
 }
+
 .liHeaderBar a, .liSearchBar {
     display: inline-block;
     color: white;
@@ -27,5 +28,12 @@
 .dropdown-content-menu {
   position: absolute;
   background-color: #333;
+  float: left;
+  transition: 0.3s ease;
 }
-
+.test {
+    list-style: none;
+}
+.potet {
+    width: 100%;
+}

@@ -13,6 +13,6 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={Home}/>
 		<Route path="/index" component={Index}/>
-		<Route path="/list" component={List}/>
+		<Route path="/list/:var" handler={List} component={List}/>
 	</Router>
 ), document.getElementById('app'))
