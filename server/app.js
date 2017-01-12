@@ -51,7 +51,7 @@ var routes = require('./routes');
 
 //Submited recipe
 app.post('/recipe', routes.recipe);
-//app.post('/uploadHandler', routes.uploadHandler);
+app.get('/search/:id', routes.search);
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {
       console.log(`Received file ${req.file.originalname}`);
@@ -59,6 +59,20 @@ app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
 
     res.send(req.file.path); // You can send any response to the user here
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 functions.handleDisconnect();
 

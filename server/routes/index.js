@@ -2,7 +2,8 @@
 var mysql = require('mysql');
 var async = require("async");
 var multer = require('multer');
-
+var bodyParser = require('body-parser');
+var functions = require('../functions/functions.js');
 const storage = multer.diskStorage({
     destination: './public/uploads/',
     filename: function (req, file, cb) {
@@ -33,14 +34,25 @@ var connection = mysql.createConnection({
 var recipeNames = ['kake1', 'kake2', 'kake3'];
 
 exports.recipe = function(req, res) {
+	console.log(req.body);
 	var UID = req.body.name.slice(0, 4) + Date.now();
-	async.parallel([async.apply(insertRecipe, req.body, UID), async.apply(insertIngredients, req.body, UID), async.apply(insertKeywords, req.body, UID), async.apply(insertPictures, req.body, UID)],
+	async.parallel([async.apply(functions.insertRecipe, req.body, UID), async.apply(functions.insertIngredients, req.body, UID), async.apply(functions.insertKeywords, req.body, UID), async.apply(functions.insertPictures, req.body, UID)],
 		function done(err, results) {
 			if (err) {
-
+				console.log(err);
 			};
 			console.log(results);
 			res.send("ok");
+		});
+}
+
+exports.search = function(req, res) {
+	async.parallel([async.apply(functions.search, req.params.id)],
+		function done (err, results) {
+			if (err) {
+				console.log(err);
+			};
+			res.send(results);
 		});
 }
 
@@ -51,87 +63,3 @@ exports.uploadHandler = function(req, res) {
 	res.send(req.file.path); // You can send any response to the user here
 }
 
-function insertRecipe(body, UID, callback) {
-	var Insert = 'Insert Into `recipes` (UID, recipeName, recipe, author) ';
-	var Values = 'Values (?, ?, ?, ?)';
-	var sql = Insert + Values;
-	var inserts = [UID, body.name, body.recipe, body.author];
-	sql = mysql.format(sql, inserts);
-	connection.query(sql, function(err, rows, fields){
-		if(!err){
-			callback(null, "recipe OK");
-		} else {
-			callback(err);
-		}
-	});
-};
-
-function insertIngredients(body, UID, callback) {
-	var Insert = 'Insert Into `ingredients` (UID, ingredient, amount) ';
-	var Values = 'Values (?, ?, ?)';
-	var sql = Insert + Values;
-	console.log(body.ingredients);
-	async.forEachOf(body.ingredients, function(element, i , inner_callback) {
-		var inserts = [UID, element, body.amount[i]];
-		var Innersql = mysql.format(sql, inserts);
-		connection.query(Innersql, function(err, rows, fields){
-			if(!err) {
-				inner_callback(null);
-			} else {
-				inner_callback(err);
-			}
-		})
-	}, function(err) {
-		if (err) {
-
-		} else {
-			callback(null, "ingredients ok");
-		};
-	});
-};
-
-function insertKeywords(body, UID, callback) {
-	var Insert = 'Insert Into `keywords` (UID, keyword) ';
-	var Values = 'Values (?, ?)';
-	var sql = Insert + Values;
-	async.forEachOf(body.keywords, function(element, i , inner_callback) {
-		var inserts = [UID, element];
-		var Innersql = mysql.format(sql, inserts);
-		connection.query(Innersql, function(err, rows, fields){
-			if(!err) {
-				inner_callback(null);
-			} else {
-				inner_callback(err);
-			}
-		})
-	}, function(err) {
-		if (err) {
-
-		} else {
-			callback(null, "keywords ok");
-		};
-	});
-};
-
-function insertPictures(body, UID, callback) {
-	var Insert = 'Insert Into `pictures` (UID, imgPath) ';
-	var Values = 'Values (?, ?)';
-	var sql = Insert + Values;
-	async.forEachOf(body.files, function(element, i , inner_callback) {
-		var inserts = [UID, element];
-		var Innersql = mysql.format(sql, inserts);
-		connection.query(Innersql, function(err, rows, fields){
-			if(!err) {
-				inner_callback(null);
-			} else {
-				inner_callback(err);
-			}
-		})
-	}, function(err) {
-		if (err) {
-
-		} else {
-			callback(null, "pictures ok");
-		};
-	});
-};

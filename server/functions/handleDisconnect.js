@@ -1,4 +1,17 @@
-var mysql = require('mysql');
+var express        =         require("express");
+var bodyParser     =         require("body-parser");
+var async          =         require("async");
+var fs             =         require('fs');
+var app            =         express();
+var mysql          =         require('mysql');
+var sizeof         =         require('object-sizeof');
+var connection = mysql.createConnection({
+  host     : '192.168.10.50',
+  user     : 'matUser',
+  password : 'mat123',
+  database : 'mat',
+  port     : '3306'
+});
 
 exports.handleDisconnect = function () {
   var connection = mysql.createConnection({
@@ -7,7 +20,7 @@ exports.handleDisconnect = function () {
   password : 'mat123',
   database : 'mat',
   port     : '3306'
-});												 // Recreate the connection, since
+});                        // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   connection.connect(function(err) {              // The server is either down
@@ -26,3 +39,5 @@ exports.handleDisconnect = function () {
     }
   });
 }
+
+

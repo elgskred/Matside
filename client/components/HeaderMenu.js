@@ -71,13 +71,19 @@ class HeaderMenu extends React.Component{
 	onKeyPress (e) {
 		if ( e.key == "Enter") {
 			console.log("Enter is pressed");
-			hashHistory.push("/list/" + this.state.searchBar);
+			this.searchGo();
 
 		}
 	};
 	searchGo (e) {
 		console.log(this.state.searchBar);
-		hashHistory.push('/list/' + this.state.searchBar); //Endres til browserHistory når siden deployes
+
+		var pathname = '/list/';
+		var query = {
+			isTrue: false,
+			aString: this.state.searchBar
+		};
+		hashHistory.push({pathname, query}); //Endres til browserHistory når siden deployes
 	}
 
 
