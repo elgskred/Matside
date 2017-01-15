@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+
 class RenderArray extends React.Component {
 	constructor(props) {
 		super(props);
@@ -9,21 +10,29 @@ class RenderArray extends React.Component {
 		}
 
 	}
-// console.log(this.props);
-// 		const recipes = this.props.recipeName
-// 		const listRecipes = this.props.recipeName.map((number) =>
-// 			<div> {number} </div>
-// 		);
 	render() {
-		const listRecipes = this.props.results.map((number) =>
-			<li key={number.UID}><Link to={'/recipe/' + number.UID}>
-			{number.recipeName} 
-			</Link></li>
+		const listRecipes = this.props.results.map((dict) =>
+			<Link key={dict.UID} to={/recipe/ + dict.UID}>
+				<div key={dict.UID} className="recipeListing">
+					<div className="recipeListing-img">
+						<img className="recipe-img" src="../public/img/404.png" alt="404"/>
+					</div>
+					<div className="recipeListing-text">
+						<div className="recipeListing-name">
+							{dict.recipeName}
+						</div>
+						<div className="recipeListing-desc">
+							{dict.shortDesc}
+						</div>
+					</div>
+				
+				</div>
+			</Link>
 		);
 		return(
-			<ul>
+			<div>
 			{listRecipes}
-			</ul>
+			</div>
 		);
 	}
 
@@ -40,6 +49,7 @@ class List extends React.Component {
 			params: "",
 			searchResults: [],
 			recipeName: [],
+			desc: [],
 			UID: []
 		}
 	}
@@ -55,6 +65,7 @@ class List extends React.Component {
 	        for (var i = 0; i < data[0].length; i++) {
 	        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
 	        	this.setState({UID: this.state.UID.concat(data[0][i]['UID'])});
+	        	this.setState({desc: this.state.desc.concat(data[0][i]['shortDesc'])});
 	        }
 	        
 	      }

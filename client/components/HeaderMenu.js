@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-import HMD from './DropdownMenu';
+import HMB from './DropdownMenu';
 import { hashHistory } from 'react-router'; //Endres til browserHistory når siden deployes se https://github.com/reactjs/react-router-tutorial/tree/master/lessons/12-navigating
 
 
@@ -50,7 +50,7 @@ class HeaderMenu extends React.Component{
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
 					<li className="liHeaderBar"><Link to="/index">Last opp</Link></li>
 					<li className="liHeaderBar"><Link to="/">Log in</Link></li>
-					<li className="liHeaderBar"><HMD name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="liHeaderBar"><HMB name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="liSearchBar"><button  id="searchButton" onClick={this.searchGo}>Go!</button></li>
 					<li className="liSearchBar"><input type="text" className="searchBar" id="searchBar" placeholder="Search" onChange={this.onChange} onKeyPress={this.onKeyPress}/></li>
 

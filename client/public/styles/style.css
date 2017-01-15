@@ -39,3 +39,39 @@ div.intro {
 .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
     border-radius: 5px;
 }
+a {
+    text-decoration: none;
+}
+.recipeListing{
+    background-color: red;
+    padding: 10px;
+    color: black;
+}
+.recipeListing:hover {
+    background-color: blue;
+}
+.recipeListing-text{
+    display: inline-block;
+    width: 80%
+}
+.recipeListing-name{
+    size: 19px;
+    font-size: 25px;
+    width: 80%;
+    display: inline-block;
+}
+.recipeListing-desc{
+    width: 80%;
+    display: inline-block;
+}
+.recipeListing-img{
+    padding-left: 25px;
+    width: 15%;
+    height: auto;
+    display: inline-block;
+}
+.recipe-img {
+    max-width: 50%;
+    height: auto;
+    display: inline-block;
+}

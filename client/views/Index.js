@@ -42,6 +42,7 @@ class Submit extends React.Component {
     //Inital data
     this.state = {
       name: "",
+      desc: "",
       recipe: "",
       ingredient: "",
       amount: "",
@@ -92,6 +93,7 @@ class Submit extends React.Component {
 
     var postData = {
       name: this.state.name,
+      desc: this.state.desc,
       recipe: this.state.recipe,
       ingredients: tempArrayI,
       amount: tempArrayA,
@@ -125,6 +127,9 @@ class Submit extends React.Component {
         <form onSubmit={this.submitForm}>
           <br />
           <input type="text" placeholder="recipe" id="name" onChange={this.onChange} value={this.state.name}/>
+          <br />
+          <br />
+          <input type="text" placeholder="short description" onChange={this.onChange} value={this.state.desc} id="desc" />
           <br />
           <br />
           <div id="ingredients">

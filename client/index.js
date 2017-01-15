@@ -16,6 +16,6 @@ render((
 		<Route path="/" component={Home}/>
 		<Route path="/index" component={Index}/>
 		<Route path="/list(/:var)" component={List}/>
-		<Route path="/recipe/:recipeName" component={Recipe} />
+		<Route path="/recipe(/:var)" component={Recipe} />
 	</Router>
 ), document.getElementById('app'))

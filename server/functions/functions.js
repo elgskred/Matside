@@ -19,10 +19,10 @@ functions.handleDisconnect();
 
 exports.insertRecipe = function (body, UID, callback) {
   console.log(body.name);
-  var Insert = 'Insert Into `recipes` (UID, recipeName, recipe, author) ';
-  var Values = 'Values (?, ?, ?, ?)';
+  var Insert = 'Insert Into `recipes` (UID, recipeName, recipe, author, shortDesc) ';
+  var Values = 'Values (?, ?, ?, ?, ?)';
   var sql = Insert + Values;
-  var inserts = [UID, body.name, body.recipe, body.author];
+  var inserts = [UID, body.name, body.recipe, body.author, body.desc];
   sql = mysql.format(sql, inserts);
   connection.query(sql, function(err, rows, fields){
     if(!err){
@@ -103,7 +103,7 @@ exports.insertPictures = function(body, UID, callback) {
 };
 
 exports.search = function(searchFor, callback) {
-  var Select = 'Select recipes.UID, recipes.recipeName ';
+  var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
   var From = 'From `recipes` ';
   var Where = 'Where recipes.recipeName Like ?'
   var inserts = '%' + searchFor + '%';

@@ -47,6 +47,7 @@ exports.recipe = function(req, res) {
 }
 
 exports.search = function(req, res) {
+  console.log(req.params.id);
 	async.parallel([async.apply(functions.search, req.params.id)],
 		function done (err, results) {
 			if (err) {
