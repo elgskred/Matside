@@ -86,6 +86,7 @@ class ShowRecipeList extends React.Component {
 		console.log(this.props.params.UID);
 		$.ajax ({
 	      method: 'GET',
+	      url: "http://localhost:3333/recipes/" + this.props.params.UID,
 	      success: (data) => {
 	        for (var i = 0; i < data[0].length; i++) {
 		        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});

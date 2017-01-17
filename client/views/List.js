@@ -54,6 +54,7 @@ class List extends React.Component {
 		console.log("getting");
 		$.ajax ({
 	      method: 'GET',
+	      url: "http://localhost:3333/search/" + this.props.location.query.q,
 	      success: (data) => {
 	        console.log(data);
 	        this.setState({searchResults: data[0]});
@@ -71,6 +72,7 @@ class List extends React.Component {
 		if (nextProps.location.query.q != this.props.location.query.q) {
 			$.ajax ({
 		      method: 'GET',
+		      url: "http://localhost:3333/search/" + nextProps.location.query.q,
 		      success: (data) => {
 		        console.log(data);
 		        this.setState({searchResults: data[0]});
