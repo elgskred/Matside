@@ -32,6 +32,7 @@ class HeaderMenu extends React.Component{
 		var query = {
 			q: this.state.searchBar
 		};
+		hashHistory.push('/');
 		hashHistory.push({pathname, query}); //Endres til browserHistory når siden deployes
 	}
 

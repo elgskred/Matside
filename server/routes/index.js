@@ -48,7 +48,7 @@ exports.recipe = function(req, res) {
 
 exports.search = function(req, res) {
   console.log(req.params.id);
-	async.parallel([async.apply(functions.search, req.params.id)],
+	async.parallel([async.apply(functions.searchRecipe, req.params.id)],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
@@ -57,10 +57,22 @@ exports.search = function(req, res) {
 		});
 }
 
+exports.recipes = function(req, res) {
+  console.log(req.params.uid);
+  async.parallel([async.apply(functions.searchRecipeByUID, req.params.uid), async.apply(functions.searchIngredientsByUID, req.params.uid)],
+    function done (err, results) {
+      if (err) {
+        console.log(err);
+      };
+      res.send(results);
+    });
+}
+
+
 exports.uploadHandler = function(req, res) {
 	if (req.file && req.file.originalname) {
   		console.log(`Received file ${req.file.originalname}`);
 	}
-	res.send(req.file.path); // You can send any response to the user here
+	res.send(req.file.path); //Sends the file path back to the user so the image can be associated with the correct recipe
 }
 

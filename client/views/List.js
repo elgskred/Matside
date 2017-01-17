@@ -1,6 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-
+import HeaderMenu from '../components/HeaderMenu';
 
 class RenderArray extends React.Component {
 	constructor(props) {
@@ -35,16 +36,11 @@ class RenderArray extends React.Component {
 			</div>
 		);
 	}
-
-
 }
-
-
 
 class List extends React.Component {
 	constructor(props){
 		super(props);
-		this.printConsole = this.printConsole.bind(this);
 		this.state = {
 			params: "",
 			searchResults: [],
@@ -55,7 +51,7 @@ class List extends React.Component {
 	}
 
 	componentDidMount () {
-
+		console.log("getting");
 		$.ajax ({
 	      method: 'GET',
 	      url: "http://localhost:3333/search/" + this.props.location.query.q,
@@ -72,19 +68,29 @@ class List extends React.Component {
 	    });
 	}
 
-	printConsole (e) {
-		e.preventDefault();
-		console.log(this.state);
-		console.log("Hello World");
-		console.log(this.state.recipeName);
-	};
-
+	componentWillReceiveProps (nextProps) {
+		if (nextProps.location.query.q != this.props.location.query.q) {
+			$.ajax ({
+		      method: 'GET',
+		      url: "http://localhost:3333/search/" + nextProps.location.query.q,
+		      success: (data) => {
+		        console.log(data);
+		        this.setState({searchResults: data[0]});
+		        for (var i = 0; i < data[0].length; i++) {
+		        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
+		        	this.setState({UID: this.state.UID.concat(data[0][i]['UID'])});
+		        	this.setState({desc: this.state.desc.concat(data[0][i]['shortDesc'])});
+		        }
+		        
+		      }
+		    });
+		}
+		
+	}
 	render() {
 		return(
 			<div id="testDIV">
-				Dette er en testside som jeg vil at skal fungere {this.props.params.var} 
-				<br />
-				<button type="button" onClick={this.printConsole}>Push me</button>
+				<HeaderMenu ref="searchBar"/>
 				<RenderArray results={this.state.searchResults}/>
 			</div>
 			);

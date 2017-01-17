@@ -26,31 +26,75 @@ class RenderArray extends React.Component {
 
 }
 
+class RenderRecipe extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return(
+			<div>
+			{this.props.recipe.split('\n').map(function(item, index) {
+		  		return (
+		    		<span key={index}>
+		      		{item}
+		      		<br/>
+		    		</span>
+		  		)
+			})}
+			</div>
+			);
+	}
+}
+
+class RenderIngredients extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		const listIngredients = this.props.ingredients.map((item, index) =>
+			<span key={index}>
+				{this.props.amounts[index]} : {item} <br />
+			</span>
+		);
+
+		return(
+			<div>
+				{listIngredients}
+			</div>
+		);
+	}
+
+}
+
+
 class ShowRecipeList extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			params: "",
-			searchResults: [],
-			recipeName: [],
-			UID: [],
-			recipe: []
+			ingredients: [],
+			amount: [],
+			recipe: "",
+			recipeName: ""
 		}
 	}
 
 	componentDidMount () {
+		console.log(this.props.params.UID);
 		$.ajax ({
 	      method: 'GET',
-	      url: "http://localhost:3333/search/" + this.props.location.query.q,
+	      url: "http://localhost:3333/recipes/" + this.props.params.UID,
 	      success: (data) => {
-	        console.log(data);
-	        this.setState({searchResults: data[0]});
 	        for (var i = 0; i < data[0].length; i++) {
-	        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
-	        	this.setState({UID: this.state.UID.concat(data[0][i]['UID'])});
-	        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipe'])});
-	        }
-	        
+		        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
+		        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipe'])});
+		    }
+	        for (var i = 0; i < data[1].length; i++) {
+		        	this.setState({ingredients: this.state.ingredients.concat(data[1][i]['ingredient'])});
+		        	this.setState({amount: this.state.amount.concat(data[1][i]['amount'])});
+		    }
+		    console.log(this.state);
 	      }
 	    });
 	}
@@ -59,8 +103,17 @@ class ShowRecipeList extends React.Component {
 	render(){
 		return(
 			<div> 
-			Her skal oppskriftene vises 
-			<RenderArray results={this.state.searchResults}/>
+			<h2>
+				{this.state.recipeName}
+			</h2>
+			<h3>
+				Ingredienser: <br/>
+			</h3>
+				<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount}/>
+			<h3>
+				Oppskrift: <br/>
+			</h3>
+				<RenderRecipe recipe={this.state.recipe} />
 			</div>
 			);
 	}

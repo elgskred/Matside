@@ -52,17 +52,17 @@ a {
 }
 .recipeListing-text{
     display: inline-block;
-    width: 80%
+    width: 80%;
+    position: relative;
+    top: -50px;
 }
 .recipeListing-name{
     size: 19px;
     font-size: 25px;
     width: 80%;
-    display: inline-block;
 }
 .recipeListing-desc{
     width: 80%;
-    display: inline-block;
 }
 .recipeListing-img{
     padding-left: 25px;

@@ -102,11 +102,43 @@ exports.insertPictures = function(body, UID, callback) {
   });
 };
 
-exports.search = function(searchFor, callback) {
+exports.searchRecipe = function(searchFor, callback) {
   var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
   var From = 'From `recipes` ';
   var Where = 'Where recipes.recipeName Like ?'
   var inserts = '%' + searchFor + '%';
+  var sql = Select + From + Where;
+  sql = mysql.format(sql, inserts);
+  connection.query(sql, function (err, rows, fields) {
+    if (!err) {
+      callback(null, rows);
+    } else {
+
+    };
+  });
+};
+
+exports.searchRecipeByUID = function(searchFor, callback) {
+  var Select = 'Select * ';
+  var From = 'From `recipes` ';
+  var Where = 'Where recipes.UID LIKE ?';
+  var inserts = searchFor;
+  var sql = Select + From + Where;
+  sql = mysql.format(sql, inserts);
+  connection.query(sql, function (err, rows, fields) {
+    if (!err) {
+      callback(null, rows);
+    } else {
+
+    };
+  });
+};
+
+exports.searchIngredientsByUID = function(searchFor, callback) {
+  var Select = 'Select * ';
+  var From = 'From `ingredients` ';
+  var Where = 'Where ingredients.UID LIKE ?';
+  var inserts = searchFor;
   var sql = Select + From + Where;
   sql = mysql.format(sql, inserts);
   connection.query(sql, function (err, rows, fields) {
