@@ -72,7 +72,7 @@ class List extends React.Component {
 		if (nextProps.location.query.q != this.props.location.query.q) {
 			$.ajax ({
 		      method: 'GET',
-		      url: "http://localhost:3333/search/" + nextProps.location.query.q,
+		      url: "http://awesomesauce-gaming.net:3333/search/" + nextProps.location.query.q,
 		      success: (data) => {
 		        console.log(data);
 		        this.setState({searchResults: data[0]});
