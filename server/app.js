@@ -50,15 +50,30 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 var routes = require('./routes');
 
 //Submited recipe
-app.post('/recipe', routes.recipe);
-//app.post('/uploadHandler', routes.uploadHandler);
+app.post('/recipe', routes.recipe); //new recipes are uploaded to this route
+app.get('/search/:id', routes.search); //All searches are requested on this route
+app.get('/recipes/:uid', routes.recipes); //Individual recipes are requested on this route
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {
       console.log(`Received file ${req.file.originalname}`);
-    }
+    } 
 
     res.send(req.file.path); // You can send any response to the user here
-  });
+  }); //Images are uploaded to this route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 functions.handleDisconnect();
 
