@@ -77,11 +77,7 @@ app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
 
 functions.handleDisconnect();
 
-// var port = process.env.PORT || 3333;
-// app.listen(port, function () {
-//   console.log('Dynamic react example listening on port ' + port);
-// });
-
-var server = app.listen(3333, function(){
-  console.log('Listening on port 3000');
+var port = process.env.PORT || 3333;
+app.listen(port, function () {
+  console.log('Dynamic react example listening on port ' + port);
 });
