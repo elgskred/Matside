@@ -70,6 +70,7 @@ class RenderIngredients extends React.Component {
 }
 
 
+
 class ShowRecipeList extends React.Component {
 	constructor(props){
 		super(props);
