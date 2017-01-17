@@ -105,7 +105,6 @@ class Submit extends React.Component {
     console.log(postData);
     $.ajax ({
       method: 'POST',
-      url: "http://awesomesauce-gaming.net:3333/recipe",
       data: postData,
       success: (data) => {
         console.log(data);
