@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
+import HeaderMenu from '../components/HeaderMenu';
 
 class RenderArray extends React.Component {
 	constructor(props) {
@@ -55,7 +56,7 @@ class RenderIngredients extends React.Component {
 	render() {
 		const listIngredients = this.props.ingredients.map((item, index) =>
 			<span key={index}>
-				{this.props.amounts[index]} : {item} <br />
+				{this.props.amounts[index]}    {item} <br />
 			</span>
 		);
 
@@ -103,6 +104,7 @@ class ShowRecipeList extends React.Component {
 	render(){
 		return(
 			<div> 
+			<HeaderMenu ref="searchBar"/>
 			<h2>
 				{this.state.recipeName}
 			</h2>
