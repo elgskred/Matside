@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack -p",
-    "start": "webpack-dev-server --inline --content-base ."
+    "start": "webpack-dev-server --inline --content-base .",
+    "test": "webpack-dev-server --host 0.0.0.0 --port 80"
   },
   "author": "Christoffer Antonsen & Mathias Sommerstad",
   "license": "ISC",
