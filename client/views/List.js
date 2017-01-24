@@ -12,11 +12,11 @@ class RenderArray extends React.Component {
 
 	}
 	render() {
-		const listRecipes = this.props.results.map((dict) =>
+		const listRecipes = this.props.results.map((dict, index) =>
 			<Link key={dict.UID} to={/recipe/ + dict.UID}>
 				<div key={dict.UID} className="recipeListing">
 					<div className="recipeListing-img">
-						<img className="recipe-img" src="../public/img/404.png" alt="404"/>
+						<img className="recipe-img" src={'../public/uploads/' + this.props.img[index]} alt="404"/>
 					</div>
 					<div className="recipeListing-text">
 						<div className="recipeListing-name">
@@ -41,28 +41,56 @@ class RenderArray extends React.Component {
 class List extends React.Component {
 	constructor(props){
 		super(props);
+		this.loadImg = this.loadImg.bind(this);
 		this.state = {
 			params: "",
 			searchResults: [],
 			recipeName: [],
 			desc: [],
-			UID: []
+			UID: [],
+			img: []
 		}
 	}
 
 	componentDidMount () {
-		console.log("getting");
 		$.ajax ({
 	      method: 'GET',
 	      url: "http://awesomesauce-gaming.net:3333/search/" + this.props.location.query.q,
 	      success: (data) => {
-	        console.log(data);
 	        this.setState({searchResults: data[0]});
+	        var temp = [];
 	        for (var i = 0; i < data[0].length; i++) {
-	        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
-	        	this.setState({UID: this.state.UID.concat(data[0][i]['UID'])});
-	        	this.setState({desc: this.state.desc.concat(data[0][i]['shortDesc'])});
+	        	temp[i] = data[0][i]['UID'];
 	        }
+	        this.setState({UID: temp}, function () {
+	        		this.loadImg();
+	        });
+	        
+	      }
+	    });
+	}
+
+	loadImg () {
+		var postData = {
+			UID: this.state.UID
+		};
+		$.ajax ({
+	      method: 'POST',
+	      url: "http://localhost:3333/searchImg",
+	      data: postData,
+	      success: (data) => {
+	        var temp = [];
+        	for (var i = 0; i < data.length; i++){
+	        	if (data[i][0] != undefined){
+	        		temp[i] = data[i][0]['imgPath'];
+	        	} else {
+	        		temp[i] = '404.png';
+	        	}
+        	}
+        	//console.log(temp);
+        	this.setState({img: temp});
+	        	
+
 	        
 	      }
 	    });
@@ -74,24 +102,26 @@ class List extends React.Component {
 		      method: 'GET',
 		      url: "http://awesomesauce-gaming.net:3333/search/" + nextProps.location.query.q,
 		      success: (data) => {
-		        console.log(data);
 		        this.setState({searchResults: data[0]});
-		        for (var i = 0; i < data[0].length; i++) {
-		        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
-		        	this.setState({UID: this.state.UID.concat(data[0][i]['UID'])});
-		        	this.setState({desc: this.state.desc.concat(data[0][i]['shortDesc'])});
-		        }
-		        
+				var temp = [];
+				for (var i = 0; i < data[0].length; i++) {
+					temp[i] = data[0][i]['UID'];
+	        	}
+	        	this.setState({UID: temp}, function () {
+	        		this.loadImg();
+	        	});
+	        	
 		      }
 		    });
 		}
+		
 		
 	}
 	render() {
 		return(
 			<div id="testDIV">
 				<HeaderMenu ref="searchBar"/>
-				<RenderArray results={this.state.searchResults}/>
+				<RenderArray results={this.state.searchResults} img={this.state.img}/>
 			</div>
 			);
 	}

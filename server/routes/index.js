@@ -24,14 +24,7 @@ const storage = multer.diskStorage({
     }
   });
 const upload = multer({storage: storage});
-var connection = mysql.createConnection({
-  host     : '192.168.10.50',
-  user     : 'matUser',
-  password : 'mat123',
-  database : 'mat',
-  port     : '3306'
-});
-var recipeNames = ['kake1', 'kake2', 'kake3'];
+
 
 exports.recipe = function(req, res) {
 	console.log(req.body);
@@ -47,19 +40,46 @@ exports.recipe = function(req, res) {
 }
 
 exports.search = function(req, res) {
+  var t = Date.now();
   console.log(req.params.id);
-	async.parallel([async.apply(functions.searchRecipe, req.params.id)],
+  var str = req.params.id;
+  var includes = [];
+  var excludes = [];
+  var searchTerm = [];
+  var splitStr = str.split(' ');
+  async.forEachOf(splitStr, function(element, i , inner_callback) {
+    if (element.match(/[+]/)){
+      includes[includes.length] = element;
+      inner_callback(null);
+    } else if (element.match(/[-]/)){
+      excludes[excludes.length] = element;
+      inner_callback(null);
+    } else {
+      searchTerm[searchTerm.length] = element;
+      inner_callback(null);
+    };
+    }, function(err) {
+      if (err) {
+
+      } else {
+        console.log(includes);
+        console.log(excludes);
+        console.log(searchTerm);
+      };
+    })
+	async.parallel([async.apply(functions.searchRecipe, searchTerm[0])],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
 			};
 			res.send(results);
+      console.log(Date.now() - t);
 		});
 }
 
 exports.recipes = function(req, res) {
   console.log(req.params.uid);
-  async.parallel([async.apply(functions.searchRecipeByUID, req.params.uid), async.apply(functions.searchIngredientsByUID, req.params.uid)],
+  async.parallel([async.apply(functions.searchRecipeByUID, req.params.uid), async.apply(functions.searchIngredientsByUID, req.params.uid), async.apply(functions.searchPictureByUID, req.params.uid)],
     function done (err, results) {
       if (err) {
         console.log(err);
@@ -74,5 +94,16 @@ exports.uploadHandler = function(req, res) {
   		console.log(`Received file ${req.file.originalname}`);
 	}
 	res.send(req.file.path); //Sends the file path back to the user so the image can be associated with the correct recipe
+}
+
+exports.searchImg = function(req, res) {
+  var temp = [];
+  async.parallel([async.apply(functions.searchPicturesByUID, req.body.UID)],
+    function done (err, results) {
+      if (err) {
+        console.log(err);
+      };
+      res.send(results[0]);
+    });
 }
 

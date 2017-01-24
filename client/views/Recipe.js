@@ -56,7 +56,7 @@ class RenderIngredients extends React.Component {
 	render() {
 		const listIngredients = this.props.ingredients.map((item, index) =>
 			<span key={index}>
-				{this.props.amounts[index]}    {item} <br />
+				{this.props.amountsParsed[index]}{this.props.amounts[index]}    {item} <br />
 			</span>
 		);
 
@@ -69,16 +69,37 @@ class RenderIngredients extends React.Component {
 
 }
 
+class RenderImg extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		const listImg = this.props.img.map((item, index) =>
+			<img src={'../public/uploads/' + item} alt="404" key={index} />
+		);
+		return(
+			<div className="recipeImg">
+				{listImg}
+			</div>
+		);
+	}
+}
+
 
 
 class ShowRecipeList extends React.Component {
 	constructor(props){
 		super(props);
+		this.onChange = this.onChange.bind(this);
 		this.state = {
 			ingredients: [],
 			amount: [],
+			amountParsed: [],
 			recipe: "",
-			recipeName: ""
+			recipeName: "",
+			servings: 2,
+			imgPath: []
 		}
 	}
 
@@ -89,16 +110,37 @@ class ShowRecipeList extends React.Component {
 	      url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
 	      success: (data) => {
 	        for (var i = 0; i < data[0].length; i++) {
-		        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
-		        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipe'])});
+	        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
+	        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipe'])});
 		    }
 	        for (var i = 0; i < data[1].length; i++) {
-		        	this.setState({ingredients: this.state.ingredients.concat(data[1][i]['ingredient'])});
-		        	this.setState({amount: this.state.amount.concat(data[1][i]['amount'])});
+	        	this.setState({ingredients: this.state.ingredients.concat(data[1][i]['ingredient'])});
+	        	this.setState({amount: this.state.amount.concat(data[1][i]['amount'].replace(/[0-9]/g, ''))});
+	        	this.setState({amountParsed: this.state.amountParsed.concat(data[1][i]['amount'].replace(/[^0-9]/g,''))})
 		    }
-		    console.log(this.state);
+		    for (var i = 0; i < data[2].length; i++) {
+		    	this.setState({imgPath: this.state.imgPath.concat(data[2][i]['imgPath'])});
+		    }
 	      }
 	    });
+	}
+
+	onChange (e) {
+		var int = this.state.servings;
+		var newAmountParsed = [];
+		var checkValue;
+		if (e.target.value == 0){
+			checkValue = int;
+		} else {
+			checkValue = e.target.value;
+		}
+		this.setState({servings: checkValue});
+		for (var i = 0; i < this.state.amountParsed.length; i++) {
+			newAmountParsed[i] = (this.state.amountParsed[i] / int) * checkValue;
+			
+		};
+		this.setState({amountParsed: newAmountParsed});
+
 	}
 
 
@@ -109,14 +151,20 @@ class ShowRecipeList extends React.Component {
 			<h2>
 				{this.state.recipeName}
 			</h2>
-			<h3>
-				Ingredienser: <br/>
-			</h3>
-				<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount}/>
-			<h3>
-				Oppskrift: <br/>
-			</h3>
-				<RenderRecipe recipe={this.state.recipe} />
+			<div className="ingredients" >
+				<h3>
+					Ingredienser: <br/>
+				</h3>
+					<input type="number" onChange={this.onChange} value={this.state.servings}/>
+					<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.amountParsed}/>
+			</div>
+			<div className="recipe">
+				<h3>
+					Oppskrift: <br/>
+				</h3>
+					<RenderRecipe recipe={this.state.recipe} />
+			</div>
+				<RenderImg img={this.state.imgPath} />
 			</div>
 			);
 	}

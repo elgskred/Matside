@@ -4,11 +4,10 @@ var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var mysql = require('mysql');
-var functions = require('./functions/handleDisconnect.js');
 
 var app = express();
 const storage = multer.diskStorage({
-    destination: './public/uploads/',
+    destination: '../client/public/uploads/',
     filename: function (req, file, cb) {
       // Mimetype stores the file type, set extensions according to filetype
       switch (file.mimetype) {
@@ -52,30 +51,16 @@ var routes = require('./routes');
 //Submited recipe
 app.post('/recipe', routes.recipe); //new recipes are uploaded to this route
 app.get('/search/:id', routes.search); //All searches are requested on this route
+app.post('/searchImg', routes.searchImg);
 app.get('/recipes/:uid', routes.recipes); //Individual recipes are requested on this route
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {
       console.log(`Received file ${req.file.originalname}`);
     } 
-
-    res.send(req.file.path); // You can send any response to the user here
+    console.log(req.file);
+    res.send(req.file.filename); // You can send any response to the user here
   }); //Images are uploaded to this route
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-functions.handleDisconnect();
 
 var port = process.env.PORT || 3333;
 app.listen(port, function () {
