@@ -76,7 +76,7 @@ class List extends React.Component {
 		};
 		$.ajax ({
 	      method: 'POST',
-	      url: "http://localhost:3333/searchImg",
+	      url: "http://awesomesauce-gaming.net:3333/searchImg",
 	      data: postData,
 	      success: (data) => {
 	        var temp = [];
