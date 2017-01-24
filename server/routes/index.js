@@ -40,13 +40,40 @@ exports.recipe = function(req, res) {
 }
 
 exports.search = function(req, res) {
+  var t = Date.now();
   console.log(req.params.id);
-	async.parallel([async.apply(functions.searchRecipe, req.params.id)],
+  var str = req.params.id;
+  var includes = [];
+  var excludes = [];
+  var searchTerm = [];
+  var splitStr = str.split(' ');
+  async.forEachOf(splitStr, function(element, i , inner_callback) {
+    if (element.match(/[+]/)){
+      includes[includes.length] = element;
+      inner_callback(null);
+    } else if (element.match(/[-]/)){
+      excludes[excludes.length] = element;
+      inner_callback(null);
+    } else {
+      searchTerm[searchTerm.length] = element;
+      inner_callback(null);
+    };
+    }, function(err) {
+      if (err) {
+
+      } else {
+        console.log(includes);
+        console.log(excludes);
+        console.log(searchTerm);
+      };
+    })
+	async.parallel([async.apply(functions.searchRecipe, searchTerm[0])],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
 			};
 			res.send(results);
+      console.log(Date.now() - t);
 		});
 }
 

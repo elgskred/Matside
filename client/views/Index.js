@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import DropzoneComponent from '../components/DropzoneComponent';
+import Keyword from '../components/KeywordTags';
 
 class AddIngredient extends React.Component {
   constructor(){
@@ -81,15 +82,13 @@ class Submit extends React.Component {
     console.log(successArray.length);
     for (var j = 0; j < successArray.length; j++) {
       tempArrayD[j] = successArray[j].xhr.response;
-      console.log(successArray[j].xhr.response);
     }
-    //Getting the keywords and separates the words before they are put in a array
-    var tempArrayS = this.state.keywords.split(",");
-    console.log(tempArrayS);
-    for (var s = 0; s < tempArrayS.length; s++) {
-      tempArrayS[s] = tempArrayS[s].trim();
+    //Getting the keywords from the component and puts them in a array
+    var tempArrayK = [];
+    for (var k = 0; k < this.refs.keywordTags.state.tags.length; k++) {
+      tempArrayK[k] = this.refs.keywordTags.state.tags[k].text;
     }
-    console.log(tempArrayS);
+    console.log(tempArrayK);
 
     var postData = {
       name: this.state.name,
@@ -99,7 +98,7 @@ class Submit extends React.Component {
       amount: tempArrayA,
       files: tempArrayD,
       author: "",
-      keywords: tempArrayS
+      keywords: tempArrayK
       
     };
     console.log(postData);
@@ -144,7 +143,7 @@ class Submit extends React.Component {
           <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
           <br />
-          <input type="text" id="keywords" placeholder="Nøkkelord" onChange={this.onChange} value={this.state.keywords}/>
+          <Keyword ref="keywordTags"/>
           <br />
           <br />
           <input type="submit" />
