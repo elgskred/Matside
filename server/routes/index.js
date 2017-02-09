@@ -40,40 +40,38 @@ exports.recipe = function(req, res) {
 }
 
 exports.search = function(req, res) {
-  var t = Date.now();
   console.log(req.params.id);
   var str = req.params.id;
   var includes = [];
   var excludes = [];
   var searchTerm = [];
+  var searchSentence = "";
   var splitStr = str.split(' ');
   async.forEachOf(splitStr, function(element, i , inner_callback) {
     if (element.match(/[+]/)){
-      includes[includes.length] = element;
+      includes[includes.length] = element.replace(/[+]/, '');
       inner_callback(null);
     } else if (element.match(/[-]/)){
-      excludes[excludes.length] = element;
+      excludes[excludes.length] = element.replace(/[-]/, '');
       inner_callback(null);
     } else {
       searchTerm[searchTerm.length] = element;
+      searchSentence = searchSentence + element;
+      searchSentence = searchSentence + " ";
       inner_callback(null);
     };
     }, function(err) {
       if (err) {
 
       } else {
-        console.log(includes);
-        console.log(excludes);
-        console.log(searchTerm);
       };
     })
-	async.parallel([async.apply(functions.searchRecipe, searchTerm[0])],
+	async.parallel([async.apply(functions.searchRecipe, searchTerm, includes, excludes, searchSentence)],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
 			};
 			res.send(results);
-      console.log(Date.now() - t);
 		});
 }
 

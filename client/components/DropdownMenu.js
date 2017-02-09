@@ -48,18 +48,23 @@ class HeaderMenuDropdown extends React.Component {
 class HeaderMenuButton extends React.Component {
 	constructor(props) {
 		super (props)
-		this.handleClick = this.handleClick.bind(this);
+		this.handleEnter = this.handleEnter.bind(this);
+		this.handleLeave = this.handleLeave.bind(this);
 		this.handleBodyClick = this.handleBodyClick.bind(this);
 		this.state = {
 			isVisible: false
 		}
 	}
 
-	handleClick (e) {
+	handleEnter (e) {
 		e.stopPropagation();
 		//e.preventDefault();
-		console.log("Button is clicked");
-		this.setState({isVisible: !this.state.isVisible});
+		this.setState({isVisible: true});
+	}
+	handleLeave (e) {
+		e.stopPropagation();
+		//e.preventDefault();
+		this.setState({isVisible: false});
 	}
 
 	handleBodyClick (e) {
@@ -75,7 +80,7 @@ class HeaderMenuButton extends React.Component {
 			}
 		};
 		return (
-			<div onMouseEnter={this.handleClick} onMouseLeave={this.handleClick} id="kake">
+			<div onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave} id="kake">
 				<a  href="#">{this.props.name}</a>
 				<HeaderMenuDropdown isVisible={this.state.isVisible} list={list}/>
 			</div>

@@ -111,23 +111,44 @@ exports.insertPictures = function(body, UID, callback) {
   });
 };
 
-exports.searchRecipe = function(searchFor, callback) {
-  var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
-  var From = 'From `recipes` ';
-  var Where = 'Where recipes.recipeName Like ?'
-  var inserts = '%' + searchFor + '%';
-  var sql = Select + From + Where;
-  sql = mysql.format(sql, inserts);
-  pool.getConnection(function(err, connection) {
-    connection.release();
-    connection.query(sql, function (err, rows, fields) {
-        if (!err) {
-          callback(null, rows);
-        } else {
-    
-        };
-      });
+exports.searchRecipe = function(searchTerm, includes, excludes, searchSentence, callback) {
+  console.log(includes);
+  console.log(excludes);
+  console.log(searchTerm);
+  console.log(searchSentence);
+
+  async.forEachOf(searchTerm, function(element, i, inner_callback) {
+
+  }, function (err) {
+    if (err) {
+
+    } else {
+
+    };
   });
+
+
+  if (searchSentence.length > 0){
+    var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
+    var From = 'From `recipes` ';
+    var Inner = 'INNER JOIN `keywords` ';
+    var On = 'ON keywords.UID = recipes.UID '
+    var Where = 'Where recipes.recipeName Like ?'
+    var inserts = '%' + searchSentence + '%';
+    var sql = Select + From + Inner + On + Where;
+    sql = mysql.format(sql, inserts);
+    pool.getConnection(function(err, connection) {
+      connection.release();
+      connection.query(sql, function (err, rows, fields) {
+          if (!err) {
+            callback(null, rows);
+          } else {
+      
+          };
+        });
+    });
+  };
+  
 };
 
 exports.searchRecipeByUID = function(searchFor, callback) {
