@@ -111,32 +111,28 @@ exports.insertPictures = function(body, UID, callback) {
   });
 };
 
-exports.searchRecipe = function(searchTerm, includes, excludes, searchSentence, callback) {
-  console.log(includes);
-  console.log(excludes);
-  console.log(searchTerm);
+exports.searchSentence = function(searchSentence, callback) {
+  //console.log(includes);
+  //console.log(excludes);
+  //console.log(searchTerm);
   console.log(searchSentence);
+  // async.forEachOf(searchTerm, function(element, i, inner_callback) {
 
-  async.forEachOf(searchTerm, function(element, i, inner_callback) {
+  // }, function (err) {
+  //   if (err) {
 
-  }, function (err) {
-    if (err) {
+  //   } else {
 
-    } else {
-
-    };
-  });
-
-
+  //   };
+  // });
   if (searchSentence.length > 0){
     var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
     var From = 'From `recipes` ';
-    var Inner = 'INNER JOIN `keywords` ';
-    var On = 'ON keywords.UID = recipes.UID '
     var Where = 'Where recipes.recipeName Like ?'
     var inserts = '%' + searchSentence + '%';
-    var sql = Select + From + Inner + On + Where;
+    var sql = Select + From + Where;
     sql = mysql.format(sql, inserts);
+    console.log(sql);
     pool.getConnection(function(err, connection) {
       connection.release();
       connection.query(sql, function (err, rows, fields) {
@@ -148,6 +144,111 @@ exports.searchRecipe = function(searchTerm, includes, excludes, searchSentence, 
         });
     });
   };
+  
+};
+
+exports.searchTerm = function(searchTerm, callback) {
+  if (searchTerm.length > 1) {
+    console.log(searchTerm);
+    var t = [];
+    pool.getConnection(function(err, connection) {
+      var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
+      var From = 'From `recipes` ';
+      var Where = 'Where recipes.recipeName Like ?'
+      var sql = Select + From + Where;
+      async.forEachOf(searchTerm, function(element, i , inner_callback) {
+        var inserts = '%' + element + '%';
+        var Innersql = mysql.format(sql, inserts);
+        connection.query(Innersql, function(err, rows, fields){
+          if(!err) {
+            t[i] = rows;
+            inner_callback(null);
+          } else {
+            inner_callback(err);
+          }
+        })
+      }, function(err) {
+        if (err) {
+
+        } else {
+          connection.release();
+          callback(null, t);
+        };
+      });
+    });
+  } else {
+    callback(null, null);
+  }
+  
+};
+
+exports.searchIncludes = function(includes, callback) {
+  if (includes.length > 0) {
+    console.log(includes);
+    var t = [];
+    pool.getConnection(function(err, connection) {
+      var Select = 'Select ingredients.UID, ingredients.ingredient ';
+      var From = 'From `ingredients` ';
+      var Where = 'Where ingredients.ingredient Like ?'
+      var sql = Select + From + Where;
+      async.forEachOf(includes, function(element, i , inner_callback) {
+        var inserts = '%' + element + '%';
+        var Innersql = mysql.format(sql, inserts);
+        connection.query(Innersql, function(err, rows, fields){
+          if(!err) {
+            t[i] = rows;
+            inner_callback(null);
+          } else {
+            inner_callback(err);
+          }
+        })
+      }, function(err) {
+        if (err) {
+
+        } else {
+          connection.release();
+          callback(null, t);
+        };
+      });
+    });
+  } else {
+    callback(null, null);
+  }
+  
+};
+
+exports.searchExcludes = function(excludes, callback) {
+  if (excludes.length > 0) {
+    console.log(excludes);
+    var t = [];
+    pool.getConnection(function(err, connection) {
+      var Select = 'Select ingredients.UID, ingredients.ingredient ';
+      var From = 'From `ingredients` ';
+      var Where = 'Where ingredients.ingredient Like ?'
+      var sql = Select + From + Where;
+      async.forEachOf(excludes, function(element, i , inner_callback) {
+        var inserts = '%' + element + '%';
+        var Innersql = mysql.format(sql, inserts);
+        connection.query(Innersql, function(err, rows, fields){
+          if(!err) {
+            t[i] = rows;
+            inner_callback(null);
+          } else {
+            inner_callback(err);
+          }
+        })
+      }, function(err) {
+        if (err) {
+
+        } else {
+          connection.release();
+          callback(null, t);
+        };
+      });
+    });
+  } else {
+    callback(null, null);
+  }
   
 };
 

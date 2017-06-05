@@ -40,7 +40,7 @@ exports.recipe = function(req, res) {
 }
 
 exports.search = function(req, res) {
-  console.log(req.params.id);
+  //console.log(req.params.id);
   var str = req.params.id;
   var includes = [];
   var excludes = [];
@@ -56,8 +56,7 @@ exports.search = function(req, res) {
       inner_callback(null);
     } else {
       searchTerm[searchTerm.length] = element;
-      searchSentence = searchSentence + element;
-      searchSentence = searchSentence + " ";
+      searchSentence = searchSentence + " " + element;
       inner_callback(null);
     };
     }, function(err) {
@@ -66,12 +65,13 @@ exports.search = function(req, res) {
       } else {
       };
     })
-	async.parallel([async.apply(functions.searchRecipe, searchTerm, includes, excludes, searchSentence)],
+	async.parallel([async.apply(functions.searchSentence, searchSentence.substring(1)), async.apply(functions.searchTerm, searchTerm), async.apply(functions.searchIncludes, includes), async.apply(functions.searchExcludes, excludes)],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
 			};
 			res.send(results);
+      console.log(results);
 		});
 }
 
