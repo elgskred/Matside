@@ -1,4 +1,38 @@
 /* React Filepicker Example CSS */
+.headerBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border: 2px solid red;
+}
+.liSearchBar {
+    float: right;
+}
+.searchBar {
+    width: 350px;
+}
+.liHeaderBar {
+    border: 2px solid blue;
+    float: left;
+}
+
+.liHeaderBar a, .liSearchBar {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.liHeaderBar a:hover {
+    background-color: red;
+}
+.dropdown-content-menu {
+    position: absolute;
+    background-color: #333;
+    border: 2px solid pink;
+}
 
 body {
     font-family: sans-serif;
@@ -43,9 +77,10 @@ a {
     text-decoration: none;
 }
 .recipeListing{
-    background-color: red;
+    background-color: white;
     padding: 10px;
     color: black;
+    border: 2px solid yellow;
 }
 .recipeListing:hover {
     background-color: blue;
@@ -81,11 +116,13 @@ a {
     align-items: center;
     height: 700px;
     position: relative;
+    border: 2px solid black;
   }
   .demo4-inner {
     overflow: hidden;
     position: relative;
     margin: auto;
+
   }
   .demo4-photo {
     position: absolute;

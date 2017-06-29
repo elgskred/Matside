@@ -8,13 +8,16 @@ import PG from '../components/PG';
 class Home extends React.Component {
 	render() {
 		return(
-			<div id="headerbar">
-				<HeaderMenu />
-				<PhotoGallery />
-				<h2> Skille </h2>
-				<PG />
+			<div className="page">
+				<div id="headerbar">
+					<HeaderMenu />
+					
+				</div>
+				<div className="suggestionGallery">
+					<PhotoGallery />
+					<h2> Skille </h2>
+				</div>
 			</div>
-
 		);
 
 	}

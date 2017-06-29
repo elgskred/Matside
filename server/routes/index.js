@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
     }
   });
 const upload = multer({storage: storage});
+var visitors = [];
 
 
 exports.recipe = function(req, res) {
@@ -34,19 +35,19 @@ exports.recipe = function(req, res) {
 			if (err) {
 				console.log(err);
 			};
-			console.log(results);
 			res.send("ok");
 		});
 }
 
 exports.search = function(req, res) {
-  //console.log(req.params.id);
   var str = req.params.id;
   var includes = [];
   var excludes = [];
   var searchTerm = [];
   var searchSentence = "";
   var splitStr = str.split(' ');
+  //Splits the search string. Elements preceeded by "+", "-", and " " gets sorted into their respective arrays
+  //One array for includes, excludes, one for the entire search string(excluding +/- elements) and one array for each element in the search string
   async.forEachOf(splitStr, function(element, i , inner_callback) {
     if (element.match(/[+]/)){
       includes[includes.length] = element.replace(/[+]/, '');
@@ -65,19 +66,44 @@ exports.search = function(req, res) {
       } else {
       };
     })
+  //Runs the sql querys async.One for includes, excludes,"string", and "string" "elements".
 	async.parallel([async.apply(functions.searchSentence, searchSentence.substring(1)), async.apply(functions.searchTerm, searchTerm), async.apply(functions.searchIncludes, includes), async.apply(functions.searchExcludes, excludes)],
 		function done (err, results) {
 			if (err) {
 				console.log(err);
 			};
 			res.send(results);
-      console.log(results);
 		});
 }
-
+//Retrieves the recipes by looking for a specific UID
 exports.recipes = function(req, res) {
-  console.log(req.params.uid);
-  async.parallel([async.apply(functions.searchRecipeByUID, req.params.uid), async.apply(functions.searchIngredientsByUID, req.params.uid), async.apply(functions.searchPictureByUID, req.params.uid)],
+  var v = req.connection.remoteAddress
+  var uid = req.params.uid;
+  var visitor = {ip: v, page: uid};
+  var flag = false;
+  if (visitors.length == 0) {
+    visitors.push(visitor);
+    async.parallel([async.apply(functions.incrementViews,uid)], 
+        function done (err, results) {
+          if (err) {
+            console.log(err);
+          };
+        });
+  };
+  for (var i = 0; i < visitors.length; i++){
+    if (visitors[i].ip === v && visitors[i].page === uid) {
+      break;
+    } else {
+      visitors.push(visitor);
+      async.parallel([async.apply(functions.incrementViews,uid)], 
+        function done (err, results) {
+          if (err) {
+            console.log(err);
+          };
+        });
+    }
+  };
+  async.parallel([async.apply(functions.searchRecipeByUID, uid), async.apply(functions.searchIngredientsByUID, uid), async.apply(functions.searchPictureByUID, uid)],
     function done (err, results) {
       if (err) {
         console.log(err);
@@ -86,15 +112,17 @@ exports.recipes = function(req, res) {
     });
 }
 
-
+//Handles the uploading of images
 exports.uploadHandler = function(req, res) {
 	if (req.file && req.file.originalname) {
   		console.log(`Received file ${req.file.originalname}`);
 	}
 	res.send(req.file.path); //Sends the file path back to the user so the image can be associated with the correct recipe
 }
-
+//Finds the images tied  to a specific UID
 exports.searchImg = function(req, res) {
+  console.log("searchIMG");
+  console.log(req.body.UID);
   var temp = [];
   async.parallel([async.apply(functions.searchPicturesByUID, req.body.UID)],
     function done (err, results) {
@@ -104,4 +132,17 @@ exports.searchImg = function(req, res) {
       res.send(results[0]);
     });
 }
+
+//Returns the current popular recipes
+exports.popularRecipes = function(req, res) {
+  async.parallel([async.apply(functions.getPopularRecipes)],
+    function done (err, results) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(results[0]);
+    })
+}
+
+
 

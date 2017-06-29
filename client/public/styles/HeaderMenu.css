@@ -4,14 +4,16 @@
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    border: 2px solid red;
 }
 .liSearchBar {
-	float: right;
+    float: right;
 }
 .searchBar {
-	width: 350px;
+    width: 350px;
 }
 .liHeaderBar {
+    border: 2px solid blue;
     float: left;
 }
 
@@ -26,14 +28,11 @@
     background-color: red;
 }
 .dropdown-content-menu {
-  position: absolute;
-  background-color: #333;
-  float: left;
-  transition: 0.3s ease;
+    position: absolute;
+    background-color: #333;
+    border: 2px solid pink;
+    z-index: 1;
 }
-.test {
-    list-style: none;
-}
-.potet {
-    width: 100%;
+.suggestionGallery {
+    border: 2px solid yellow;
 }

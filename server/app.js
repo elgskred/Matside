@@ -4,6 +4,7 @@ var reactViews = require('express-react-views');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var mysql = require('mysql');
+var routes = require('./routes');
 
 var app = express();
 const storage = multer.diskStorage({
@@ -41,17 +42,13 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-var routes = require('./routes');
-
-//Submited recipe
 app.post('/recipe', routes.recipe); //new recipes are uploaded to this route
 app.get('/search/:id', routes.search); //All searches are requested on this route
 app.post('/searchImg', routes.searchImg);
+app.get('/popularRecipes', routes.popularRecipes);
 app.get('/recipes/:uid', routes.recipes); //Individual recipes are requested on this route
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {

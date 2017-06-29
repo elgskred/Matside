@@ -76,7 +76,7 @@ class RenderImg extends React.Component {
 
 	render() {
 		const listImg = this.props.img.map((item, index) =>
-			<img src={'../public/uploads/' + item} alt="404" key={index} />
+			<img src={'../public/uploads/' + item} alt="404.png" key={index} />
 		);
 		return(
 			<div className="recipeImg">

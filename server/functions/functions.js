@@ -112,19 +112,7 @@ exports.insertPictures = function(body, UID, callback) {
 };
 
 exports.searchSentence = function(searchSentence, callback) {
-  //console.log(includes);
-  //console.log(excludes);
-  //console.log(searchTerm);
-  console.log(searchSentence);
-  // async.forEachOf(searchTerm, function(element, i, inner_callback) {
-
-  // }, function (err) {
-  //   if (err) {
-
-  //   } else {
-
-  //   };
-  // });
+  console.log("searchSentence");
   if (searchSentence.length > 0){
     var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
     var From = 'From `recipes` ';
@@ -134,22 +122,25 @@ exports.searchSentence = function(searchSentence, callback) {
     sql = mysql.format(sql, inserts);
     console.log(sql);
     pool.getConnection(function(err, connection) {
-      connection.release();
+      if (err) throw err;
       connection.query(sql, function (err, rows, fields) {
           if (!err) {
+            connection.release();
             callback(null, rows);
           } else {
       
           };
         });
     });
+  } else {
+    callback(null,null);
   };
   
 };
 
 exports.searchTerm = function(searchTerm, callback) {
   if (searchTerm.length > 1) {
-    console.log(searchTerm);
+    console.log("searchTerm");
     var t = [];
     pool.getConnection(function(err, connection) {
       var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
@@ -184,16 +175,18 @@ exports.searchTerm = function(searchTerm, callback) {
 
 exports.searchIncludes = function(includes, callback) {
   if (includes.length > 0) {
-    console.log(includes);
+    console.log("includes");
     var t = [];
     pool.getConnection(function(err, connection) {
-      var Select = 'Select ingredients.UID, ingredients.ingredient ';
+      var Select = 'Select ingredients.UID, ingredients.ingredient, recipes.recipeName, recipes.shortDesc ';
       var From = 'From `ingredients` ';
-      var Where = 'Where ingredients.ingredient Like ?'
-      var sql = Select + From + Where;
+      var Join = 'Left Join `recipes` on ingredients.UID = recipes.UID ';
+      var Where = 'Where ingredients.ingredient Like ?';
+      var sql = Select + From + Join + Where;
       async.forEachOf(includes, function(element, i , inner_callback) {
         var inserts = '%' + element + '%';
         var Innersql = mysql.format(sql, inserts);
+        console.log(Innersql);
         connection.query(Innersql, function(err, rows, fields){
           if(!err) {
             t[i] = rows;
@@ -219,7 +212,7 @@ exports.searchIncludes = function(includes, callback) {
 
 exports.searchExcludes = function(excludes, callback) {
   if (excludes.length > 0) {
-    console.log(excludes);
+    console.log("excludes");
     var t = [];
     pool.getConnection(function(err, connection) {
       var Select = 'Select ingredients.UID, ingredients.ingredient ';
@@ -338,3 +331,55 @@ exports.searchPicturesByUID = function(searchFor, callback) {
     });
   });
 };
+
+
+exports.getPopularRecipes = function(callback) {
+  pool.getConnection(function(err, connection) {
+    var Select = 'Select recipes.UID ';
+    var From = 'From `recipes` ';
+    var Order = 'Order by recipes.views DESC ';
+    var Limit = 'LIMIT 5';
+    var sql = Select + From + Order + Limit;
+    console.log(sql);
+    connection.query(sql, function(err, rows, fields) {
+      if(!err){
+        callback(null,rows);
+      } else {
+        callback(null, null);
+      }
+    })
+  })
+
+}
+
+exports.incrementViews = function(uid, callback) {
+  pool.getConnection(function(err, connection) {
+    var Select = 'Select recipes.UID, recipes.views ';
+    var From = 'From `recipes` ';
+    var Where = 'Where recipes.UID LIKE ?';
+    var sql = Select + From + Where;
+    var insert = uid;
+    var sql = mysql.format(sql, insert);
+    connection.query(sql, function(err, rows, fields){
+      if (!err) {
+        if (rows.length > 0) {
+          var Update = 'UPDATE recipes ';
+          var _Set = 'SET views = ? ';
+          Where = 'Where recipes.UID LIKE ?';
+          sql = Update + _Set + Where;
+          var insert = [rows[0].views + 1, uid];
+          sql = mysql.format(sql, insert);
+          connection.query(sql, function(err, i_rows, fields){
+            if (!err) {
+              callback(null, "OK");
+            } else {
+              callback(null, "not ok");
+            };
+          });
+        } else {
+          callback(null, "not ok");
+        };
+    };
+    });
+  });
+}
