@@ -46,10 +46,12 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.post('/recipe', routes.recipe); //new recipes are uploaded to this route
+app.post('/updateRecipe', routes.updateRecipe);
 app.get('/search/:id', routes.search); //All searches are requested on this route
 app.post('/searchImg', routes.searchImg);
 app.get('/popularRecipes', routes.popularRecipes);
 app.get('/recipes/:uid', routes.recipes); //Individual recipes are requested on this route
+app.get('/recipes/:uid/edit', routes.recipes); //Enables editing of a specified recipe
 app.post('/uploadHandler', upload.single('file'), function (req, res, next) {
     if (req.file && req.file.originalname) {
       console.log(`Received file ${req.file.originalname}`);

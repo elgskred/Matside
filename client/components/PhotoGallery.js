@@ -52,7 +52,7 @@ const Demo = React.createClass({
           var temp = [];
           for (var i = 0; i < data.length; i++){
             if (data[i][0] != undefined){
-              temp[i] = "../public/uploads/" +data[i][0]['imgPath'];
+              temp[i] = "../public/uploads/" +data[i][0]['imagePath'];
             } else {
               temp[i] = '404.png';
             }

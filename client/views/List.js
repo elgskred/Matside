@@ -189,10 +189,11 @@ class List extends React.Component {
 	      url: "http://localhost:3333/searchImg",
 	      data: postData,
 	      success: (data) => {
+	      	console.log(data)
 	        var temp = [];
         	for (var i = 0; i < data.length; i++){
 	        	if (data[i][0] != undefined){
-	        		temp[i] = data[i][0]['imgPath'];
+	        		temp[i] = data[i][0]['imagePath'];
 	        	} else {
 	        		temp[i] = '404.png';
 	        	}

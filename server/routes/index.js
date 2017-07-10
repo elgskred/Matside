@@ -29,17 +29,30 @@ var visitors = [];
 
 exports.recipe = function(req, res) {
 	console.log(req.body);
-	var UID = req.body.name.slice(0, 4) + Date.now();
-	async.parallel([async.apply(functions.insertRecipe, req.body, UID), async.apply(functions.insertIngredients, req.body, UID), async.apply(functions.insertKeywords, req.body, UID), async.apply(functions.insertPictures, req.body, UID)],
-		function done(err, results) {
-			if (err) {
-				console.log(err);
-			};
-			res.send("ok");
-		});
+  var UID;
+  async.parallel([async.apply(functions.insertRecipe, req.body)],
+    function done(err, results) {
+      if (err) {
+        console.log(results);
+      } else {
+        UID = results[0];
+        console.log("recipe ok");
+        async.parallel([async.apply(functions.insertIngredients, req.body, UID), async.apply(functions.insertPictures, req.body, UID)],
+          function done(err, results) {
+            if (err) {
+              console.log(err);
+            } else {
+              console.log("rest ok");
+            }
+          });
+      }
+      res.send("ok");
+    })
+	
 }
 
 exports.search = function(req, res) {
+  console.log("search");
   var str = req.params.id;
   var includes = [];
   var excludes = [];
@@ -72,6 +85,7 @@ exports.search = function(req, res) {
 			if (err) {
 				console.log(err);
 			};
+      console.log("search results");
 			res.send(results);
 		});
 }
@@ -121,8 +135,6 @@ exports.uploadHandler = function(req, res) {
 }
 //Finds the images tied  to a specific UID
 exports.searchImg = function(req, res) {
-  console.log("searchIMG");
-  console.log(req.body.UID);
   var temp = [];
   async.parallel([async.apply(functions.searchPicturesByUID, req.body.UID)],
     function done (err, results) {
@@ -144,5 +156,10 @@ exports.popularRecipes = function(req, res) {
     })
 }
 
+
+exports.updateRecipe = function(req, res) {
+  console.log(req.body);
+  res.send("ok");
+}
 
 

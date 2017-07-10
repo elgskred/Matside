@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
-import request from 'superagent';
 import DropzoneComponent from '../components/DropzoneComponent';
 import Keyword from '../components/KeywordTags';
 
@@ -72,7 +71,7 @@ class Submit extends React.Component {
     var tempArrayA = [];
     var tempArrayD = [];
 
-    //Getting ingredients and ingretient amounts and placing the values in two arrays
+    //Getting ingredients and ingredient amounts and placing the values in two arrays
     for (var i = 0; i < len; i++) {
       tempArrayI[i] = document.getElementById("ingredient" + i).value;
       tempArrayA[i] = document.getElementById("amount" + i).value;
@@ -117,6 +116,7 @@ class Submit extends React.Component {
   };
 
   render() {
+    {console.log(this.state.testing)}
     const testing = this.state.testing.map((Element, index) => {
       return <Element key={ index } index={ index } />
     });

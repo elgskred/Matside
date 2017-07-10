@@ -111,15 +111,15 @@ class ShowRecipeList extends React.Component {
 	      success: (data) => {
 	        for (var i = 0; i < data[0].length; i++) {
 	        	this.setState({recipeName: this.state.recipeName.concat(data[0][i]['recipeName'])});
-	        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipe'])});
+	        	this.setState({recipe: this.state.recipe.concat(data[0][i]['recipeDescription'])});
 		    }
 	        for (var i = 0; i < data[1].length; i++) {
-	        	this.setState({ingredients: this.state.ingredients.concat(data[1][i]['ingredient'])});
-	        	this.setState({amount: this.state.amount.concat(data[1][i]['amount'].replace(/[0-9]/g, ''))});
-	        	this.setState({amountParsed: this.state.amountParsed.concat(data[1][i]['amount'].replace(/[^0-9]/g,''))})
+	        	this.setState({ingredients: this.state.ingredients.concat(data[1][i]['ingredient_name'])});
+	        	this.setState({amount: this.state.amount.concat(data[1][i]['ingredient_amount'].replace(/[0-9]/g, ''))});
+	        	this.setState({amountParsed: this.state.amountParsed.concat(data[1][i]['ingredient_amount'].replace(/[^0-9]/g,''))})
 		    }
 		    for (var i = 0; i < data[2].length; i++) {
-		    	this.setState({imgPath: this.state.imgPath.concat(data[2][i]['imgPath'])});
+		    	this.setState({imgPath: this.state.imgPath.concat(data[2][i]['imagePath'])});
 		    }
 	      }
 	    });

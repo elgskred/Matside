@@ -13,22 +13,9 @@ class RenderArray extends React.Component {
 		}
 	}
 
-
-
-	// handleEnterDropdown (e) {
-	// 	e.stopPropagation();
-	// 	//e.preventDefault();
-	// 	//this.setState({isVisible: true});
-	// 	this.props.onHandleMouseChange(true)
-	// 	console.log("Entered dropdown");
-	// 	console.log(this.props);
-	// }
-
 	handleLeaveDropdown (e) {
 		e.stopPropagation();
 		this.props.onHandleMouseChange(false)
-		//e.preventDefault();
-		//this.setState({isVisible: false});
 		console.log("Exited dropdown");
 	}
 

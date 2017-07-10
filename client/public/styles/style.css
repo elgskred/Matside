@@ -110,6 +110,11 @@ a {
     height: auto;
     display: inline-block;
 }
+
+#ingredientsList, #amountsList {
+    display: inline-block;
+}
+
  .demo4 {
     display: flex;
     display: -webkit-flex;

@@ -13,7 +13,8 @@ export default class Example extends React.Component {
         // please consult http://www.dropzonejs.com/#configuration
         this.djsConfig = {
             addRemoveLinks: true,
-            acceptedFiles: "image/jpeg,image/png,image/gif"
+            acceptedFiles: "image/jpeg,image/png,image/gif",
+            maxFilesize: 3
         };
 
         this.componentConfig = {

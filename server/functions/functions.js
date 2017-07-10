@@ -14,18 +14,17 @@ var pool = mysql.createPool({
   port     : '3306'
 });
 
-exports.insertRecipe = function (body, UID, callback) {
-  console.log(body.name);
-  var Insert = 'Insert Into `recipes` (UID, recipeName, recipe, author, shortDesc) ';
-  var Values = 'Values (?, ?, ?, ?, ?)';
+exports.insertRecipe = function (body, callback) {
+  var Insert = 'Insert Into `recipes` (recipeName, recipeDescription, shortDescription) ';
+  var Values = 'Values (?, ?, ?)';
   var sql = Insert + Values;
-  var inserts = [UID, body.name, body.recipe, body.author, body.desc];
+  var inserts = [body.name, body.recipe, body.desc];
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
     connection.query(sql, function(err, rows, fields){
-      connection.release();
       if(!err){
-        callback(null, "recipe OK");
+        connection.release();
+        callback(null, rows.insertId);
       } else {
         callback(err);
       }
@@ -34,7 +33,7 @@ exports.insertRecipe = function (body, UID, callback) {
 };
 
 exports.insertIngredients = function(body, UID, callback) {
-  var Insert = 'Insert Into `ingredients` (UID, ingredient, amount) ';
+  var Insert = 'Insert Into `ingredients` (UID, ingredient_name, ingredient_amount) ';
   var Values = 'Values (?, ?, ?)';
   var sql = Insert + Values;
   pool.getConnection(function(err, connection) {
@@ -86,7 +85,7 @@ exports.insertKeywords = function(body, UID, callback) {
 };
 
 exports.insertPictures = function(body, UID, callback) {
-  var Insert = 'Insert Into `pictures` (UID, imgPath) ';
+  var Insert = 'Insert Into `pictures` (UID, imagePath) ';
   var Values = 'Values (?, ?)';
   var sql = Insert + Values;
   pool.getConnection(function(err, connection) {
@@ -112,15 +111,13 @@ exports.insertPictures = function(body, UID, callback) {
 };
 
 exports.searchSentence = function(searchSentence, callback) {
-  console.log("searchSentence");
   if (searchSentence.length > 0){
-    var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
+    var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipeDescription, recipes.shortDescription ';
     var From = 'From `recipes` ';
     var Where = 'Where recipes.recipeName Like ?'
     var inserts = '%' + searchSentence + '%';
     var sql = Select + From + Where;
     sql = mysql.format(sql, inserts);
-    console.log(sql);
     pool.getConnection(function(err, connection) {
       if (err) throw err;
       connection.query(sql, function (err, rows, fields) {
@@ -140,10 +137,9 @@ exports.searchSentence = function(searchSentence, callback) {
 
 exports.searchTerm = function(searchTerm, callback) {
   if (searchTerm.length > 1) {
-    console.log("searchTerm");
     var t = [];
     pool.getConnection(function(err, connection) {
-      var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipe, recipes.shortDesc ';
+      var Select = 'Select recipes.UID, recipes.recipeName, recipes.recipeDescription, recipes.shortDescription ';
       var From = 'From `recipes` ';
       var Where = 'Where recipes.recipeName Like ?'
       var sql = Select + From + Where;
@@ -175,18 +171,16 @@ exports.searchTerm = function(searchTerm, callback) {
 
 exports.searchIncludes = function(includes, callback) {
   if (includes.length > 0) {
-    console.log("includes");
     var t = [];
     pool.getConnection(function(err, connection) {
-      var Select = 'Select ingredients.UID, ingredients.ingredient, recipes.recipeName, recipes.shortDesc ';
+      var Select = 'Select ingredients.UID, ingredients.ingredient_name, recipes.recipeName, recipes.shortDescription ';
       var From = 'From `ingredients` ';
       var Join = 'Left Join `recipes` on ingredients.UID = recipes.UID ';
-      var Where = 'Where ingredients.ingredient Like ?';
+      var Where = 'Where ingredients.ingredient_name Like ?';
       var sql = Select + From + Join + Where;
       async.forEachOf(includes, function(element, i , inner_callback) {
         var inserts = '%' + element + '%';
         var Innersql = mysql.format(sql, inserts);
-        console.log(Innersql);
         connection.query(Innersql, function(err, rows, fields){
           if(!err) {
             t[i] = rows;
@@ -215,9 +209,9 @@ exports.searchExcludes = function(excludes, callback) {
     console.log("excludes");
     var t = [];
     pool.getConnection(function(err, connection) {
-      var Select = 'Select ingredients.UID, ingredients.ingredient ';
+      var Select = 'Select ingredients.UID, ingredients.ingredient_name ';
       var From = 'From `ingredients` ';
-      var Where = 'Where ingredients.ingredient Like ?'
+      var Where = 'Where ingredients.ingredient_name Like ?'
       var sql = Select + From + Where;
       async.forEachOf(excludes, function(element, i , inner_callback) {
         var inserts = '%' + element + '%';
@@ -253,9 +247,10 @@ exports.searchRecipeByUID = function(searchFor, callback) {
   var sql = Select + From + Where;
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
-    connection.release();
+
     connection.query(sql, function (err, rows, fields) {
       if (!err) {
+        connection.release();
         callback(null, rows);
       } else {
 
@@ -272,9 +267,9 @@ exports.searchIngredientsByUID = function(searchFor, callback) {
   var sql = Select + From + Where;
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
-    connection.release();
     connection.query(sql, function (err, rows, fields) {
       if (!err) {
+        connection.release();
         callback(null, rows);
       } else {
 
@@ -291,9 +286,9 @@ exports.searchPictureByUID = function(searchFor, callback) {
   var sql = Select + From + Where;
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
-    connection.release();
     connection.query(sql, function (err, rows, fields) {
       if (!err) {
+        connection.release();
         callback(null, rows);
       } else {
 
@@ -314,7 +309,6 @@ exports.searchPicturesByUID = function(searchFor, callback) {
       var Innersql = mysql.format(sql, inserts);
       connection.query(Innersql, function(err, rows, fields){
         if(!err) {
-          console.log(rows);
           t[i] = rows;
           inner_callback(null);
         } else {
@@ -340,7 +334,6 @@ exports.getPopularRecipes = function(callback) {
     var Order = 'Order by recipes.views DESC ';
     var Limit = 'LIMIT 5';
     var sql = Select + From + Order + Limit;
-    console.log(sql);
     connection.query(sql, function(err, rows, fields) {
       if(!err){
         callback(null,rows);
@@ -371,6 +364,7 @@ exports.incrementViews = function(uid, callback) {
           sql = mysql.format(sql, insert);
           connection.query(sql, function(err, i_rows, fields){
             if (!err) {
+              connection.release();
               callback(null, "OK");
             } else {
               callback(null, "not ok");
