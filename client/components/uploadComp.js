@@ -5,22 +5,18 @@ import DropzoneComponent from 'react-dropzone-component';
 export default class Example extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            success: []
-        }
 
         // For a full list of possible configurations,
         // please consult http://www.dropzonejs.com/#configuration
         this.djsConfig = {
-            addRemoveLinks: true,
-            acceptedFiles: "image/jpeg,image/png,image/gif",
-            maxFilesize: 3
+            addRemoveLinks: false,
+            acceptedFiles: "image/jpeg,image/png,image/gif"
         };
 
         this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.gif'],
             showFiletypeIcon: true,
-            postUrl: 'http://awesomesauce-gaming.net:3333/uploadHandler'
+            postUrl: 'http://localhost:3333/uploadHandler',
         };
 
         // If you want to attach multiple callbacks, simply
@@ -30,14 +26,7 @@ export default class Example extends React.Component {
         // Simple callbacks work too, of course
         this.callback = () => console.log('Hello!');
 
-        //this.success = file => this.setState({ success: file});
-        this.success = file => {
-            const success = this.state.success.concat(file)
-            this.setState({success});
-        }
-        
-
-        //this.success = file => console.log('uploaded', file);
+        this.success = file => console.log('uploaded', file);
 
         this.removedfile = file => console.log('removing...', file);
 

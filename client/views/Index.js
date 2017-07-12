@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
-import request from 'superagent';
 import DropzoneComponent from '../components/DropzoneComponent';
 import Keyword from '../components/KeywordTags';
 
@@ -49,7 +48,8 @@ class Submit extends React.Component {
       amount: "",
       recipeListe: [],
       testing: [],
-      keywords: ""
+      keywords: "",
+      servings: 2
     };
   };
   onChange (e) {
@@ -67,28 +67,26 @@ class Submit extends React.Component {
   //Preventing default submit behaviour so we can add our own
   submitForm (e) {
     e.preventDefault();
+    console.log("submit");
     var len = this.state.testing.length;
     var tempArrayI = [];
     var tempArrayA = [];
     var tempArrayD = [];
 
-    //Getting ingredients and ingretient amounts and placing the values in two arrays
+    //Getting ingredients and ingredient amounts and placing the values in two arrays
     for (var i = 0; i < len; i++) {
       tempArrayI[i] = document.getElementById("ingredient" + i).value;
       tempArrayA[i] = document.getElementById("amount" + i).value;
     }
+    console.log("tempIA");
     //Getting successfull image uploads and placing the imageID in a array
     var successArray = this.refs.aTest.state.success;
     console.log(successArray.length);
     for (var j = 0; j < successArray.length; j++) {
       tempArrayD[j] = successArray[j].xhr.response;
     }
+    console.log("tempBilde")
     //Getting the keywords from the component and puts them in a array
-    var tempArrayK = [];
-    for (var k = 0; k < this.refs.keywordTags.state.tags.length; k++) {
-      tempArrayK[k] = this.refs.keywordTags.state.tags[k].text;
-    }
-    console.log(tempArrayK);
 
     var postData = {
       name: this.state.name,
@@ -98,8 +96,7 @@ class Submit extends React.Component {
       amount: tempArrayA,
       files: tempArrayD,
       author: "",
-      keywords: tempArrayK
-      
+      servings: this.state.servings
     };
     console.log(postData);
     $.ajax ({
@@ -135,15 +132,13 @@ class Submit extends React.Component {
             { testing }
             <button onClick = {this.addIngredientField}> Add Ingredient</button>
           </div>
-          <div id="newingredient">
-
-          </div>
+          <br />
+          Servings:
+          <input type="number" placeholder="2" id="servings" onChange={this.onChange} value={this.state.servings} />
           <br />
           <br />
           <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
-          <br />
-          <Keyword ref="keywordTags"/>
           <br />
           <br />
           <input type="submit" />

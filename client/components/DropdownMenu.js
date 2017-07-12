@@ -6,18 +6,27 @@ import { hashHistory } from 'react-router'; //Endres til browserHistory når sid
 class RenderArray extends React.Component {
 	constructor(props) {
 		super(props);
+		//this.handleEnterDropdown = this.handleEnterDropdown.bind(this);
+		this.handleLeaveDropdown = this.handleLeaveDropdown.bind(this);
 		this.state = {
 			recipeName: []
 		}
 	}
+
+	handleLeaveDropdown (e) {
+		e.stopPropagation();
+		this.props.onHandleMouseChange(false)
+		console.log("Exited dropdown");
+	}
+
 	render() {
 		const listButtons = this.props.list.map((number) =>
 			<div key={number.name}><Link to={number.link} key={number.name}>
-			{number.name}
+				{number.name}
 			</Link></div>
 		);	
 		return(
-			<div>
+			<div className="dropdown-content-menu" onMouseEnter={this.handleEnterDropdown} onMouseLeave={this.handleLeaveDropdown}>
 			{listButtons}
 			</div>
 		);
@@ -27,18 +36,29 @@ class RenderArray extends React.Component {
 class HeaderMenuDropdown extends React.Component {
 	constructor(props){
 		super(props);
+		this.handleMouseChange = this.handleMouseChange.bind(this);
 		this.state = {
-			isVisible: false,
+			lowerIsVisible: false,
 			aVar: "Search for something"
 		};
 	}
 
+	handleMouseChange(mouseState) {
+		let mState = !this.state.lowerIsVisible;
+		this.setState({
+			lowerIsVisible: mouseState
+		});		
+		console.log(this.state);
+	}
+
+	componentWillReceiveProps(nextProps){
+		this.setState({lowerIsVisible: nextProps.isVisible});
+	}
+
 	render(){
-		if (this.props.isVisible) {
+		if (this.state.lowerIsVisible) {
 			return(
-				<div className="dropdown-content-menu">
-					<RenderArray list={this.props.list} />
-				</div>
+					<RenderArray list={this.props.list} onHandleMouseChange={this.handleMouseChange}/>
 				);
 		}
 		return null;
@@ -48,23 +68,23 @@ class HeaderMenuDropdown extends React.Component {
 class HeaderMenuButton extends React.Component {
 	constructor(props) {
 		super (props)
-		this.handleClick = this.handleClick.bind(this);
-		this.handleBodyClick = this.handleBodyClick.bind(this);
+		this.handleEnter = this.handleEnter.bind(this);
+		this.handleLeave = this.handleLeave.bind(this);
 		this.state = {
 			isVisible: false
 		}
 	}
-
-	handleClick (e) {
+	handleEnter (e) {
 		e.stopPropagation();
 		//e.preventDefault();
-		console.log("Button is clicked");
-		this.setState({isVisible: !this.state.isVisible});
+		this.setState({isVisible: true});
+		console.log("Enter");
 	}
-
-	handleBodyClick (e) {
-		console.log("Something was clicked");
+	handleLeave (e) {
+		e.stopPropagation();
+		e.preventDefault();
 		this.setState({isVisible: false});
+		console.log("Exit");
 	}
 	render () {
 		var list = [];
@@ -75,7 +95,7 @@ class HeaderMenuButton extends React.Component {
 			}
 		};
 		return (
-			<div onMouseEnter={this.handleClick} onMouseLeave={this.handleClick} id="kake">
+			<div onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave} >
 				<a  href="#">{this.props.name}</a>
 				<HeaderMenuDropdown isVisible={this.state.isVisible} list={list}/>
 			</div>
