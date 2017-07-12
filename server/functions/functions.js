@@ -15,10 +15,10 @@ var pool = mysql.createPool({
 });
 
 exports.insertRecipe = function (body, callback) {
-  var Insert = 'Insert Into `recipes` (recipeName, recipeDescription, shortDescription) ';
-  var Values = 'Values (?, ?, ?)';
+  var Insert = 'Insert Into `recipes` (recipeName, recipeDescription, shortDescription, servings) ';
+  var Values = 'Values (?, ?, ?, ?)';
   var sql = Insert + Values;
-  var inserts = [body.name, body.recipe, body.desc];
+  var inserts = [body.name, body.recipe, body.desc, body.servings];
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
     connection.query(sql, function(err, rows, fields){
@@ -26,6 +26,7 @@ exports.insertRecipe = function (body, callback) {
         connection.release();
         callback(null, rows.insertId);
       } else {
+        connection.release();
         callback(err);
       }
     });
@@ -44,12 +45,13 @@ exports.insertIngredients = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          connection.release();
           inner_callback(err);
         }
       });
     }, function(err) {
       if (err) {
-
+        connection.release();
       } else {
         connection.release();
         callback(null, "ingredients ok");
@@ -70,12 +72,13 @@ exports.insertKeywords = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
-
+        connection.release();
       } else {
         connection.release();
         callback(null, "keywords ok");
@@ -96,12 +99,13 @@ exports.insertPictures = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
-
+        connection.release();
       } else {
         connection.release();
         callback(null, "pictures ok");
@@ -125,7 +129,7 @@ exports.searchSentence = function(searchSentence, callback) {
             connection.release();
             callback(null, rows);
           } else {
-      
+            connection.release();      
           };
         });
     });
@@ -151,12 +155,13 @@ exports.searchTerm = function(searchTerm, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
-
+          connection.release();
         } else {
           connection.release();
           callback(null, t);
@@ -186,12 +191,13 @@ exports.searchIncludes = function(includes, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
-
+          connection.release();
         } else {
           connection.release();
           callback(null, t);
@@ -221,12 +227,13 @@ exports.searchExcludes = function(excludes, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
-
+          connection.release();
         } else {
           connection.release();
           callback(null, t);
@@ -253,7 +260,7 @@ exports.searchRecipeByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
-
+        connection.release();
       };
     });
   });
@@ -272,7 +279,7 @@ exports.searchIngredientsByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
-
+        connection.release();
       };
     });
   });
@@ -291,7 +298,7 @@ exports.searchPictureByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
-
+        connection.release();
       };
     });
   });
@@ -312,12 +319,13 @@ exports.searchPicturesByUID = function(searchFor, callback) {
           t[i] = rows;
           inner_callback(null);
         } else {
+          connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
-
+        connection.release();
       } else {
         connection.release();
         callback(null, t);
@@ -336,8 +344,10 @@ exports.getPopularRecipes = function(callback) {
     var sql = Select + From + Order + Limit;
     connection.query(sql, function(err, rows, fields) {
       if(!err){
+        connection.release();
         callback(null,rows);
       } else {
+        connection.release();
         callback(null, null);
       }
     })
@@ -367,6 +377,7 @@ exports.incrementViews = function(uid, callback) {
               connection.release();
               callback(null, "OK");
             } else {
+              connection.release();
               callback(null, "not ok");
             };
           });
@@ -374,6 +385,127 @@ exports.incrementViews = function(uid, callback) {
           callback(null, "not ok");
         };
     };
+    });
+  });
+}
+
+exports.updateRecipe = function(body, callback) {
+  pool.getConnection(function(err, connection) {
+    var Update = 'UPDATE recipes ';
+    var _Set = 'SET recipeName = ?, shortDescription = ?, recipeDescription = ?, servings = ? ';
+    var Where = 'WHERE recipes.UID LIKE ?';
+    var sql = Update + _Set + Where;
+    var insert = [body.recipeName, body.shortDesc, body.recipe, body.servings, body.UID];
+    sql = mysql.format(sql, insert);
+    //console.log(sql);
+    connection.query(sql, function(err, rows, fields){
+      if (!err) {
+        //If no error is returned
+        connection.release()
+        //console.log(rows);
+        callback(null, "OK");
+      } else {
+        connection.release()
+        //console.log(err);
+        callback(null, "Error");
+      }
+    })
+  });
+}
+
+exports.updateIngredients = function(body, callback) {
+  console.log("updateIngredients");
+  pool.getConnection(function(err, connection) {
+    var countQuery = 'SELECT COUNT(ingredient_name) AS cnt FROM `ingredients` WHERE ingredient_id = ?';
+    var updateQuery = 'UPDATE ingredients SET ingredient_name = ?, ingredient_amount = ? WHERE ingredient_id LIKE ?';
+    var insertQuery = 'INSERT INTO `ingredients` (UID, ingredient_name, ingredient_amount) VALUES (?, ?, ?)';
+    var deleteQuery = 'DELETE FROM ingredients WHERE ingredient_id = ?'
+    async.forEachOf(body.ingredients, function(element, i , inner_callback) {
+      var insert = [body.ingredient_id[i]];
+      var sql = mysql.format(countQuery, insert);
+      connection.beginTransaction(function(err){
+        if (err) {throw err;}
+        //No point in updating if the field is empty
+        if (element != "" || body.amounts[i] != ""){
+          connection.query(sql, function(err, rows, fields){
+            if (err) {
+              return connection.rollback(function() {
+                throw err;
+              });
+            }
+            console.log(rows[0]['cnt']);
+            //If ingredient_id allready exists, update it.
+            if (rows[0]['cnt'] > 0){
+              console.log("updating row");
+              insert = [element, body.amounts[i], body.ingredient_id[i]];
+              var updateSql = mysql.format(updateQuery, insert);
+              connection.query(updateSql, function(err, rows, fields){
+                if (err) {
+                  return connection.rollback(function(){
+                    throw err;
+                  });
+                }
+                connection.commit(function(err){
+                  if (err) {
+                    return connection.rollback(function(){
+                      throw err;
+                    })
+                  }
+                  console.log("Update Success");
+                  inner_callback(null);
+                })
+              })
+              //If the ingredient_id is nonexistant, insert a new row.
+            } else if (rows[0]['cnt'] == 0){
+              console.log("Inserting row");
+              insert = [body.UID, element, body.amounts[i]];
+              var insertSql = mysql.format(insertQuery, insert);
+              connection.query(insertSql, function(err, rows, fields){
+                if (err) {
+                  return connection.rollback(function(){
+                    throw err;
+                  });
+                }
+                connection.commit(function(err){
+                  if (err) {
+                    return connection.rollback(function(){
+                    });
+                  }
+                  console.log("Insert Success");
+                  inner_callback(null);
+                })
+              })
+            }
+          })
+        }
+        if (element == "" && body.amounts[i] == "" && body.ingredient_id[i] != null){
+          console.log("empty field");
+          insert = [body.ingredient_id[i]];
+          var deleteSql = mysql.format(deleteQuery, insert);
+          connection.query(deleteSql, function(err, rows, fields){
+            if (err) {
+              return connection.rollback(function(){
+                throw err;
+              });
+            }
+            connection.commit(function(err){
+              if (err) {
+                return connection.rollback(function() {
+                });
+              }
+              console.log("Delete Success");
+              inner_callback(null);
+            })
+          })
+        }
+      })
+    }, function(err) {
+      if (err) {
+        connection.release();
+      } else {
+        connection.release();
+        callback(null, "OK");
+      };
     });
   });
 }

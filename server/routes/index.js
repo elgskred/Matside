@@ -94,6 +94,7 @@ exports.recipes = function(req, res) {
   var v = req.connection.remoteAddress
   var uid = req.params.uid;
   var visitor = {ip: v, page: uid};
+  var recordedVisit = false;
   var flag = false;
   if (visitors.length == 0) {
     visitors.push(visitor);
@@ -104,19 +105,32 @@ exports.recipes = function(req, res) {
           };
         });
   };
-  for (var i = 0; i < visitors.length; i++){
-    if (visitors[i].ip === v && visitors[i].page === uid) {
-      break;
+  async.forEachOf(visitors, function(element, i, inner_callback) {
+    if (element.ip === v && element.page === uid) {
+      recordedVisit = true;
+      inner_callback(null);
     } else {
-      visitors.push(visitor);
-      async.parallel([async.apply(functions.incrementViews,uid)], 
+      inner_callback(null);
+    }
+  }, function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      if (recordedVisit == false) {
+        async.parallel([async.apply(functions.incrementViews,uid)], 
         function done (err, results) {
           if (err) {
             console.log(err);
           };
         });
+        visitors.push(visitor);
+
+      };
     }
-  };
+  });
+
+
+
   async.parallel([async.apply(functions.searchRecipeByUID, uid), async.apply(functions.searchIngredientsByUID, uid), async.apply(functions.searchPictureByUID, uid)],
     function done (err, results) {
       if (err) {
@@ -156,9 +170,15 @@ exports.popularRecipes = function(req, res) {
     })
 }
 
-
+//Updates a recipe with a given UID
 exports.updateRecipe = function(req, res) {
-  console.log(req.body);
+  async.parallel([async.apply(functions.updateRecipe, req.body), async.apply(functions.updateIngredients, req.body)],
+    function done (err, results) {
+      if (err) {
+        console.log(err);
+      }
+      console.log(results);
+    })
   res.send("ok");
 }
 

@@ -81,7 +81,8 @@ constructor(props){
     e.preventDefault();
     const ingredients = this.state.ingredients.concat("");
     const amounts = this.state.amounts.concat("");
-    this.setState({ingredients, amounts});
+    const id = this.state.ingredient_id.concat(null);
+    this.setState({ingredients, amounts, id});
   }
 
   updateState(value, id, index) {
@@ -118,16 +119,20 @@ componentDidMount () {
       var tempShortDesc = [];
       var tempIngredients = [];
       var tempAmount = [];
+      var tempIngredientID = [];
       var tempImgPath = [];
+      var tempServings = "";
       for (var i = 0; i < data[0].length; i++) {
         tempUID = data[0][i]['UID'];
         tempRecipeName = data[0][i]['recipeName'];
         tempRecipe = data[0][i]['recipeDescription'];
         tempShortDesc = data[0][i]['shortDescription'];
+        tempServings = data[0][i]['servings'];
       }
       for (var i = 0; i < data[1].length; i++) {
         tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
         tempAmount = tempAmount.concat(data[1][i]['ingredient_amount']);
+        tempIngredientID = tempIngredientID.concat(data[1][i]['ingredient_id']);
       }
       for (var i = 0; i < data[2].length; i++) {
         tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
@@ -139,7 +144,9 @@ componentDidMount () {
         shortDesc: tempShortDesc,
         ingredients: tempIngredients,
         amounts: tempAmount,
-        imgPath: tempImgPath
+        ingredient_id: tempIngredientID,
+        imgPath: tempImgPath,
+        servings: tempServings
       });
     }
   });
