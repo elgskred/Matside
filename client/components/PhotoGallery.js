@@ -24,7 +24,7 @@ const Demo = React.createClass({
   getData() {
     $.ajax ({
         method: 'GET',
-        url: "http://localhost:3333/popularRecipes" ,
+        url: "http://awesomesauce-gaming.net:3333/popularRecipes" ,
         success: (data) => {
           var temp = []
           if (data.length > 0) {
@@ -45,7 +45,7 @@ const Demo = React.createClass({
     };
     $.ajax ({
         method: 'POST',
-        url: "http://localhost:3333/searchImg",
+        url: "http://awesomesauce-gaming.net:3333/searchImg",
         data: postData,
         success: (data) => {
           console.log(data);
