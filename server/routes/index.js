@@ -172,7 +172,7 @@ exports.popularRecipes = function(req, res) {
 
 //Updates a recipe with a given UID
 exports.updateRecipe = function(req, res) {
-  async.parallel([async.apply(functions.updateRecipe, req.body), async.apply(functions.updateIngredients, req.body)],
+  async.parallel([async.apply(functions.updateRecipe, req.body), async.apply(functions.updateIngredients, req.body), async.apply(functions.updateImages, req.body)],
     function done (err, results) {
       if (err) {
         console.log(err);
