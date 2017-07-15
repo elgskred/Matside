@@ -433,10 +433,8 @@ exports.updateIngredients = function(body, callback) {
                 throw err;
               });
             }
-            console.log(rows[0]['cnt']);
             //If ingredient_id allready exists, update it.
             if (rows[0]['cnt'] > 0){
-              console.log("updating row");
               insert = [element, body.amounts[i], body.ingredient_id[i]];
               var updateSql = mysql.format(updateQuery, insert);
               connection.query(updateSql, function(err, rows, fields){
@@ -457,7 +455,6 @@ exports.updateIngredients = function(body, callback) {
               })
               //If the ingredient_id is nonexistant, insert a new row.
             } else if (rows[0]['cnt'] == 0){
-              console.log("Inserting row");
               insert = [body.UID, element, body.amounts[i]];
               var insertSql = mysql.format(insertQuery, insert);
               connection.query(insertSql, function(err, rows, fields){
@@ -508,4 +505,60 @@ exports.updateIngredients = function(body, callback) {
       };
     });
   });
+}
+
+exports.updateImages = function(body, callback) {
+  var countQuery = 'SELECT COUNT(imagePath) AS cnt FROM `pictures` WHERE imagePath = ?';
+  var insertQuery = 'INSERT INTO `pictures` (UID, imagePath) VALUES (?, ?)';
+  var deleteQuery = 'DELETE FROM pictures WHERE imagePath = ?';
+  console.log("updating images");
+  console.log(body.imgPath);
+  pool.getConnection(function(err, connection) {
+    async.forEachOf(body.imgPath, function(element, i, inner_callback) {
+      console.log(element);
+      connection.beginTransaction(function(err) {
+        if (err) {throw err;}
+        var insert = [element];
+        var sql = mysql.format(countQuery, insert);
+        console.log(sql);
+        connection.query(sql, function(err, rows, fields) {
+          if (err) {
+            return connection.rollback(function() {
+              throw err;
+            });
+          }
+          if (rows[0]['cnt'] == 0) {
+            console.log("Inserting new row");
+            insert = [body.UID, element];
+            var insertSql = mysql.format(insertQuery, insert);
+            connection.query(insertSql, function(err, rows, fields) {
+              if (err) {
+                return connection.rollback(function(){
+                  throw err;
+                });
+              }
+              connection.commit(function(err){
+                if (err) {
+                  return connection.rollback(function(){
+                    throw err;
+                  });
+                }
+                console.log("Insert Success");
+                inner_callback(null);
+              })
+              
+            })
+          }
+        })
+
+      });
+    }, function(err) {
+      if (err) {
+        connection.release();
+      } else {
+        connection.release();
+        callback(null, "OK");
+      }
+    });
+  }); 
 }

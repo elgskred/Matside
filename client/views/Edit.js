@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
-import DropzoneComponent from '../components/DropzoneComponent';
-import Keyword from '../components/KeywordTags';
+//import DropzoneComponent from '../components/DropzoneComponent';
+import DropzoneComponent from 'react-dropzone-component';
+
 
 class RenderImg extends React.Component {
   constructor(props) {
@@ -13,11 +12,17 @@ class RenderImg extends React.Component {
       ingredient: "",
       amount: ""
     }
+    this.onImgLoad = this.onImgLoad.bind(this);
+  }
+
+  onImgLoad({target:img}) {
+    console.log("Height:" + img.offsetHeight);
+    console.log("Width:" + img.offsetWidth);
   }
 
   render() {
     const listImg = this.props.img.map((item, index) =>
-      <img src={'../public/uploads/' + item} alt="404.png" key={index} />
+      <img src={'../public/uploads/' + item} alt="404.png" key={index} onLoad={this.onImgLoad} style={{width:300}}/>
     );
     return(
       <div className="recipeImg">
@@ -26,6 +31,66 @@ class RenderImg extends React.Component {
     );
   }
 }
+class Example extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            success: []
+        }
+
+        // For a full list of possible configurations,
+        // please consult http://www.dropzonejs.com/#configuration
+        this.djsConfig = {
+            addRemoveLinks: true,
+            acceptedFiles: "image/jpeg,image/png,image/gif",
+            maxFilesize: 3
+        };
+
+        this.componentConfig = {
+            iconFiletypes: ['.jpg', '.png', '.gif'],
+            showFiletypeIcon: true,
+            postUrl: 'http://localhost:3333/uploadHandler'
+        };
+
+        // If you want to attach multiple callbacks, simply
+        // create an array filled with all your callbacks.
+        this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
+
+        // Simple callbacks work too, of course
+        this.callback = () => console.log('Hello!');
+
+        //this.success = file => this.setState({ success: file});
+        this.success = file => {
+            const success = this.state.success.concat(file)
+            this.setState({success});
+            this.props.onSuccess(success);
+        }
+        
+
+        //this.success = file => console.log('uploaded', file);
+
+        this.removedfile = file => console.log('removing...', file);
+
+        this.dropzone = null;
+    }
+
+    render() {
+        const config = this.componentConfig;
+        const djsConfig = this.djsConfig;
+
+        // For a list of all possible events (there are many), see README.md!
+        const eventHandlers = {
+            init: dz => this.dropzone = dz,
+            drop: this.callbackArray,
+            addedfile: this.callback,
+            success: this.success,
+            removedfile: this.removedfile
+        }
+
+        return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
+    }
+}
+
 
 class TextField extends React.Component {
   constructor(props) {
@@ -68,6 +133,7 @@ constructor(props){
     this.onChange = this.onChange.bind(this);
     this.updateState = this.updateState.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.onSuccess = this.onSuccess.bind(this);
   };
 
   onChange (e) {
@@ -76,6 +142,14 @@ constructor(props){
     t[id] = e.target.value
     this.setState(t);
   };  
+
+  onSuccess (imgpath) {
+    console.log(imgpath);
+    console.log(imgpath[0].xhr.response);
+    this.setState({
+      imgPath: this.state.imgPath.concat(imgpath[0].xhr.response) 
+    });
+  } 
 
   addIngredientField (e) {
     e.preventDefault();
@@ -160,10 +234,7 @@ submitForm (e) {
       url: "http://awesomesauce-gaming.net:3333/updateRecipe",
       data: this.state,
       success: (data) => {
-        console.log(data);
-        this.setState({
-          recipeListe: data
-        });
+        console.log("Update Success");
       }
     });
 }
@@ -213,7 +284,7 @@ render() {
           <input type="submit" />
           <br />
           <br />
-          <DropzoneComponent ref="aTest"/>
+          <Example onSuccess={this.onSuccess} ref="aTest"/>
           <RenderImg img={this.state.imgPath} />
         </form>
       </div>
