@@ -54,7 +54,7 @@ const Demo = React.createClass({
             if (data[i][0] != undefined){
               temp[i] = "../public/uploads/" +data[i][0]['imagePath'];
             } else {
-              temp[i] = '404.png';
+              temp[i] = '../public/uploads/404.png';
             }
           }
           this.setState({img: temp});
@@ -123,20 +123,26 @@ const Demo = React.createClass({
       return prevLeft + widths[i];
     }, leftStartCoords);
 
+    const photoText = this.state.UID.map((item, index) => {
+      return <div> {item} </div> 
+    })
+
     return (
       <div>
         <div className="demo4" >
           <Motion style={{height: spring(currHeight), width: spring(currWidth)}}>
             {container =>
-              <div className="demo4-inner" style={container} onClick={this.test}>
+              <div className="demo4-inner" style={container}>
                 {configs.map((style, i) =>
-                  <Link key={i} to={/recipe/ + this.state.UID[i]} onClick={this.test}>
-                    <Motion key={i} style={style}>
-                      {style =>
+                  <div>
+                    <Link key={i} to={/recipe/ + this.state.UID[i]}>
+                      <Motion key={i} style={style}>
+                        {style =>
                           <img className="demo4-photo" src={this.state.img[i]} style={style}/> 
-                      }
-                    </Motion>
-                  </Link>
+                        }
+                      </Motion>
+                    </Link>
+                  </div>
                 )}
               </div>
             }
