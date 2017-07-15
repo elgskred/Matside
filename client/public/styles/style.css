@@ -25,6 +25,11 @@
     margin-left: auto;
 }  
 
+#popImgDiv {
+    text-align: center;
+    font-size: 150%;
+}
+
 #popImg {
     max-width: 80%;
     max-width: 800px;
