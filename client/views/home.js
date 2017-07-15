@@ -11,10 +11,9 @@ class Home extends React.Component {
 			<div className="page">
 				<div id="headerbar">
 					<HeaderMenu />
-					<Slideshow />
 				</div>
 				<div className="suggestionGallery">
-					<h2> Skille </h2>
+					<Slideshow />
 				</div>
 			</div>
 		);

@@ -337,7 +337,7 @@ exports.searchPicturesByUID = function(searchFor, callback) {
 
 exports.getPopularRecipes = function(callback) {
   pool.getConnection(function(err, connection) {
-    var Select = 'Select recipes.UID ';
+    var Select = 'Select recipes.UID, recipes.recipeName ';
     var From = 'From `recipes` ';
     var Order = 'Order by recipes.views DESC ';
     var Limit = 'LIMIT 5';

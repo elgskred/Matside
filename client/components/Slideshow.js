@@ -7,6 +7,7 @@ export default class AdaptiveHeight extends Component {
     super(props);
     this.state = {
       UID: [],
+      name: [],
       img: [],
       temp: false
     }
@@ -21,13 +22,17 @@ export default class AdaptiveHeight extends Component {
         method: 'GET',
         url: "http://localhost:3333/popularRecipes" ,
         success: (data) => {
-          var temp = []
+          var tempUID = [];
+          var tempName = [];
+          console.log(data);
           if (data.length > 0) {
             for(var i = 0; i < data.length; i++) {
-              temp[i] = data[i]['UID'];
+              tempUID[i] = data[i]['UID'];
+              tempName[i] = data[i]['recipeName'];
+
             };
           };
-          this.setState({UID:temp}, function () {
+          this.setState({UID:tempUID, name:tempName}, function () {
             this.loadImg();
           });  
         }
@@ -74,10 +79,10 @@ export default class AdaptiveHeight extends Component {
     {console.log(this.state.img)}
     const elements = this.state.img.map((element, index) => {
       return (
-        <div key={index}>
+        <div key={index} id="popImgDiv">
           <Link key={index} to={/recipe/ + this.state.UID[index]}>
             <img id="popImg" src={element} />
-            <h2> Oppskrift </h2>
+            <h2> {this.state.name[index]} </h2>
           </Link>
         </div>
       )
@@ -86,7 +91,6 @@ export default class AdaptiveHeight extends Component {
     if (this.state.temp) {
       return (
       <div>
-        <h2>Adaptive height</h2>
         <Slider {...settings}>
           {elements}
         </Slider>
