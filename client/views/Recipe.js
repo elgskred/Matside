@@ -76,10 +76,10 @@ class RenderImg extends React.Component {
 
 	render() {
 		const listImg = this.props.img.map((item, index) =>
-			<img src={'../public/uploads/' + item} alt="404.png" key={index} />
+			<img src={'../public/uploads/' + item} alt="404.png" key={index} id="recipeImg"/>
 		);
 		return(
-			<div className="recipeImg">
+			<div className="recipeImg" id="imgContainer">
 				{listImg}
 			</div>
 		);
@@ -98,8 +98,10 @@ class ShowRecipeList extends React.Component {
 			amountParsed: [],
 			recipe: "",
 			recipeName: "",
-			servings: 2,
-			imgPath: []
+			servings: "",
+			imgPath: [],
+			servingsValue: "",
+			servingsCalculated: []
 		}
 	}
 
@@ -113,10 +115,12 @@ class ShowRecipeList extends React.Component {
 	      	var tempAmounts = [];
 	      	var tempAmountsParsed = [];
 	      	var tempImgpath = [];
+	      	var tempRegex = "";
 	        for (var i = 0; i < data[1].length; i++) {
 	        	tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
-        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9]/g, ''));
-        		tempAmountsParsed = tempAmountsParsed.concat(data[1][i]['ingredient_amount'].replace(/[^0-9]/g,''));
+        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9,]/g, ''));
+        		tempRegex = data[1][i]['ingredient_amount'].replace(/([^0-9,])/g,'');
+        		tempAmountsParsed = tempAmountsParsed.concat(tempRegex.replace(/[,]/g,'.'));
 		    }
 		    for (var i = 0; i < data[2].length; i++) {
 		    	tempImgpath = tempImgpath.concat(data[2][i]['imagePath'])
@@ -125,9 +129,11 @@ class ShowRecipeList extends React.Component {
 		    	recipeName: data[0][0]['recipeName'],
 	        	recipe: data[0][0]['recipeDescription'],
 	        	servings: data[0][0]['servings'],
+	        	servingsValue: data[0][0]['servings'],
 		    	ingredients: tempIngredients,
 		    	amount: tempAmounts,
 		    	amountParsed: tempAmountsParsed,
+		    	servingsCalculated: tempAmountsParsed,
 		    	imgPath: tempImgpath
 		    });
 	      }
@@ -135,7 +141,7 @@ class ShowRecipeList extends React.Component {
 	}
 
 	onChange (e) {
-		var int = this.state.servings;
+		var int = this.state.servingsValue;
 		var newAmountParsed = [];
 		var checkValue;
 		if (e.target.value == 0){
@@ -143,37 +149,51 @@ class ShowRecipeList extends React.Component {
 		} else {
 			checkValue = e.target.value;
 		}
-		this.setState({servings: checkValue});
+		this.setState({servingsValue: checkValue});
 		for (var i = 0; i < this.state.amountParsed.length; i++) {
-			newAmountParsed[i] = (this.state.amountParsed[i] / int) * checkValue;
+			//newAmountParsed[i] = ((this.state.amountParsed[i] / int) * checkValue).toFixed(2);
+			newAmountParsed[i] = ((checkValue / this.state.servings) * this.state.amountParsed[i]).toFixed(2);
 			
 		};
-		this.setState({amountParsed: newAmountParsed});
+		this.setState({servingsCalculated: newAmountParsed});
 
 	}
 
 
 	render(){
 		return(
-			<div> 
+			<div id="recipeContent"> 
 			<HeaderMenu ref="searchBar"/>
-			<h2>
-				{this.state.recipeName}
-			</h2>
-			<div className="ingredients" >
-				<h3>
-					Ingredienser: <br/>
-				</h3>
-					<input type="number" onChange={this.onChange} value={this.state.servings}/>
-					<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.amountParsed}/>
+			<div id="recipeName">
+				<h2>
+					{this.state.recipeName}
+				</h2>
 			</div>
-			<div className="recipe">
+			<div id="recipe">
 				<h3>
-					Oppskrift: <br/>
+					Slik gjør du: <br/>
 				</h3>
-					<RenderRecipe recipe={this.state.recipe} />
-			</div>
+				<RenderRecipe recipe={this.state.recipe} />
+				<br />
+				<br />
+				<br />
 				<RenderImg img={this.state.imgPath} />
+				<RenderImg img={this.state.imgPath} />
+				<RenderImg img={this.state.imgPath} />
+			</div>
+
+
+			<div id="ingredients">
+				<h3>
+				Ingredienser: 
+				<br/>
+				</h3>
+				<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
+				<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
+			</div>
+			
+			
+			
 			</div>
 			);
 	}
