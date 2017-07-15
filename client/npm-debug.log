@@ -1,0 +1,166 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\chris\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'slick-carousel',
+1 verbose cli   '@import',
+1 verbose cli   '~slick-carousel/slick/slick.css;',
+1 verbose cli   '@import',
+1 verbose cli   '~slick-carousel/slick/slick-theme.css;' ]
+2 info using npm@4.0.5
+3 info using node@v6.9.2
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData slick-carousel
+8 silly fetchPackageMetaData @import
+9 silly fetchPackageMetaData ~slick-carousel/slick/slick.css;
+10 silly fetchPackageMetaData @import
+11 silly fetchPackageMetaData ~slick-carousel/slick/slick-theme.css;
+12 silly fetchNamedPackageData slick-carousel
+13 silly mapToRegistry name slick-carousel
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry data Result {
+16 silly mapToRegistry   raw: 'slick-carousel',
+16 silly mapToRegistry   scope: null,
+16 silly mapToRegistry   escapedName: 'slick-carousel',
+16 silly mapToRegistry   name: 'slick-carousel',
+16 silly mapToRegistry   rawSpec: '',
+16 silly mapToRegistry   spec: 'latest',
+16 silly mapToRegistry   type: 'tag' }
+17 silly mapToRegistry uri https://registry.npmjs.org/slick-carousel
+18 silly fetchOtherPackageData @import
+19 silly cache add args [ '@import', null ]
+20 verbose cache add spec @import
+21 silly fetchOtherPackageData ~slick-carousel/slick/slick.css;
+22 silly cache add args [ '~slick-carousel/slick/slick.css;', null ]
+23 verbose cache add spec ~slick-carousel/slick/slick.css;
+24 silly fetchOtherPackageData @import
+25 silly cache add args [ '@import', null ]
+26 verbose cache add spec @import
+27 silly fetchOtherPackageData ~slick-carousel/slick/slick-theme.css;
+28 silly cache add args [ '~slick-carousel/slick/slick-theme.css;', null ]
+29 verbose cache add spec ~slick-carousel/slick/slick-theme.css;
+30 silly cache add parsed spec Result {
+30 silly cache add   raw: '@import',
+30 silly cache add   scope: null,
+30 silly cache add   escapedName: null,
+30 silly cache add   name: null,
+30 silly cache add   rawSpec: '@import',
+30 silly cache add   spec: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\@import',
+30 silly cache add   type: 'local' }
+31 silly cache add parsed spec Result {
+31 silly cache add   raw: '~slick-carousel/slick/slick.css;',
+31 silly cache add   scope: null,
+31 silly cache add   escapedName: null,
+31 silly cache add   name: null,
+31 silly cache add   rawSpec: '~slick-carousel/slick/slick.css;',
+31 silly cache add   spec: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\~slick-carousel\\slick\\slick.css;',
+31 silly cache add   type: 'local' }
+32 silly cache add parsed spec Result {
+32 silly cache add   raw: '@import',
+32 silly cache add   scope: null,
+32 silly cache add   escapedName: null,
+32 silly cache add   name: null,
+32 silly cache add   rawSpec: '@import',
+32 silly cache add   spec: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\@import',
+32 silly cache add   type: 'local' }
+33 silly cache add parsed spec Result {
+33 silly cache add   raw: '~slick-carousel/slick/slick-theme.css;',
+33 silly cache add   scope: null,
+33 silly cache add   escapedName: null,
+33 silly cache add   name: null,
+33 silly cache add   rawSpec: '~slick-carousel/slick/slick-theme.css;',
+33 silly cache add   spec: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\~slick-carousel\\slick\\slick-theme.css;',
+33 silly cache add   type: 'local' }
+34 error addLocal Could not install C:\Users\chris\Documents\GitHub\Matside\client\@import
+35 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+35 silly fetchPackageMetaData     at Error (native)
+35 silly fetchPackageMetaData  error for @import { Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+35 silly fetchPackageMetaData     at Error (native)
+35 silly fetchPackageMetaData   errno: -4058,
+35 silly fetchPackageMetaData   code: 'ENOENT',
+35 silly fetchPackageMetaData   syscall: 'open',
+35 silly fetchPackageMetaData   path: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\@import' }
+36 error addLocal Could not install C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick.css;
+37 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick.css;'
+37 silly fetchPackageMetaData     at Error (native)
+37 silly fetchPackageMetaData  error for ~slick-carousel/slick/slick.css; { Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick.css;'
+37 silly fetchPackageMetaData     at Error (native)
+37 silly fetchPackageMetaData   errno: -4058,
+37 silly fetchPackageMetaData   code: 'ENOENT',
+37 silly fetchPackageMetaData   syscall: 'open',
+37 silly fetchPackageMetaData   path: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\~slick-carousel\\slick\\slick.css;' }
+38 error addLocal Could not install C:\Users\chris\Documents\GitHub\Matside\client\@import
+39 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+39 silly fetchPackageMetaData     at Error (native)
+39 silly fetchPackageMetaData  error for @import { Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+39 silly fetchPackageMetaData     at Error (native)
+39 silly fetchPackageMetaData   errno: -4058,
+39 silly fetchPackageMetaData   code: 'ENOENT',
+39 silly fetchPackageMetaData   syscall: 'open',
+39 silly fetchPackageMetaData   path: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\@import' }
+40 error addLocal Could not install C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick-theme.css;
+41 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick-theme.css;'
+41 silly fetchPackageMetaData     at Error (native)
+41 silly fetchPackageMetaData  error for ~slick-carousel/slick/slick-theme.css; { Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\~slick-carousel\slick\slick-theme.css;'
+41 silly fetchPackageMetaData     at Error (native)
+41 silly fetchPackageMetaData   errno: -4058,
+41 silly fetchPackageMetaData   code: 'ENOENT',
+41 silly fetchPackageMetaData   syscall: 'open',
+41 silly fetchPackageMetaData   path: 'C:\\Users\\chris\\Documents\\GitHub\\Matside\\client\\~slick-carousel\\slick\\slick-theme.css;' }
+42 verbose request uri https://registry.npmjs.org/slick-carousel
+43 verbose request no auth needed
+44 info attempt registry request try #1 at 12:21:47
+45 verbose request id e1937245ab912f74
+46 verbose etag W/"59646c72-7fdb"
+47 verbose lastModified Tue, 11 Jul 2017 06:13:06 GMT
+48 http request GET https://registry.npmjs.org/slick-carousel
+49 http 304 https://registry.npmjs.org/slick-carousel
+50 verbose headers { date: 'Sat, 15 Jul 2017 10:21:46 GMT',
+50 verbose headers   via: '1.1 varnish',
+50 verbose headers   'cache-control': 'max-age=300',
+50 verbose headers   etag: 'W/"59646c72-7fdb"',
+50 verbose headers   age: '57',
+50 verbose headers   connection: 'keep-alive',
+50 verbose headers   'x-served-by': 'cache-bma7031-BMA',
+50 verbose headers   'x-cache': 'HIT',
+50 verbose headers   'x-cache-hits': '1',
+50 verbose headers   'x-timer': 'S1500114107.534059,VS0,VE1',
+50 verbose headers   vary: 'Accept-Encoding, Accept' }
+51 silly get cb [ 304,
+51 silly get   { date: 'Sat, 15 Jul 2017 10:21:46 GMT',
+51 silly get     via: '1.1 varnish',
+51 silly get     'cache-control': 'max-age=300',
+51 silly get     etag: 'W/"59646c72-7fdb"',
+51 silly get     age: '57',
+51 silly get     connection: 'keep-alive',
+51 silly get     'x-served-by': 'cache-bma7031-BMA',
+51 silly get     'x-cache': 'HIT',
+51 silly get     'x-cache-hits': '1',
+51 silly get     'x-timer': 'S1500114107.534059,VS0,VE1',
+51 silly get     vary: 'Accept-Encoding, Accept' } ]
+52 verbose etag https://registry.npmjs.org/slick-carousel from cache
+53 verbose get saving slick-carousel to C:\Users\chris\AppData\Roaming\npm-cache\registry.npmjs.org\slick-carousel\.cache.json
+54 verbose correctMkdir C:\Users\chris\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+55 silly rollbackFailedOptional Starting
+56 silly rollbackFailedOptional Finishing
+57 silly runTopLevelLifecycles Finishing
+58 silly install printInstalled
+59 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+59 verbose stack     at Error (native)
+60 verbose cwd C:\Users\chris\Documents\GitHub\Matside\client
+61 error Windows_NT 10.0.14393
+62 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\chris\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "slick-carousel" "@import" "~slick-carousel/slick/slick.css;" "@import" "~slick-carousel/slick/slick-theme.css;"
+63 error node v6.9.2
+64 error npm  v4.0.5
+65 error path C:\Users\chris\Documents\GitHub\Matside\client\@import
+66 error code ENOENT
+67 error errno -4058
+68 error syscall open
+69 error enoent ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+70 error enoent ENOENT: no such file or directory, open 'C:\Users\chris\Documents\GitHub\Matside\client\@import'
+70 error enoent This is most likely not a problem with npm itself
+70 error enoent and is related to npm not being able to find a file.
+71 verbose exit [ -4058, true ]
