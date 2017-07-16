@@ -20,7 +20,7 @@ export default class AdaptiveHeight extends Component {
   getData() {
     $.ajax ({
         method: 'GET',
-        url: "http://localhost:3333/popularRecipes" ,
+        url: "http://awesomesauce-gaming.net:3333/popularRecipes" ,
         success: (data) => {
           var tempUID = [];
           var tempName = [];
@@ -45,7 +45,7 @@ export default class AdaptiveHeight extends Component {
     };
     $.ajax ({
         method: 'POST',
-        url: "http://localhost:3333/searchImg",
+        url: "http://awesomesauce-gaming.net:3333/searchImg",
         data: postData,
         success: (data) => {
           console.log(data);
@@ -76,13 +76,14 @@ export default class AdaptiveHeight extends Component {
       autoplaySpeed: 4000,
       pauseOnHover: true
     };
-    {console.log(this.state.img)}
+    {console.log(window.innerHeight)};
+    {console.log(window.innerWidth)};
     const elements = this.state.img.map((element, index) => {
       return (
         <div key={index} id="popImgDiv">
           <Link key={index} to={/recipe/ + this.state.UID[index]}>
             <img id="popImg" src={element} />
-            <h2> {this.state.name[index]} </h2>
+            <h1> {this.state.name[index]} </h1>
           </Link>
         </div>
       )

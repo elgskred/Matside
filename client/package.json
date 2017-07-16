@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack -p",
-    "start": "webpack-dev-server --inline --content-base ."
+    "start": "webpack-dev-server --inline --content-base .",
+    "test": "webpack-dev-server --host 0.0.0.0 --port 80"
   },
   "author": "Christoffer Antonsen & Mathias Sommerstad",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "babel-preset-react": "^6.16.0",
     "http-server": "^0.9.0",
     "react": "^15.4.1",
+    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.4.1",
     "react-dropzone": "^3.8.0",
     "react-dropzone-component": "^1.4.1",

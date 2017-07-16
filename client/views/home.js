@@ -13,7 +13,13 @@ class Home extends React.Component {
 					<HeaderMenu />
 				</div>
 				<div className="suggestionGallery">
+					{window.innerHeight};
+					<br />
+    				{window.innerWidth};
 					<Slideshow />
+					Height:{window.innerHeight};
+					<br />
+    				Width:{window.innerWidth};
 				</div>
 			</div>
 		);

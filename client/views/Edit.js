@@ -184,7 +184,7 @@ constructor(props){
 componentDidMount () {
   $.ajax ({
     method: 'GET',
-    url: "http://localhost:3333/recipes/" + this.props.params.UID,
+    url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
     success: (data) => {
       console.log(data);
       var tempUID = [];
@@ -231,7 +231,7 @@ submitForm (e) {
   console.log(this.state);
   $.ajax ({
       method: 'POST',
-      url: "http://localhost:3333/updateRecipe",
+      url: "http://awesomesauce-gaming.net:3333/updateRecipe",
       data: this.state,
       success: (data) => {
         console.log("Update Success");

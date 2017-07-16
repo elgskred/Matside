@@ -63,7 +63,7 @@ class List extends React.Component {
 		
 		$.ajax ({
 	      method: 'GET',
-	      url: "http://localhost:3333/search/" + query,
+	      url: "http://awesomesauce-gaming.net:3333/search/" + query,
 	      success: (data) => {
 	      	console.log(data);	
 	      	var data0Len;
@@ -186,7 +186,7 @@ class List extends React.Component {
 		};
 		$.ajax ({
 	      method: 'POST',
-	      url: "http://localhost:3333/searchImg",
+	      url: "http://awesomesauce-gaming.net:3333/searchImg",
 	      data: postData,
 	      success: (data) => {
 	      	console.log(data)
@@ -210,9 +210,7 @@ class List extends React.Component {
 	componentWillReceiveProps (nextProps) {
 		if (nextProps.location.query.q != this.props.location.query.q) {
 			this.getData(nextProps.location.query.q);
-		}
-		
-		
+		}	
 	}
 	render() {
 		return(

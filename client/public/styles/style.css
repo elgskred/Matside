@@ -4,40 +4,120 @@
 .slick-next:before {
   color: grey;
 }
-#app {
-    width: 60%;
-    max-width: 1600px;
-    min-width: 200px;
+
+body {
+    background-color:#ecf0f1;
+}
+
+/********************************
+*       Stucture - Main 2600px ->     *
+********************************/
+
+
+@media screen and (max-width: 2600px) { 
+    #app {
+    width: 75%;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
+    background: #ecf0f1;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
+    }
 }
+
+h1, h2, h3, h4, h5, h6 {
+     font-weight: 600;  
+}
+ 
+h1 { font-size: 6rem; }
+h2 { font-size: 3.5rem; }
+h3 { font-size: 3rem; }
+
+/*Front page*/
+
+#popImgDiv {
+    text-align: center;
+    font-size: 25px;
+}
+
+#popImg {
+    max-width: 80%;
+    height: 500px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+} 
+
+/*Recipe page*/
+#recipeContent {
+    width: 100%;
+}
+#recipeName {
+    border: 2px solid black;
+    text-align: center;
+}
+#ingredients {
+    position: fixed;
+    width: 15%;
+    display: inline-block;
+    float: left;
+    font-size: 1.5rem;  
+    border: 2px solid pink;  
+}
+#recipeContainer {
+    width: 80%;
+    border: 2px solid red;
+    display: inline-block;
+    float: right;
+}
+#recipe {
+    width: inherit;
+    float: left;
+    margin-left: 2%;
+    font-size: 1.5rem;
+    border: 2px solid blue;
+}
+#recipeImg {
+    max-width:80%;
+    height: 250px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+} 
+
+/*Upload page*/
+#uploadContainer {
+    width: 100%;
+    border: 2px solid pink;
+    font-size: 1.5rem; 
+}
+
+
+
+/********************************
+*       Stucture - Mobile      *
+********************************/
+@media screen and (max-width: 1028px) { 
+    #app {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    background: #ecf0f1;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
+    }
+}
+
 .div {
     margin-left: auto;
     margin-right: auto;
     align-items: center;
 }
-#recipeImg {
-    width:80%;
-    max-width: 800px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}  
+ 
 
-#popImgDiv {
-    text-align: center;
-    font-size: 150%;
-}
 
-#popImg {
-    max-width: 80%;
-    max-width: 800px;
-    height: 300px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-} 
 
 #imgContainer {
     margin-right: auto;
@@ -45,39 +125,12 @@
     width: 100%;
 }
 
-#recipeImg {
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-}
 
-#recipeContent {
-    width: 100%;
-    min-width: 100%;
-}
-#recipeName {
-    border: 2px solid black;
-    text-align: center;
-    
-}
 
-#ingredients {
-    position: fixed;
-    max-width: 12%;
-    display: inline-block;
-    float: left;
-    font-size: 130%;
-    border: 2px solid black;
-}
 
-#recipe {
-    width: 78%;
-    display: inline-block;
-    float: right;
-    margin-left: : 2%;
-    font-size: 115%;
-    border: 2px solid black;
-}
+
+
+
 
 #inputServings {
     width: 35%;
@@ -97,6 +150,7 @@
 }
 .searchBar {
     width: 350px;
+    color: black;
 }
 .liHeaderBar {
     border: 2px solid blue;
@@ -119,22 +173,6 @@
     border: 2px solid pink;
 }
 
-body {
-    font-family: sans-serif;
-}
-
-h2, h3 {
-    color: #000;
-}
-
-h2 a {
-    text-decoration: none;
-    color: #000;
-}
-
-body {
-    background-color: #F7F7F7;
-}
 
 div.example {
     margin-left: 20px;

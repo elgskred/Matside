@@ -15,12 +15,12 @@ class HeaderMenu extends React.Component{
 			searchBar: "",
 			DropdownName: "Menu",
 			subNames: ["Recipes", "Categories"],
-			subLinks: ["/list", "/index"]
+			subLinks: ["/list"]
 		};
 		this.recipe = {
             subDropTag: "Oppskrifter",
             subDrop: ["Sunn", "Rask", "Familien", "Kos", "Gjester", "Tradisjon", "Vis alle oppskrifter"],
-            subDropLink: ["/test", "/index"]
+            subDropLink: ["/test"]
         };
 	}
 	onKeyPress (e) {
@@ -54,7 +54,6 @@ class HeaderMenu extends React.Component{
 			<div onClick={this.handleBodyClick}>
 				<ul className="headerBar">
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="liHeaderBar"><Link to="/index">Last opp</Link></li>
 					<li className="liHeaderBar"><Link to="/">Log in</Link></li>
 					<li className="liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="liHeaderBar"><DropdownMenu name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
