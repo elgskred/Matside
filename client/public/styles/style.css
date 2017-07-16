@@ -150,6 +150,7 @@ h3 { font-size: 3rem; }
 }
 .searchBar {
     width: 350px;
+    color: black;
 }
 .liHeaderBar {
     border: 2px solid blue;
