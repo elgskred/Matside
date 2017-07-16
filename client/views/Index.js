@@ -41,15 +41,14 @@ class Submit extends React.Component {
     this.addIngredientField = this.addIngredientField.bind(this);
     //Inital data
     this.state = {
-      name: "",
-      desc: "",
-      recipe: "",
+      RecipeName: "",
+      ShortDescription: "",
+      RecipeDescription: "",
       ingredient: "",
       amount: "",
       recipeListe: [],
-      testing: [],
-      keywords: "",
-      servings: 2
+      ingredientList: [],
+      RecipeServings: 2
     };
   };
   onChange (e) {
@@ -60,15 +59,15 @@ class Submit extends React.Component {
   };
   addIngredientField (e) {
     e.preventDefault();
-    const testing = this.state.testing.concat(AddIngredient);
-    this.setState({testing});
+    const ingredientList = this.state.ingredientList.concat(AddIngredient);
+    this.setState({ingredientList});
   }
 
   //Preventing default submit behaviour so we can add our own
   submitForm (e) {
     e.preventDefault();
     console.log("submit");
-    var len = this.state.testing.length;
+    var len = this.state.ingredientList.length;
     var tempArrayI = [];
     var tempArrayA = [];
     var tempArrayD = [];
@@ -85,18 +84,15 @@ class Submit extends React.Component {
     for (var j = 0; j < successArray.length; j++) {
       tempArrayD[j] = successArray[j].xhr.response;
     }
-    console.log("tempBilde")
-    //Getting the keywords from the component and puts them in a array
-
     var postData = {
-      name: this.state.name,
-      desc: this.state.desc,
-      recipe: this.state.recipe,
+      name: this.state.RecipeName,
+      desc: this.state.ShortDescription,
+      recipe: this.state.RecipeDescription,
       ingredients: tempArrayI,
       amount: tempArrayA,
       files: tempArrayD,
       author: "",
-      servings: this.state.servings
+      servings: this.state.RecipeServings
     };
     console.log(postData);
     $.ajax ({
@@ -114,30 +110,33 @@ class Submit extends React.Component {
   };
 
   render() {
-    const testing = this.state.testing.map((Element, index) => {
+    const ingredientList = this.state.ingredientList.map((Element, index) => {
       return <Element key={ index } index={ index } />
     });
 
     return (
-      <div id="recipe">
+
+      <div id="uploadContainer">
         <form onSubmit={this.submitForm}>
           <br />
-          <input type="text" placeholder="recipe" id="name" onChange={this.onChange} value={this.state.name}/>
+          <input type="text" placeholder="RecipeName" id="RecipeName" onChange={this.onChange} value={this.state.RecipeName}/>
           <br />
           <br />
-          <input type="text" placeholder="short description" onChange={this.onChange} value={this.state.desc} id="desc" />
+          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} id="ShortDescription" />
           <br />
           <br />
-          <div id="ingredients">
-            { testing }
+          <div id="RecipeIngredients">
+            { ingredientList }
             <button onClick = {this.addIngredientField}> Add Ingredient</button>
           </div>
           <br />
+          <br />
+          <br />
           Servings:
-          <input type="number" placeholder="2" id="servings" onChange={this.onChange} value={this.state.servings} />
+          <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
           <br />
           <br />
-          <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
+          <textarea rows="5" cols="50" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
           <br />
           <br />
           <br />
@@ -146,7 +145,6 @@ class Submit extends React.Component {
           <br />
           <DropzoneComponent ref="aTest"/>
         </form>
-        <Link to="/list">Se recipeer</Link>
       </div>
     );
   }

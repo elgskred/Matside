@@ -163,35 +163,37 @@ class ShowRecipeList extends React.Component {
 	render(){
 		return(
 			<div id="recipeContent"> 
-			<HeaderMenu ref="searchBar"/>
-			<div id="recipeName">
-				<h2>
-					{this.state.recipeName}
-				</h2>
-			</div>
-			<div id="recipe">
-				<h3>
-					Slik gjør du: <br/>
-				</h3>
-				<RenderRecipe recipe={this.state.recipe} />
-				<br />
-				<br />
-				<br />
-				<RenderImg img={this.state.imgPath} />
-				<RenderImg img={this.state.imgPath} />
-				<RenderImg img={this.state.imgPath} />
-			</div>
+				<HeaderMenu ref="searchBar"/>
+				<div id="recipeName">
+					<h1>
+						{this.state.recipeName}
+					</h1>
+				</div>
 
 
-			<div id="ingredients">
-				<h3>
-				Ingredienser: 
-				<br/>
-				</h3>
-				<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
-				<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
-			</div>
-			
+				<div id="ingredients">
+					<h2>Ingredienser: </h2>
+					<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
+					<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
+				</div>
+
+
+
+				<div id="recipeContainer">
+					<div id="recipe">
+						<h2>
+							Slik gjør du: <br/>
+						</h2>
+						<RenderRecipe recipe={this.state.recipe} />
+						<br />
+						<br />
+						<br />
+						<RenderImg img={this.state.imgPath} />
+						<RenderImg img={this.state.imgPath} />
+						<RenderImg img={this.state.imgPath} />
+						<RenderImg img={this.state.imgPath} />
+					</div>
+				</div>
 			
 			
 			</div>
