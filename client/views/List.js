@@ -13,22 +13,24 @@ class RenderArray extends React.Component {
 	}
 	render() {
 		const listRecipes = this.props.results.map((dict, index) =>
-			<Link key={dict.UID} to={/recipe/ + dict.UID}>
-				<div key={dict.UID} className="recipeListing">
-					<div className="recipeListing-img">
-						<img className="recipe-img" src={'../public/uploads/' + this.props.img[index]} alt="404"/>
-					</div>
-					<div className="recipeListing-text">
-						<div className="recipeListing-name">
-							{dict.recipeName}
+			<div id="recipeListContainer">
+				<Link key={dict.UID} to={/recipe/ + dict.UID}>
+					<div key={dict.UID} className="recipeListing">
+						<div className="recipeListing-img">
+							<img className="recipe-img" src={'../public/uploads/' + this.props.img[index]} alt="404"/>
 						</div>
-						<div className="recipeListing-desc">
-							{dict.shortDesc}
+						<div className="recipeListing-text">
+							<div className="recipeListing-name">
+								{dict.recipeName}
+							</div>
+							<div className="recipeListing-desc">
+								{dict.shortDescription}
+							</div>
 						</div>
+					
 					</div>
-				
-				</div>
-			</Link>
+				</Link>
+			</div>
 		);
 		return(
 			<div>
@@ -132,9 +134,9 @@ class List extends React.Component {
 	        		}
 	        	}
 	        	
-	        	console.log(tempInclude);
+                var uniq = [ ...new Set(tempInclude) ]
 	        	//Overwrites the original returned data with results showing only recipes including specific ingredients
-	        	data[0] = tempInclude;
+	        	data[0] = uniq;
 	        };
 	        console.log("data2 ok");
 	        //If the user searched for any "excludes", IE "-flour", results will be returned in data[3] 
