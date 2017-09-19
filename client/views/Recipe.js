@@ -189,9 +189,6 @@ class ShowRecipeList extends React.Component {
 						<br />
 						<br />
 						<RenderImg img={this.state.imgPath} />
-						<RenderImg img={this.state.imgPath} />
-						<RenderImg img={this.state.imgPath} />
-						<RenderImg img={this.state.imgPath} />
 					</div>
 				</div>
 			

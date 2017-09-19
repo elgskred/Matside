@@ -345,6 +345,7 @@ exports.getPopularRecipes = function(callback) {
     connection.query(sql, function(err, rows, fields) {
       if(!err){
         connection.release();
+        console.log(rows);
         callback(null,rows);
       } else {
         connection.release();
