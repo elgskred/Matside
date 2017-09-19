@@ -48,7 +48,8 @@ class Submit extends React.Component {
       amount: "",
       recipeListe: [],
       ingredientList: [],
-      RecipeServings: 2
+      RecipeServings: 2,
+      keywords: []
     };
   };
   onChange (e) {
@@ -68,9 +69,10 @@ class Submit extends React.Component {
     e.preventDefault();
     console.log("submit");
     var len = this.state.ingredientList.length;
-    var tempArrayI = [];
-    var tempArrayA = [];
-    var tempArrayD = [];
+    var tempArrayI = []; //Ingredient
+    var tempArrayA = []; //Amount
+    var tempArrayK = []; //Keywords
+    var tempArrayD = []; //Data
 
     //Getting ingredients and ingredient amounts and placing the values in two arrays
     for (var i = 0; i < len; i++) {
@@ -78,8 +80,15 @@ class Submit extends React.Component {
       tempArrayA[i] = document.getElementById("amount" + i).value;
     }
     console.log("tempIA");
+    //Getting keyword tags
+    var keywordTags = this.refs.keywords.state.tags;
+    console.log(keywordTags.length);
+    for (var l = 0; l < keywordTags.length; l++) {
+      tempArrayK[l] = keywordTags[l]['text'];
+    }
+    console.log(tempArrayK);
     //Getting successfull image uploads and placing the imageID in a array
-    var successArray = this.refs.aTest.state.success;
+    var successArray = this.refs.upload.state.success;
     console.log(successArray.length);
     for (var j = 0; j < successArray.length; j++) {
       tempArrayD[j] = successArray[j].xhr.response;
@@ -90,22 +99,23 @@ class Submit extends React.Component {
       recipe: this.state.RecipeDescription,
       ingredients: tempArrayI,
       amount: tempArrayA,
+      tags: tempArrayK,
       files: tempArrayD,
       author: "",
       servings: this.state.RecipeServings
     };
     console.log(postData);
-    $.ajax ({
-      method: 'POST',
-      url: "http://awesomesauce-gaming.net:3333/recipe",
-      data: postData,
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          recipeListe: data
-        });
-      }
-    });
+    // $.ajax ({
+    //   method: 'POST',
+    //   url: "http://awesomesauce-gaming.net:3333/recipe",
+    //   data: postData,
+    //   success: (data) => {
+    //     console.log(data);
+    //     this.setState({
+    //       recipeListe: data
+    //     });
+    //   }
+    // });
 
   };
 
@@ -139,11 +149,13 @@ class Submit extends React.Component {
           <textarea rows="5" cols="50" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
           <br />
           <br />
+          <Keyword ref="keywords"/>
+          <br />
           <br />
           <input type="submit" />
           <br />
           <br />
-          <DropzoneComponent ref="aTest"/>
+          <DropzoneComponent ref="upload"/>
         </form>
       </div>
     );

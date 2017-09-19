@@ -51,7 +51,7 @@ class HeaderMenu extends React.Component{
 
 	render(){
 		return(
-			<div onClick={this.handleBodyClick}>
+			<div onClick={this.handleBodyClick} id="HeaderMenu">
 				<ul className="headerBar">
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
 					<li className="liHeaderBar"><Link to="/">Log in</Link></li>

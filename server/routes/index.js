@@ -37,7 +37,7 @@ exports.recipe = function(req, res) {
       } else {
         UID = results[0];
         console.log("recipe ok");
-        async.parallel([async.apply(functions.insertIngredients, req.body, UID), async.apply(functions.insertPictures, req.body, UID)],
+        async.parallel([async.apply(functions.insertIngredients, req.body, UID), async.apply(functions.insertPictures, req.body, UID), async.apply(functions.insertKeywords, req.body, UID)],
           function done(err, results) {
             if (err) {
               console.log(err);
@@ -166,6 +166,7 @@ exports.popularRecipes = function(req, res) {
       if (err) {
         console.log(err);
       }
+      console.log(results[0]);
       res.send(results[0]);
     })
 }
