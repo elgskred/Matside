@@ -128,7 +128,9 @@ constructor(props){
       servings: 2,
       imgPath: [],
       shortDesc: "",
-      testing: []
+      testing: [],
+      keywordTags: [],
+      keywordsSend: []
     }
     this.addIngredientField = this.addIngredientField.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -293,7 +295,7 @@ render() {
           <br />
           <br />
           <br />
-          <Keyword id="keywordTags" propTags={this.state.keywordTags}/>
+          <Keyword id="keywordTags" propTags={this.state.keywordTags} ref="keywordTagComponent"/>
           <br />
           <br />
           <input type="submit" />
