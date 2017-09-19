@@ -10,8 +10,15 @@ class Keywords extends React.Component {
 		this.handleDrag = this.handleDrag.bind(this);
 		this.state = {
 			tags: [],
-			suggestions: []
+			suggestions: [],
+			test: []
 		};
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log(this.props.propTags);
+		console.log(nextProps.propTags);
+		this.setState({tags:nextProps.propTags});
 	}
 
 	handleDelete (i) {
