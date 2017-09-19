@@ -105,17 +105,17 @@ class Submit extends React.Component {
       servings: this.state.RecipeServings
     };
     console.log(postData);
-    // $.ajax ({
-    //   method: 'POST',
-    //   url: "http://awesomesauce-gaming.net:3333/recipe",
-    //   data: postData,
-    //   success: (data) => {
-    //     console.log(data);
-    //     this.setState({
-    //       recipeListe: data
-    //     });
-    //   }
-    // });
+    $.ajax ({
+      method: 'POST',
+      url: "http://awesomesauce-gaming.net:3333/recipe",
+      data: postData,
+      success: (data) => {
+        console.log(data);
+        this.setState({
+          recipeListe: data
+        });
+      }
+    });
 
   };
 
