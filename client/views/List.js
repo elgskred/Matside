@@ -134,9 +134,9 @@ class List extends React.Component {
 	        		}
 	        	}
 	        	
-	        	console.log(tempInclude);
+                var uniq = [ ...new Set(tempInclude) ]
 	        	//Overwrites the original returned data with results showing only recipes including specific ingredients
-	        	data[0] = tempInclude;
+	        	data[0] = uniq;
 	        };
 	        console.log("data2 ok");
 	        //If the user searched for any "excludes", IE "-flour", results will be returned in data[3] 

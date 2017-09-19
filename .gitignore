@@ -54,3 +54,4 @@ client/public/img
 client/public/uploads
 node_modules
 *.log
+start.bat

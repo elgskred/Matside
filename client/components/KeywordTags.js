@@ -10,7 +10,7 @@ class Keywords extends React.Component {
 		this.handleDrag = this.handleDrag.bind(this);
 		this.state = {
 			tags: [],
-			suggestions: ["Banana", "Kiwi", "Sitron", "Karri"]
+			suggestions: []
 		};
 	}
 
