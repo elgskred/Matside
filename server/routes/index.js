@@ -131,7 +131,7 @@ exports.recipes = function(req, res) {
 
 
 
-  async.parallel([async.apply(functions.searchRecipeByUID, uid), async.apply(functions.searchIngredientsByUID, uid), async.apply(functions.searchPictureByUID, uid)],
+  async.parallel([async.apply(functions.searchRecipeByUID, uid), async.apply(functions.searchIngredientsByUID, uid), async.apply(functions.searchPictureByUID, uid), async.apply(functions.searchKeywordsByUID, uid)],
     function done (err, results) {
       if (err) {
         console.log(err);

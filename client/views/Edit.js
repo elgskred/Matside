@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 //import DropzoneComponent from '../components/DropzoneComponent';
 import DropzoneComponent from 'react-dropzone-component';
+import Keyword from '../components/KeywordTags';
 
 
 class RenderImg extends React.Component {
@@ -196,12 +197,14 @@ componentDidMount () {
       var tempIngredientID = [];
       var tempImgPath = [];
       var tempServings = "";
+      var tempKeywords = [];
       for (var i = 0; i < data[0].length; i++) {
         tempUID = data[0][i]['UID'];
         tempRecipeName = data[0][i]['recipeName'];
         tempRecipe = data[0][i]['recipeDescription'];
         tempShortDesc = data[0][i]['shortDescription'];
         tempServings = data[0][i]['servings'];
+        tempKeywords = data[0][i]['keyword'];
       }
       for (var i = 0; i < data[1].length; i++) {
         tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
@@ -279,6 +282,12 @@ render() {
           <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
           <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <Keyword id="keywordTags"/>
           <br />
           <br />
           <input type="submit" />
