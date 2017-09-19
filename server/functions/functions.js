@@ -593,3 +593,59 @@ exports.updateImages = function(body, callback) {
     });
   }); 
 }
+
+exports.updateKeywords = function(body, callback) {
+  var countQuery = 'SELECT COUNT(keyword) AS cnt FROM `keywords` WHERE keyword = ?';
+  var insertQuery = 'INSERT INTO `keyword` (UID, imagePath) VALUES (?, ?)';
+  var deleteQuery = 'DELETE FROM pictures WHERE keyword = ?';
+  console.log("updating images");
+  console.log(body.keywordTags);
+  pool.getConnection(function(err, connection) {
+    async.forEachOf(body.keywordTags, function(element, i, inner_callback) {
+      console.log(element['text']);
+      connection.beginTransaction(function(err) {
+        if (err) {throw err;}
+        var insert = [element['text']];
+        var sql = mysql.format(countQuery, insert);
+        console.log(sql);
+        connection.query(sql, function(err, rows, fields) {
+          if (err) {
+            return connection.rollback(function() {
+              throw err;
+            });
+          }
+          if (rows[0]['cnt'] == 0) {
+            console.log("Inserting new row");
+            insert = [body.UID, element['text']];
+            var insertSql = mysql.format(insertQuery, insert);
+            connection.query(insertSql, function(err, rows, fields) {
+              if (err) {
+                return connection.rollback(function(){
+                  throw err;
+                });
+              }
+              connection.commit(function(err){
+                if (err) {
+                  return connection.rollback(function(){
+                    throw err;
+                  });
+                }
+                console.log("Insert Success");
+                inner_callback(null);
+              })
+              
+            })
+          }
+        })
+
+      });
+    }, function(err) {
+      if (err) {
+        connection.release();
+      } else {
+        connection.release();
+        callback(null, "OK");
+      }
+    });
+  }); 
+}

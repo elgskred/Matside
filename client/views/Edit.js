@@ -128,7 +128,9 @@ constructor(props){
       servings: 2,
       imgPath: [],
       shortDesc: "",
-      testing: []
+      testing: [],
+      keywordTags: [],
+      keywordsSend: []
     }
     this.addIngredientField = this.addIngredientField.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -198,13 +200,13 @@ componentDidMount () {
       var tempImgPath = [];
       var tempServings = "";
       var tempKeywords = [];
+      var t = {};
       for (var i = 0; i < data[0].length; i++) {
         tempUID = data[0][i]['UID'];
         tempRecipeName = data[0][i]['recipeName'];
         tempRecipe = data[0][i]['recipeDescription'];
         tempShortDesc = data[0][i]['shortDescription'];
         tempServings = data[0][i]['servings'];
-        tempKeywords = data[0][i]['keyword'];
       }
       for (var i = 0; i < data[1].length; i++) {
         tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
@@ -214,6 +216,11 @@ componentDidMount () {
       for (var i = 0; i < data[2].length; i++) {
         tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
       }
+      for (var i = 0; i < data[3][0].length; i++) {
+        t = {id: i, text: data[3][0][i]['keyword']};
+        tempKeywords = tempKeywords.concat(t);
+      }
+      console.log(tempKeywords);
       this.setState({
         UID: tempUID,
         recipeName: tempRecipeName,
@@ -222,6 +229,7 @@ componentDidMount () {
         ingredients: tempIngredients,
         amounts: tempAmount,
         ingredient_id: tempIngredientID,
+        keywordTags: tempKeywords,
         imgPath: tempImgPath,
         servings: tempServings
       });
@@ -287,7 +295,7 @@ render() {
           <br />
           <br />
           <br />
-          <Keyword id="keywordTags"/>
+          <Keyword id="keywordTags" propTags={this.state.keywordTags} ref="keywordTagComponent"/>
           <br />
           <br />
           <input type="submit" />
