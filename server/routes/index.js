@@ -166,6 +166,7 @@ exports.popularRecipes = function(req, res) {
       if (err) {
         console.log(err);
       }
+      console.log(results[0]);
       res.send(results[0]);
     })
 }

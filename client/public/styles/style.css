@@ -2,7 +2,7 @@
 
 .slick-prev:before,
 .slick-next:before {
-  color: grey;
+  color: black;
 }
 
 body {
@@ -24,79 +24,170 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
-}
 
-h1, h2, h3, h4, h5, h6 {
+    h1, h2, h3, h4, h5, h6 {
      font-weight: 600;  
-}
- 
-h1 { font-size: 6rem; }
-h2 { font-size: 3.5rem; }
-h3 { font-size: 3rem; }
+    }
+    h1 { font-size: 6rem; }
+    h2 { font-size: 3.5rem; }
+    h3 { font-size: 3rem; }
 
-/*Front page*/
+    /*Header*/
+    #HeaderMenu {
+        width: inherit;
 
-#popImgDiv {
-    text-align: center;
-    font-size: 25px;
-}
+    }
+    .headerBar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+    .liSearchBar {
+        float: right;
+    }
+    .searchBar {
+        width: 350px;
+    }
+    .liHeaderBar {
+        float: left;
+    }
 
-#popImg {
-    max-width: 80%;
-    height: 500px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-} 
+    .liHeaderBar a, .liSearchBar {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 1.7rem;
+    }
+    .liHeaderBar a:hover {
+        background-color: red;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: #333;
+        z-index: 1;
+    }
+    #searchButton {
+        background-color: darkgrey;
+        color: black;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: #333;
+    }
 
-/*Recipe page*/
-#recipeContent {
-    width: 100%;
-}
-#recipeName {
-    border: 2px solid black;
-    text-align: center;
-}
-#ingredients {
-    position: fixed;
-    width: 15%;
+
+    /*Front page*/
+
+    #popImgDiv {
+        text-align: center;
+        font-size: 25px;
+        padding-top: 10px;
+    }
+
+    #popImg {
+        max-width: 80%;
+        height: 500px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+
+    /*Recipe page*/
+    #recipeContent {
+        width: 100%;
+    }
+    #recipeName {
+        text-align: center;
+    }
+    #ingredients {
+        position: fixed;
+        width: 15%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;  
+    }
+    #recipeContainer {
+        width: 80%;
+        display: inline-block;
+        float: right;
+    }
+    #recipe {
+        width: inherit;
+        float: left;
+        margin-left: 2%;
+        font-size: 1.5rem;
+    }
+    #recipeImg {
+        max-width:80%;
+        height: 250px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #inputServings {
+        width: 35%;
+        font-size: 105%;
+    } 
+
+    /*Upload page*/
+    #uploadContainer {
+        width: 100%;
+        font-size: 1.5rem; 
+    }
+
+    /*List page*/
+    #recipeListContainer{
     display: inline-block;
-    float: left;
-    font-size: 1.5rem;  
-    border: 2px solid pink;  
-}
-#recipeContainer {
-    width: 80%;
-    border: 2px solid red;
-    display: inline-block;
-    float: right;
-}
-#recipe {
-    width: inherit;
-    float: left;
-    margin-left: 2%;
-    font-size: 1.5rem;
-    border: 2px solid blue;
-}
-#recipeImg {
-    max-width:80%;
-    height: 250px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-} 
-
-/*Upload page*/
-#uploadContainer {
+    border-bottom: 1px solid grey;
     width: 100%;
-    border: 2px solid pink;
-    font-size: 1.5rem; 
+    }
+
+    .recipeListing{
+        padding: 5px;
+    }
+
+    #recipeListContainer:hover {
+        background-color: darkgrey;
+    }
+    .recipeListing-img{
+        display: inline-block;
+        width:25%;
+        float:left;
+    }
+    .recipe-img {
+        width:100%;
+    }
+    .recipeListing-text{
+        display: inline-block;
+        float:left;
+        width: 60%;
+
+    }
+    .recipeListing-name{
+        font-size: 3.5rem;
+        width: 100%;
+        float: left;
+        padding-left: 5px;
+        color: black;
+    }
+    .recipeListing-desc{
+        width: 80%;
+        font-size: 2rem;
+        float: left;
+        padding-left: 15px;
+    }
 }
+
+
 
 
 
 /********************************
-*       Stucture - Mobile      *
+*       Stucture - Mobile Portrait     *
 ********************************/
 @media screen and (max-width: 1028px) { 
     #app {
@@ -108,86 +199,337 @@ h3 { font-size: 3rem; }
     font-family: 'Roboto', sans-serif;
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
-}
 
-.div {
-    margin-left: auto;
-    margin-right: auto;
-    align-items: center;
-}
- 
+    h1, h2, h3, h4, h5, h6 {
+     font-weight: 600;  
+    }
+    h1 { font-size: 6rem; }
+    h2 { font-size: 3rem; }
+    h3 { font-size: 3rem; }
 
+    /*Header*/
+    #HeaderMenu {
+        width: inherit;
 
+    }
+    .headerBar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+    .liSearchBar {
+        float: right;
+    }
+    .searchBar {
+        width: 350px;
+    }
+    .liHeaderBar {
+        float: left;
+    }
 
-#imgContainer {
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-}
+    .liHeaderBar a, .liSearchBar {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 2.7rem;
+    }
+    .liHeaderBar a:hover {
+        background-color: red;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: #333;
+        z-index: 1;
+    }
+    #searchButton {
+        background-color: darkgrey;
+        color: black;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: #333;
+    }
 
+    /*Front page*/
 
+    #popImgDiv {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 25px;
+    }
 
+    #popImg {
+        max-width: 80%;
+        height: 500px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
 
+    /*Recipe page*/
+    #recipeContent {
+        width: 100%;
+    }
+    #recipeName {
+        text-align: center;
+    }
+    #ingredients {
+        position: fixed;
+        width: 20%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;  
+    }
+    #recipeContainer {
+        width: 80%;
+        display: inline-block;
+        float: right;
+    }
+    #recipe {
+        width: inherit;
+        float: left;
+        margin-left: 2%;
+        font-size: 1.5rem;
+    }
+    #recipeImg {
+        max-width:80%;
+        height: 250px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+        #inputServings {
+        width: 35%;
+        font-size: 105%;
+    }
 
-
-
-
-#inputServings {
-    width: 35%;
-    font-size: 105%;
-}
-
-.headerBar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    border: 2px solid red;
-}
-.liSearchBar {
-    float: right;
-}
-.searchBar {
-    width: 350px;
-    color: black;
-}
-.liHeaderBar {
-    border: 2px solid blue;
-    float: left;
-}
-
-.liHeaderBar a, .liSearchBar {
+    /*Upload page*/
+    #uploadContainer {
+        width: 100%;
+        font-size: 1.5rem; 
+    }
+    /*List page*/
+    #recipeListContainer{
     display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-.liHeaderBar a:hover {
-    background-color: red;
-}
-.dropdown-content-menu {
-    position: absolute;
-    background-color: #333;
-    border: 2px solid pink;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    }
+
+    .recipeListing{
+        padding: 5px;
+    }
+
+    #recipeListContainer:hover {
+        background-color: darkgrey;
+    }
+    .recipeListing-img{
+        display: inline-block;
+        width:25%;
+        float:left;
+    }
+    .recipe-img {
+        width:100%;
+    }
+    .recipeListing-text{
+        display: inline-block;
+        float:left;
+        width: 60%;
+
+    }
+    .recipeListing-name{
+        font-size: 3.5rem;
+        width: 100%;
+        float: left;
+        padding-left: 5px;
+        color: black;
+    }
+    .recipeListing-desc{
+        width: 80%;
+        font-size: 2rem;
+        float: left;
+        padding-left: 15px;
+    }
 }
 
-
-div.example {
-    margin-left: 20px;
-}
-
-div.intro {
-    margin-left: 20px;
-    color: #000;
-}
-
-#host {
-    width: 800px;
-    margin-left: auto;
+/********************************
+*       Stucture - Mobile Landscape     *
+********************************/
+@media screen and (max-width: 1028px) and (max-height: 450px) { 
+    #app {
+    width: 100%;
     margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    background: #ecf0f1;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+     font-weight: 600;  
+    }
+    h1 { font-size: 6rem; }
+    h2 { font-size: 3rem; }
+    h3 { font-size: 3rem; }
+
+    /*Header*/
+    #HeaderMenu {
+        width: inherit;
+
+    }
+    .headerBar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+    .liSearchBar {
+        float: right;
+    }
+    .searchBar {
+        width: 350px;
+    }
+    .liHeaderBar {
+        float: left;
+    }
+
+    .liHeaderBar a, .liSearchBar {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 2.5rem;
+    }
+    .liHeaderBar a:hover {
+        background-color: red;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        z-index: 1;
+    }
+
+    #searchButton {
+        background-color: darkgrey;
+        color: black;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: #333;
+    }
+
+
+    /*Front page*/
+
+    #popImgDiv {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 25px;
+        padding-top: 10px;
+    }
+
+    #popImg {
+        max-width: 80%;
+        height: 225px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+
+    /*Recipe page*/
+    #recipeContent {
+        width: 100%;
+    }
+    #recipeName {
+        text-align: center;
+    }
+    #ingredients {
+        position: fixed;
+        width: 20%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;   
+    }
+    #recipeContainer {
+        width: 80%;
+        display: inline-block;
+        float: right;
+    }
+    #recipe {
+        width: inherit;
+        float: left;
+        margin-left: 2%;
+        font-size: 1.5rem;
+    }
+    #recipeImg {
+        max-width:80%;
+        height: 250px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+
+    #inputServings {
+        width: 35%;
+        font-size: 105%;
+    }
+
+    /*Upload page*/
+    #uploadContainer {
+        width: 100%;
+        font-size: 1.5rem; 
+    }
+    /*List page*/
+    #recipeListContainer{
+    display: inline-block;
+    border-bottom: 1px solid grey;
+    width: 100%;
+    }
+
+    .recipeListing{
+        padding: 5px;
+    }
+
+    #recipeListContainer:hover {
+        background-color: darkgrey;
+    }
+    .recipeListing-img{
+        display: inline-block;
+        width:25%;
+        float:left;
+    }
+    .recipe-img {
+        width:100%;
+    }
+    .recipeListing-text{
+        display: inline-block;
+        float:left;
+        width: 60%;
+
+    }
+    .recipeListing-name{
+        font-size: 3.5rem;
+        width: 100%;
+        float: left;
+        padding-left: 5px;
+        color: black;
+    }
+    .recipeListing-desc{
+        width: 80%;
+        font-size: 2rem;
+        float: left;
+        padding-left: 15px;
+    }
 }
+
+
+
+
 
 .filepicker.dropzone .dz-preview.dz-image-preview {
     background: none;
@@ -196,128 +538,6 @@ div.intro {
 .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
     border-radius: 5px;
 }
-a {
-    text-decoration: none;
-}
-.recipeListing{
-    background-color: white;
-    padding: 10px;
-    color: black;
-    border: 2px solid yellow;
-}
-.recipeListing:hover {
-    background-color: blue;
-}
-.recipeListing-text{
-    display: inline-block;
-    width: 80%;
-    position: relative;
-    top: -50px;
-}
-.recipeListing-name{
-    size: 19px;
-    font-size: 25px;
-    width: 80%;
-}
-.recipeListing-desc{
-    width: 80%;
-}
-.recipeListing-img{
-    padding-left: 25px;
-    width: 15%;
-    height: auto;
-    display: inline-block;
-}
-.recipe-img {
-    max-width: 50%;
-    height: auto;
-    display: inline-block;
-}
-
-#ingredientsList, #amountsList {
-    display: inline-block;
-}
-
- .demo4 {
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
-    height: 700px;
-    position: relative;
-    border: 2px solid black;
-  }
-  .demo4-inner {
-    overflow: hidden;
-    position: relative;
-    margin: auto;
-
-  }
-  .demo4-photo {
-    position: absolute;
-    background-color: lightgray;
-  }
 
 
 
-  //KeywordTags
-  /* Example Styles for React Tags*/
-div.ReactTags__tags {
-    position: relative;
-}
-
-/* Styles for the input */
-div.ReactTags__tagInput {
-    width: 200px;
-    border-radius: 2px;
-    display: inline-block;
-}
-div.ReactTags__tagInput input.ReactTags__tagInputField,
-div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-    height: 31px;
-    margin: 0;
-    font-size: 12px;
-    width: 100%;
-    border: 1px solid #eee;
-}
-
-/* Styles for selected tags */
-div.ReactTags__selected span.ReactTags__tag {
-    border: 1px solid #ddd;
-    background: #eee;
-    font-size: 12px;
-    display: inline-block;
-    padding: 5px;
-    margin: 0 5px;
-    cursor: move;
-    border-radius: 2px;
-}
-div.ReactTags__selected a.ReactTags__remove {
-    color: #aaa;
-    margin-left: 5px;
-    cursor: pointer;
-}
-
-/* Styles for suggestions */
-div.ReactTags__suggestions {
-    position: absolute;
-}
-div.ReactTags__suggestions ul {
-    list-style-type: none;
-    box-shadow: .05em .01em .5em rgba(0,0,0,.2);
-    background: white;
-    width: 200px;
-}
-div.ReactTags__suggestions li {
-    border-bottom: 1px solid #ddd;
-    padding: 5px 10px;
-    margin: 0;
-}
-div.ReactTags__suggestions li mark {
-    text-decoration: underline;
-    background: none;
-    font-weight: 600;
-}
-div.ReactTags__suggestions ul li.active {
-    background: #b7cfe0;
-    cursor: pointer;
-}
