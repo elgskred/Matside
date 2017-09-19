@@ -1,0 +1,30 @@
+Create TABLE recipes (
+	UID INT(255) PRIMARY KEY AUTO_INCREMENT,
+	recipeName VARCHAR(255) NOT NULL,
+	shortDescription VARCHAR(255),
+	recipeDescription VARCHAR(2048),
+	servings INT(255),
+	views INT(255)
+)
+
+Create TABLE ingredients (
+	ingredient_id INT(255) PRIMARY KEY AUTO_INCREMENT,
+	UID INT(255),
+	ingredient_name VARCHAR(255) NOT NULL,
+	ingredient_amount VARCHAR(255) NOT NULL,
+	FOREIGN KEY (UID) REFERENCES recipes(UID)
+)
+
+Create TABLE pictures (
+	image_id INT(255) PRIMARY KEY AUTO_INCREMENT,
+	UID INT(255),
+	imagePath VARCHAR(255) NOT NULL,
+	FOREIGN KEY (UID) REFERENCES recipes(UID)
+)
+
+Create TABLE keywords (
+	keyword_id INT(255) PRIMARY  KEY AUTO_INCREMENT,
+	UID INT(255),
+	keyword VARCHAR(255) NOT NULL,
+	FOREIGN KEY (UID) REFERENCES recipes(UID)
+)
