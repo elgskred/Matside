@@ -53,3 +53,4 @@ server/public/uploads
 client/public/img
 client/public/uploads
 node_modules
+*.log
