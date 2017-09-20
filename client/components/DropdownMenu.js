@@ -96,7 +96,7 @@ class HeaderMenuButton extends React.Component {
 		};
 		return (
 			<div onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave} >
-				<a  href="#">{this.props.name}</a>
+				<a>{this.props.name}</a>
 				<HeaderMenuDropdown isVisible={this.state.isVisible} list={list}/>
 			</div>
 		);
