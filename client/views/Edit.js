@@ -50,7 +50,7 @@ class Example extends React.Component {
         this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.gif'],
             showFiletypeIcon: true,
-            postUrl: 'http://localhost:3333/uploadHandler'
+            postUrl: 'http://mathjørnet.net:3333/uploadHandler'
         };
 
         // If you want to attach multiple callbacks, simply
