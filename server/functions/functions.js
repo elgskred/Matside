@@ -597,7 +597,7 @@ exports.updateImages = function(body, callback) {
 exports.updateKeywords = function(body, callback) {
   var countQuery = 'SELECT COUNT(keyword) AS cnt FROM `keywords` WHERE keyword = ?';
   var insertQuery = 'INSERT INTO `keywords` (UID, keyword) VALUES (?, ?)';
-  var deleteQuery = 'DELETE FROM pictures WHERE UID = ?';
+  var deleteQuery = 'DELETE FROM `keywords` WHERE UID = ?';
   console.log("updating keywords");
   console.log(body.keywordTags);
   pool.getConnection(function(err, connection) {
