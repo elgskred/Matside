@@ -149,8 +149,12 @@ constructor(props){
   onSuccess (imgpath) {
     console.log(imgpath);
     console.log(imgpath[0].xhr.response);
+    var tempArray = [];
+    for (var i = 0; i < imgpath.length; i++) {
+      tempArray = tempArray.concat(imgpath[i].xhr.response);
+    }
     this.setState({
-      imgPath: this.state.imgPath.concat(imgpath[0].xhr.response) 
+      imgPath: tempArray 
     });
   } 
 
