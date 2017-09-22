@@ -49,7 +49,7 @@ class Submit extends React.Component {
       recipeListe: [],
       ingredientList: [],
       RecipeServings: 2,
-      keywords: []
+      keywordTags: []
     };
   };
   onChange (e) {
@@ -81,8 +81,6 @@ class Submit extends React.Component {
     }
     console.log("tempIA");
     //Getting keyword tags
-    var keywordTags = this.refs.keywords.state.tags;
-    console.log(keywordTags.length);
     for (var l = 0; l < keywordTags.length; l++) {
       tempArrayK[l] = keywordTags[l]['text'];
     }
@@ -151,7 +149,7 @@ class Submit extends React.Component {
           <textarea rows="25" cols="150" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
           <br />
           <br />
-          <Keyword ref="keywords"/>
+          <Keyword ref="keywords" id="keywordTags" propTags={this.state.keywordTags}/>
           <br />
           <br />
           <input type="submit" />
