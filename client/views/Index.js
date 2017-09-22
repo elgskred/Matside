@@ -81,8 +81,8 @@ class Submit extends React.Component {
     }
     console.log("tempIA");
     //Getting keyword tags
-    for (var l = 0; l < keywordTags.length; l++) {
-      tempArrayK[l] = keywordTags[l]['text'];
+    for (var l = 0; l < this.state.keywordTags.length; l++) {
+      tempArrayK[l] = this.state.keywordTags[l]['text'];
     }
     console.log(tempArrayK);
     //Getting successfull image uploads and placing the imageID in a array
