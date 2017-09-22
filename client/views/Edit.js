@@ -147,8 +147,6 @@ constructor(props){
   };  
 
   onSuccess (imgpath) {
-    console.log(imgpath);
-    console.log(imgpath[0].xhr.response);
     var tempArray = [];
     for (var i = 0; i < imgpath.length; i++) {
       tempArray = tempArray.concat(imgpath[i].xhr.response);
@@ -258,40 +256,42 @@ render() {
   const ingredientsList = this.state.ingredients.map((item, index) =>{
     return(
       <div>
-        <TextField placeholder={this.state.ingredients[index]} id="ingredients" index={index} updateState={this.updateState} />
+        <TextField placeholder={this.state.ingredients[index]} id="ingredients" index={index} updateState={this.updateState} className="inputFieldDefault"/>
       </div>
       )
   });
   const amountsList = this.state.amounts.map((item, index) =>{
     return(
       <div>
-        <TextField placeholder={this.state.amounts[index]} id="amounts" index={index} updateState={this.updateState} />
+        <TextField placeholder={this.state.amounts[index]} id="amounts" index={index} updateState={this.updateState} className="inputFieldDefault"/>
       </div>
     )
   });  
   console.log(ingredientsList);
 
     return (
-      <div id="recipe">
+      <div id="editForm">
         <form onSubmit={this.submitForm}>
           <br />
-          <TextField placeholder={this.state.recipeName} id="recipeName" updateState={this.updateState}/>
+          <input type="text" placeholder={this.state.recipeName} updateState={this.updateState} className="inputFieldDefault"/>
           <br />
           <br />
-            <TextField placeholder={this.state.shortDesc} id="shortDesc" updateState={this.updateState}/>
+          <input type="text" placeholder={this.state.shortDesc} updateState={this.updateState} className="inputFieldLong"/>
           <br />
           <br />
+          <div id="amountsList">
+            <p>Mendge:</p>
+            {amountsList}
+          </div> 
           <div id="ingredientsList">
+            <p>Ingredienser:</p>
             {ingredientsList}
           </div>
-          <div id="amountsList">
-            {amountsList}
-          </div>  
           <br />
           <button onClick = {this.addIngredientField}> Add Ingredient</button>
           <br />
           <br />
-          <textarea rows="5" cols="50" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
+          <textarea rows="25" cols="150" id="editRecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
           <br />
           <br />
