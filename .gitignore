@@ -55,3 +55,5 @@ client/public/uploads
 node_modules
 *.log
 start.bat
+npm-debug.log
+*.bat
