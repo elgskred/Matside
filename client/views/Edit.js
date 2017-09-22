@@ -291,7 +291,7 @@ render() {
           <button onClick = {this.addIngredientField}> Add Ingredient</button>
           <br />
           <br />
-          <textarea rows="25" cols="150" id="editRecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
+          <textarea rows="25" cols="150" id="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
           <br />
           <br />
           <br />
