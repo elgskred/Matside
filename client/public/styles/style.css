@@ -11,6 +11,43 @@ body {
 
 /********************************
 *       Stucture - Main 2600px ->     *
+        Edit and Upload page
+********************************/
+
+    .filepicker.dropzone .dz-preview.dz-image-preview {
+        background: none;
+    }
+
+    .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
+        border-radius: 5px;
+    }
+
+    /*Edit page*/
+    .inputFieldDefault{
+        width: 200px;
+    }
+    .inputFieldLong{
+        width: 500px;
+    }
+    #ingredientsList{
+        display: inline-block;
+    }
+    #amountsList{
+        display: inline-block;
+    }
+    #editRecipeDescription{
+
+    }
+    /*Index page*/
+    .textField1{
+        display: inline-block;
+        padding-right: 138px;
+    }
+
+
+
+/********************************
+*       Stucture - Main 2600px ->     *
 ********************************/
 
 
@@ -532,15 +569,6 @@ body {
 
 
 
-
-
-.filepicker.dropzone .dz-preview.dz-image-preview {
-    background: none;
-}
-
-.filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
-    border-radius: 5px;
-}
 
 
 
