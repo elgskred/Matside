@@ -26,8 +26,8 @@ class AddIngredient extends React.Component {
   render() {
     return (
       <div id="i">
-        <input type="text" placeholder="Mendge" id={ `amount${this.props.index}` } onChange={this.onChange} name="amount" value={this.state.amount} />
-        <input type="text" placeholder="Ingrediens" id={ `ingredient${this.props.index}` } name="ingredient" onChange={this.onChange} value={this.state.ingredient} />
+        <input type="text" placeholder="Mendge" id={ `amount${this.props.index}` } onChange={this.onChange} name="amount" value={this.state.amount} className="inputFieldDefault"/>
+        <input type="text" placeholder="Ingrediens" id={ `ingredient${this.props.index}` } name="ingredient" onChange={this.onChange} value={this.state.ingredient} className="inputFieldDefault"/>
       </div>
       );
   }
@@ -129,13 +129,15 @@ class Submit extends React.Component {
       <div id="uploadContainer">
         <form onSubmit={this.submitForm}>
           <br />
-          <input type="text" placeholder="RecipeName" id="RecipeName" onChange={this.onChange} value={this.state.RecipeName}/>
+          <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault"/>
           <br />
           <br />
-          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} id="ShortDescription" />
+          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong"/>
           <br />
           <br />
           <div id="RecipeIngredients">
+            <div className="textField1"><b>Mendge:</b></div><div className="textField1"><b>Ingrediens</b></div>
+            <br />
             { ingredientList }
             <button onClick = {this.addIngredientField}> Add Ingredient</button>
           </div>
@@ -146,7 +148,7 @@ class Submit extends React.Component {
           <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
           <br />
           <br />
-          <textarea rows="5" cols="50" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
+          <textarea rows="25" cols="150" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
           <br />
           <br />
           <Keyword ref="keywords"/>
