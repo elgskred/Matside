@@ -543,15 +543,12 @@ exports.updateImages = function(body, callback) {
   var insertQuery = 'INSERT INTO `pictures` (UID, imagePath) VALUES (?, ?)';
   var deleteQuery = 'DELETE FROM pictures WHERE imagePath = ?';
   console.log("updating images");
-  console.log(body.imgPath);
   pool.getConnection(function(err, connection) {
     async.forEachOf(body.imgPath, function(element, i, inner_callback) {
-      console.log(element);
       connection.beginTransaction(function(err) {
         if (err) {throw err;}
         var insert = [element];
         var sql = mysql.format(countQuery, insert);
-        console.log(sql);
         connection.query(sql, function(err, rows, fields) {
           if (err) {
             return connection.rollback(function() {
@@ -559,7 +556,7 @@ exports.updateImages = function(body, callback) {
             });
           }
           if (rows[0]['cnt'] == 0) {
-            console.log("Inserting new row");
+            console.log("Inserting new image row");
             insert = [body.UID, element];
             var insertSql = mysql.format(insertQuery, insert);
             connection.query(insertSql, function(err, rows, fields) {
@@ -574,7 +571,7 @@ exports.updateImages = function(body, callback) {
                     throw err;
                   });
                 }
-                console.log("Insert Success");
+                console.log("Image insert Success");
                 inner_callback(null);
               })
               
@@ -612,8 +609,9 @@ exports.updateKeywords = function(body, callback) {
         }
       })
       async.forEachOf(body.keywordTags, function(element, i, inner_callback) {
-        console.log("Inserting new row");
+        console.log("Inserting new keyword");
         insert = [body.UID, element['text']];
+        console.log(element['text']);
         var insertSql = mysql.format(insertQuery, insert);
         connection.query(insertSql, function(err, rows, fields) {
           if (err) {
@@ -627,7 +625,7 @@ exports.updateKeywords = function(body, callback) {
                 throw err;
               });
             }
-            console.log("Insert Success");
+            console.log("Keyword insert Success");
             inner_callback(null);
           }) 
         })
