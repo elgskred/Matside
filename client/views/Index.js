@@ -129,10 +129,10 @@ class Submit extends React.Component {
       <div id="uploadContainer">
         <form onSubmit={this.submitForm}>
           <br />
-          <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault"/>
+          <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault" id="RecipeName"/>
           <br />
           <br />
-          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong"/>
+          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong" id="ShortDescription"/>
           <br />
           <br />
           <div id="RecipeIngredients">

@@ -273,10 +273,10 @@ render() {
       <div id="editForm">
         <form onSubmit={this.submitForm}>
           <br />
-          <input type="text" placeholder={this.state.recipeName} updateState={this.updateState} className="inputFieldDefault"/>
+          <input type="text" placeholder={this.state.recipeName} onChange={this.onChange} className="inputFieldDefault" name="recipeName"/>
           <br />
           <br />
-          <input type="text" placeholder={this.state.shortDesc} updateState={this.updateState} className="inputFieldLong"/>
+          <input type="text" placeholder={this.state.shortDesc} onChange={this.onChange} className="inputFieldLong" name="shortDesc"/>
           <br />
           <br />
           <div id="amountsList">
