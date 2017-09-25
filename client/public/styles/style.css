@@ -505,7 +505,7 @@ body {
         text-align: center;
     }
     #sidebar {
-        position: fixed;
+        position: static;
         width: 15%;
         display: inline-block;
         float: left;
