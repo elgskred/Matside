@@ -321,6 +321,13 @@ body {
     #recipeName {
         text-align: center;
     }
+    #sidebar {
+        position: fixed;
+        width: 15%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;  
+    }
     #ingredients {
          
     }
@@ -496,6 +503,13 @@ body {
     }
     #recipeName {
         text-align: center;
+    }
+    #sidebar {
+        position: fixed;
+        width: 15%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;  
     }
     #ingredients {
          
