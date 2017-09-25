@@ -141,12 +141,18 @@ body {
     #recipeName {
         text-align: center;
     }
-    #ingredients {
+    #sidebar {
         position: fixed;
         width: 15%;
         display: inline-block;
         float: left;
         font-size: 1.5rem;  
+    }
+    #ingredients {
+         
+    }
+    #imageContainer {
+        
     }
     #recipeContainer {
         width: 80%;
@@ -160,8 +166,7 @@ body {
         font-size: 1.5rem;
     }
     #recipeImg {
-        max-width:80%;
-        height: 250px;
+        height: 150px;
         display: block;
         margin-right: auto;
         margin-left: auto;
@@ -317,11 +322,15 @@ body {
         text-align: center;
     }
     #ingredients {
-        position: fixed;
-        width: 20%;
+         
+    }
+    #imageContainer {
+        
+    }
+    #recipeContainer {
+        width: 80%;
         display: inline-block;
-        float: left;
-        font-size: 1.5rem;  
+        float: right;
     }
     #recipeContainer {
         width: 80%;
@@ -489,11 +498,15 @@ body {
         text-align: center;
     }
     #ingredients {
-        position: fixed;
-        width: 20%;
+         
+    }
+    #imageContainer {
+        
+    }
+    #recipeContainer {
+        width: 80%;
         display: inline-block;
-        float: left;
-        font-size: 1.5rem;   
+        float: right;
     }
     #recipeContainer {
         width: 80%;

@@ -170,14 +170,19 @@ class ShowRecipeList extends React.Component {
 					</h1>
 				</div>
 
+				<div id="sidebar">
+					<div id="ingredients">
+						<h2>Ingredienser: </h2>
+						<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
+						<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
+					</div>
 
-				<div id="ingredients">
-					<h2>Ingredienser: </h2>
-					<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
-					<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
+					<div id="imageContainer">
+						<br />
+						<br />
+						<RenderImg img={this.state.imgPath} />
+					</div>
 				</div>
-
-
 
 				<div id="recipeContainer">
 					<div id="recipe">
@@ -188,7 +193,7 @@ class ShowRecipeList extends React.Component {
 						<br />
 						<br />
 						<br />
-						<RenderImg img={this.state.imgPath} />
+						
 					</div>
 				</div>
 			
