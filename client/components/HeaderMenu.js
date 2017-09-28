@@ -13,14 +13,14 @@ class HeaderMenu extends React.Component{
 		this.searchGo = this.searchGo.bind(this);
 		this.state = {
 			searchBar: "",
-			DropdownName: "Menu",
+			DropdownName: "Placeholder",
 			subNames: ["Recipes", "Categories"],
-			subLinks: ["/list"]
+			subLinks: []
 		};
 		this.recipe = {
-            subDropTag: "Oppskrifter",
+            subDropTag: "Placeholder",
             subDrop: ["Sunn", "Rask", "Familien", "Kos", "Gjester", "Tradisjon", "Vis alle oppskrifter"],
-            subDropLink: ["/test"]
+            subDropLink: []
         };
 	}
 	onKeyPress (e) {
