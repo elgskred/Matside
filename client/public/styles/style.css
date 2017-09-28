@@ -42,8 +42,31 @@ body {
     .textField1{
         display: inline-block;
         padding-right: 138px;
+        background-color: grey;
     }
+    #largeImageContainer {
+        display: flex;
+        position: relative; 
+        height: 50%;
+        width: 50%;
+        top: 50%;
+        left: 50%;
+        opacity: 1.0;
 
+    }
+    #largeImage {
+        position: static;
+        height: 500px;
+        margin-top: -250px;
+        margin-left: -25%;
+        opacity: 1.0;       
+    }
+    .parent {
+
+    }
+    .parent:before {
+        opacity: 0.2;
+    }
 
 
 /********************************
@@ -151,8 +174,8 @@ body {
     #ingredients {
          
     }
-    #imageContainer {
-        
+    #imageContainer, #imgContainer {
+        width: 100%;
     }
     #recipeContainer {
         width: 80%;
@@ -166,8 +189,9 @@ body {
         font-size: 1.5rem;
     }
     #recipeImg {
-        height: 150px;
+        max-width: 90%;
         display: block;
+        float: left;
         margin-right: auto;
         margin-left: auto;
     }
