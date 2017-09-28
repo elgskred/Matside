@@ -26,7 +26,7 @@ class RenderArray extends React.Component {
 			</Link></div>
 		);	
 		return(
-			<div className="dropdown-content-menu" onMouseEnter={this.handleEnterDropdown} onMouseLeave={this.handleLeaveDropdown}>
+			<div className="dropdown-content-menu" onMouseLeave={this.handleLeaveDropdown}>
 			{listButtons}
 			</div>
 		);
