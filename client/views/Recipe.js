@@ -69,14 +69,55 @@ class RenderIngredients extends React.Component {
 
 }
 
+class LargeImage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onClick = this.onClick.bind(this);
+		this.state = {
+			isVisible: false
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({isVisible: true});
+	}
+	onClick () {
+		console.log("disableDiv");
+	}
+
+
+	render(){
+		var imgStyle = {
+			position: "static",
+			height: "75%",
+			verticalAlign: "middle",
+			opacity: "1",
+		}
+		if (this.state.isVisible) {
+			return(
+				<img src={'../public/uploads/' + this.props.img[this.props.index]} name="largeImage" id="largeImage"/>
+			)
+		}
+		return null;
+		
+	}
+}
+
 class RenderImg extends React.Component {
 	constructor(props) {
 		super(props);
+		this.zoomImage = this.zoomImage.bind(this);
+	}
+
+	zoomImage (index){
+		this.props.imageClick(index);
+		this.props.enable();
+
 	}
 
 	render() {
 		const listImg = this.props.img.map((item, index) =>
-			<img src={'../public/uploads/' + item} alt="404.png" key={index} id="recipeImg"/>
+			<img src={'../public/uploads/' + item} alt="404.png" key={index} id="recipeImg" onClick={this.zoomImage.bind(this, index)}/>
 		);
 		return(
 			<div className="recipeImg" id="imgContainer">
@@ -92,6 +133,9 @@ class ShowRecipeList extends React.Component {
 	constructor(props){
 		super(props);
 		this.onChange = this.onChange.bind(this);
+		this.showZoomedImage = this.showZoomedImage.bind(this);
+		this.disableDiv = this.disableDiv.bind(this);
+    	this.enableDiv = this.enableDiv.bind(this);
 		this.state = {
 			ingredients: [],
 			amount: [],
@@ -134,7 +178,10 @@ class ShowRecipeList extends React.Component {
 		    	amount: tempAmounts,
 		    	amountParsed: tempAmountsParsed,
 		    	servingsCalculated: tempAmountsParsed,
-		    	imgPath: tempImgpath
+		    	imgPath: tempImgpath,
+		    	index: null,
+		    	disableDiv: true
+
 		    });
 	      }
 	    });
@@ -151,16 +198,66 @@ class ShowRecipeList extends React.Component {
 		}
 		this.setState({servingsValue: checkValue});
 		for (var i = 0; i < this.state.amountParsed.length; i++) {
-			//newAmountParsed[i] = ((this.state.amountParsed[i] / int) * checkValue).toFixed(2);
 			newAmountParsed[i] = ((checkValue / this.state.servings) * this.state.amountParsed[i]).toFixed(2);
-			
 		};
 		this.setState({servingsCalculated: newAmountParsed});
 
 	}
 
+	showZoomedImage (mouseState) {
+		console.log(mouseState);
+		this.setState({index: mouseState});
+
+	}
+
+	disableDiv(e) {
+		console.log(e);
+		console.log(e.target);
+		console.log(e.target.name)
+		if (e.target.name != "largeImage") {
+			this.setState({
+		       	disableDiv:true
+		    });
+		}
+	    
+	}
+
+	enableDiv() {
+	    this.setState({
+	       	disableDiv:false
+	    });
+	}
+
 
 	render(){
+		var divStyle = {
+			display:this.state.disableDiv?'none':'block',
+			zIndex:this.state.disableDiv?'-1':'3',
+			position: "absolute",
+        	padding:0,
+        	margin:0,
+        	top:0,
+        	left:0,
+        	width: "100%",
+        	height: "100%",
+        	
+		};
+
+		var divOpacity = {
+			display:this.state.disableDiv?'none':'block',
+			zIndex:this.state.disableDiv?'-1':'2',
+			backgroundColor: "grey",
+			position: "absolute",
+        	padding:0,
+        	margin:0,
+        	top:0,
+        	left:0,
+        	width: "100%",
+        	height: "100%",
+        	opacity: "0.9"
+			
+		};
+		
 		return(
 			<div id="recipeContent"> 
 				<HeaderMenu ref="searchBar"/>
@@ -180,7 +277,7 @@ class ShowRecipeList extends React.Component {
 					<div id="imageContainer">
 						<br />
 						<br />
-						<RenderImg img={this.state.imgPath} />
+						<RenderImg img={this.state.imgPath} imageClick={this.showZoomedImage} enable={this.enableDiv}/>
 					</div>
 				</div>
 
@@ -196,6 +293,15 @@ class ShowRecipeList extends React.Component {
 						
 					</div>
 				</div>
+
+				<div name="backgroundOpacity" style={divOpacity}>
+				</div>
+				<div name="zoomedImage" style={divStyle} onClick={this.disableDiv}>
+					<div name="largeImageContainer" id="largeImageContainer">
+						<LargeImage img={this.state.imgPath} index={this.state.index} name="largeImage" onClick={this.disableDiv}/>
+					</div>
+				</div>
+				
 			
 			
 			</div>
