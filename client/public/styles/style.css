@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color:#ecf0f1;
+    background-color: #fff /*#2b3848*/;
 }
 
 .editor {
@@ -85,7 +85,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     align-items: center;
-    background: #ecf0f1;
+    background: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
@@ -99,7 +99,8 @@ body {
 
     /*Header*/
     #HeaderMenu {
-        width: inherit;
+        width: 100%;
+        margin-bottom: 150px;
 
     }
     .headerBar {
@@ -107,25 +108,28 @@ body {
         margin: 0;
         padding: 0;
         overflow: hidden;
-        background-color: #333;
+        background-color: #fff;
+        border-bottom: 1px solid black;
+        
         }
     .liSearchBar {
         float: right;
-        padding: 0;
-        padding-top: 14px;
+        padding-top: 25px;
     }
+    
     .searchBar {
+        border: 0.1px solid black;
         width: 350px;
         color:black;
     }
     .liHeaderBar {
         float: left;
-        padding: 14px 16px;
+        padding: 25px 16px;
     }
 
     .liHeaderBar a, .liSearchBar {
         display: inline-block;
-        color: white;
+        color: black;
         text-align: center;
         text-decoration: none;
         font-size: 1.7rem;
@@ -138,10 +142,9 @@ body {
         background-color: #333;
         z-index: 1;
     }
-    #imageMagButton {
-        background-color: darkgrey;
-        color: black;
-        width: 30px;
+    #imgMagnifyingButton {
+        width: 18px;
+        height: 20px;
     }
     .dropdown-content-menu {
         position: absolute;
@@ -270,7 +273,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     align-items: center;
-    background: #ecf0f1;
+    background: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
@@ -321,7 +324,7 @@ body {
         background-color: #333;
         z-index: 1;
     }
-    #searchButton {
+    #imgMagnifyingButton {
         background-color: darkgrey;
         color: black;
     }
@@ -451,7 +454,7 @@ body {
     margin-right: auto;
     margin-left: auto;
     align-items: center;
-    background: #ecf0f1;
+    background: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
@@ -502,7 +505,7 @@ body {
         z-index: 1;
     }
 
-    #searchButton {
+    #imgMagnifyingButton {
         background-color: darkgrey;
         color: black;
     }

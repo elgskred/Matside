@@ -56,7 +56,7 @@ class HeaderMenu extends React.Component{
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
 					<li className="liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="liHeaderBar"><DropdownMenu name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
-					<li className="liSearchBar"><img src="../public/img/mag.png" id="imageMagButton" onClick={this.searchGo}/></li>
+					<li className="liSearchBar"><img src="../public/img/mag.png" id="imgMagnifyingButton" onClick={this.searchGo}/></li>
 					<li className="liSearchBar"><input type="text" className="searchBar" id="searchBar" placeholder="Search" onChange={this.onChange} onKeyPress={this.onKeyPress}/></li>
 
 				</ul>
