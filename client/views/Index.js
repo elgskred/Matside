@@ -4,6 +4,9 @@ import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
 import DropzoneComponent from '../components/DropzoneComponent';
 import Keyword from '../components/KeywordTags';
+import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
+import RichEditorExample from '../components/RichEditorExample';
+import RichEditorExampleReadOnly from '../components/RichEditorExampleReadOnly';
 
 class AddIngredient extends React.Component {
   constructor(){
@@ -39,6 +42,8 @@ class Submit extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.addIngredientField = this.addIngredientField.bind(this);
+    this.export = this.export.bind(this);
+    
     //Inital data
     this.state = {
       RecipeName: "",
@@ -49,7 +54,8 @@ class Submit extends React.Component {
       recipeListe: [],
       ingredientList: [],
       RecipeServings: 2,
-      keywordTags: []
+      keywordTags: [],
+      raw: {}
     };
   };
   onChange (e) {
@@ -62,6 +68,13 @@ class Submit extends React.Component {
     e.preventDefault();
     const ingredientList = this.state.ingredientList.concat(AddIngredient);
     this.setState({ingredientList});
+  }
+  export(content) {
+    console.log(content);
+    console.log(JSON.stringify(content));
+    this.setState({
+      raw: JSON.stringify(content)
+    });
   }
 
   //Preventing default submit behaviour so we can add our own
@@ -94,7 +107,7 @@ class Submit extends React.Component {
     var postData = {
       name: this.state.RecipeName,
       desc: this.state.ShortDescription,
-      recipe: this.state.RecipeDescription,
+      recipe: this.state.raw,
       ingredients: tempArrayI,
       amount: tempArrayA,
       tags: tempArrayK,
@@ -105,7 +118,7 @@ class Submit extends React.Component {
     console.log(postData);
     $.ajax ({
       method: 'POST',
-      url: "http://awesomesauce-gaming.net:3333/recipe",
+      url: "http://mathjørnet.net:3333/recipe",
       data: postData,
       success: (data) => {
         console.log(data);
@@ -146,7 +159,10 @@ class Submit extends React.Component {
           <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
           <br />
           <br />
-          <textarea rows="25" cols="150" id="RecipeDescription" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.RecipeDescription}/>
+          <br />
+          <div className="editor" >
+            <RichEditorExample exportContent={this.export}/>
+          </div>
           <br />
           <br />
           <Keyword ref="keywords" id="keywordTags" propTags={this.state.keywordTags}/>

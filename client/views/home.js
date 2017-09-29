@@ -8,12 +8,15 @@ import Slideshow from '../components/Slideshow';
 class Home extends React.Component {
 	render() {
 		return(
-			<div className="page">
-				<div id="headerbar">
+			<div>
+				<div className="header">
 					<HeaderMenu />
 				</div>
-				<div className="suggestionGallery">
-					<Slideshow />
+
+				<div className="page">
+					<div className="suggestionGallery">
+						<Slideshow />
+					</div>
 				</div>
 			</div>
 		);
