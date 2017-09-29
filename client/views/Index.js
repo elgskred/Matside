@@ -11,7 +11,10 @@ class RichEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: EditorState.createEmpty()};
-    this.onChange = (editorState) => this.setState({editorState});
+    this.onChange = (editorState) => {
+      this.setState({editorState});
+      console.log(this.refs.editor.refs.editor.innerHTML);
+    }
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
   handleKeyCommand(command, editorState) {
@@ -33,6 +36,7 @@ class RichEditor extends React.Component {
           editorState={this.state.editorState}
           handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange}
+          ref="editor"
         />
       </div>
     );
