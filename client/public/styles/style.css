@@ -9,6 +9,12 @@ body {
     background-color:#ecf0f1;
 }
 
+.editor {
+ border: 1px solid grey;
+ padding: 6px;
+}
+
+
 /********************************
 *       Stucture - Main 2600px ->     *
         Edit and Upload page
@@ -42,7 +48,6 @@ body {
     .textField1{
         display: inline-block;
         padding-right: 138px;
-        background-color: grey;
     }
     #largeImageContainer {
         display: flex;
