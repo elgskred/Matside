@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import HeaderMenu from '../components/HeaderMenu';
+import RichEditorExampleReadOnly from '../components/RichEditorExampleReadOnly';
 
 class RenderArray extends React.Component {
 	constructor(props) {
@@ -286,7 +287,7 @@ class ShowRecipeList extends React.Component {
 						<h2>
 							Slik gjør du: <br/>
 						</h2>
-						<RenderRecipe recipe={this.state.recipe} />
+						<RichEditorExampleReadOnly importContent={this.state.recipe}/>
 						<br />
 						<br />
 						<br />

@@ -111,6 +111,8 @@ body {
         }
     .liSearchBar {
         float: right;
+        padding: 0;
+        padding-top: 14px;
     }
     .searchBar {
         width: 350px;
@@ -118,13 +120,13 @@ body {
     }
     .liHeaderBar {
         float: left;
+        padding: 14px 16px;
     }
 
     .liHeaderBar a, .liSearchBar {
         display: inline-block;
         color: white;
         text-align: center;
-        padding: 14px 16px;
         text-decoration: none;
         font-size: 1.7rem;
     }
@@ -136,9 +138,10 @@ body {
         background-color: #333;
         z-index: 1;
     }
-    #searchButton {
+    #imageMagButton {
         background-color: darkgrey;
         color: black;
+        width: 30px;
     }
     .dropdown-content-menu {
         position: absolute;
