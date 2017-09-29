@@ -65,7 +65,7 @@ exports.insertKeywords = function(body, UID, callback) {
   var Values = 'Values (?, ?)';
   var sql = Insert + Values;
   pool.getConnection(function(err, connection) {
-    async.forEachOf(body.keywords, function(element, i , inner_callback) {
+    async.forEachOf(body.tags, function(element, i , inner_callback) {
       var inserts = [UID, element];
       var Innersql = mysql.format(sql, inserts);
       connection.query(Innersql, function(err, rows, fields){
