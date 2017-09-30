@@ -359,7 +359,9 @@ body {
         font-size: 1.5rem;  
     }
     #ingredients {
-         
+         backface-visibility: 5px;
+                 backface-visibility: 5px;
+
     }
     #imageContainer {
         
