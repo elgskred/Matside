@@ -305,6 +305,7 @@ exports.searchPictureByUID = function(searchFor, callback) {
 };
 
 exports.searchKeywordsByUID = function(searchFor, callback) {
+  console.log("Searching for keywords");
   var Select = 'Select * ';
   var From = 'From `keywords` ';
   var Where = 'Where keywords.UID LIKE ?';
