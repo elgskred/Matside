@@ -232,6 +232,7 @@ componentDidMount () {
         UID: tempUID,
         recipeName: tempRecipeName,
         importRecipe: tempRecipe,
+        recipe: tempRecipe,
         shortDesc: tempShortDesc,
         ingredients: tempIngredients,
         amounts: tempAmount,
