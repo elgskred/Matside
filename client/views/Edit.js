@@ -223,9 +223,9 @@ componentDidMount () {
         tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
       }
       console.log("data[3][0]");
-      console.log(data[3][0]);
-      for (var i = 0; i < data[3][0].length; i++) {
-        t = {id: i, text: data[3][0][i]['keyword']};
+      console.log(data[3]);
+      for (var i = 0; i < data[3].length; i++) {
+        t = {id: i, text: data[3][i]['keyword']};
         tempKeywords = tempKeywords.concat(t);
       }
       this.setState({
