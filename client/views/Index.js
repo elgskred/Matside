@@ -70,8 +70,6 @@ class Submit extends React.Component {
     this.setState({ingredientList});
   }
   export(content) {
-    console.log(content);
-    console.log(JSON.stringify(content));
     this.setState({
       raw: JSON.stringify(content)
     });

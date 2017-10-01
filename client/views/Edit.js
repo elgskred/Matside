@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-//import DropzoneComponent from '../components/DropzoneComponent';
-import DropzoneComponent from 'react-dropzone-component';
+import Dropzone from 'react-dropzone';
+import DropzoneComponent from '../components/DropzoneComponent';
 import Keyword from '../components/KeywordTags';
+import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
+import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWithText';
 
 
 class RenderImg extends React.Component {
@@ -123,6 +125,7 @@ constructor(props){
       ingredients: [],
       amounts: [],
       amountParsed: [],
+      importRecipe: {},
       recipe: "",
       recipeName: "",
       servings: 2,
@@ -137,6 +140,7 @@ constructor(props){
     this.updateState = this.updateState.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
+    this.export = this.export.bind(this);
   };
 
   onChange (e) {
@@ -218,15 +222,16 @@ componentDidMount () {
       for (var i = 0; i < data[2].length; i++) {
         tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
       }
+      console.log("data[3][0]");
+      console.log(data[3][0]);
       for (var i = 0; i < data[3][0].length; i++) {
         t = {id: i, text: data[3][0][i]['keyword']};
         tempKeywords = tempKeywords.concat(t);
       }
-      console.log(tempKeywords);
       this.setState({
         UID: tempUID,
         recipeName: tempRecipeName,
-        recipe: tempRecipe,
+        importRecipe: tempRecipe,
         shortDesc: tempShortDesc,
         ingredients: tempIngredients,
         amounts: tempAmount,
@@ -238,6 +243,12 @@ componentDidMount () {
     }
   });
 }
+export(content) {
+  this.setState({
+    recipe: JSON.stringify(content)
+  });
+}
+
 
 submitForm (e) {
   e.preventDefault();
@@ -291,7 +302,9 @@ render() {
           <button onClick = {this.addIngredientField}> Add Ingredient</button>
           <br />
           <br />
-          <textarea rows="25" cols="150" id="editRecipeDescription" name="recipe" placeholder="Slik gjør du" onChange={this.onChange} value={this.state.recipe}/>
+          <div className="editor" >
+            <RichEditorInstantiateWithText importContent={this.state.importRecipe} exportContent={this.export}/>
+          </div>
           <br />
           <br />
           <br />

@@ -304,6 +304,40 @@ exports.searchPictureByUID = function(searchFor, callback) {
   });
 };
 
+exports.searchKeywordsByUID = function(searchFor, callback) {
+  var t = [];
+  console.log(searchFor);
+  pool.getConnection(function(err, connection) {
+    var Select = 'Select * ';
+    var From = 'From `keywords` ';
+    var Where = 'Where keywords.UID LIKE ?';
+    var sql = Select + From + Where;
+    async.forEachOf(searchFor, function(element, i, inner_callback) {
+      console.log("element");
+      console.log(element);
+      var inserts = element;
+      var innerSql = mysql.format(sql, inserts);
+      connection.query(innerSql, function(err, rows, fields) {
+        if(!err) {
+          t[i] = rows;
+          inner_callback(null);
+        } else {
+          connection.release();
+          inner_callback(err);
+        }
+      })
+    }, function(err) {
+      if (err) {
+        connection.release();        
+      } else {
+        connection.release();
+        console.log(t);
+        callback(null, t);
+      }
+    })
+  })
+};
+
 exports.searchPicturesByUID = function(searchFor, callback) {
   var t = [];
   pool.getConnection(function(err, connection) {
@@ -334,35 +368,7 @@ exports.searchPicturesByUID = function(searchFor, callback) {
   });
 };
 
-exports.searchKeywordsByUID = function(searchFor, callback) {
-  var t = [];
-  pool.getConnection(function(err, connection) {
-    var Select = 'Select * ';
-    var From = 'From `keywords` ';
-    var Where = 'Where keywords.UID LIKE ?';
-    var sql = Select + From + Where;
-    async.forEachOf(searchFor, function(element, i, inner_callback) {
-      var inserts = element;
-      var innerSql = mysql.format(sql, inserts);
-      connection.query(innerSql, function(err, rows, fields) {
-        if(!err) {
-          t[i] = rows;
-          inner_callback(null);
-        } else {
-          connection.release();
-          inner_callback(err);
-        }
-      })
-    }, function(err) {
-      if (err) {
-        connection.release();        
-      } else {
-        connection.release();
-        callback(null, t);
-      }
-    })
-  })
-};
+
 
 
 exports.getPopularRecipes = function(callback) {

@@ -14,7 +14,6 @@ class RichEditorExample extends React.Component {
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
       this.setState({editorState});
-      console.log(convertToRaw(this.state.editorState.getCurrentContent()));
       this.props.exportContent(convertToRaw(this.state.editorState.getCurrentContent()));
     }
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
