@@ -305,37 +305,22 @@ exports.searchPictureByUID = function(searchFor, callback) {
 };
 
 exports.searchKeywordsByUID = function(searchFor, callback) {
-  var t = [];
-  console.log(searchFor);
+  var Select = 'Select * ';
+  var From = 'From `keywords` ';
+  var Where = 'Where keywords.UID LIKE ?';
+  var inserts = searchFor;
+  var sql = Select + From + Where;
+  sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
-    var Select = 'Select * ';
-    var From = 'From `keywords` ';
-    var Where = 'Where keywords.UID LIKE ?';
-    var sql = Select + From + Where;
-    async.forEachOf(searchFor, function(element, i, inner_callback) {
-      console.log("element");
-      console.log(element);
-      var inserts = element;
-      var innerSql = mysql.format(sql, inserts);
-      connection.query(innerSql, function(err, rows, fields) {
-        if(!err) {
-          t[i] = rows;
-          inner_callback(null);
-        } else {
-          connection.release();
-          inner_callback(err);
-        }
-      })
-    }, function(err) {
-      if (err) {
-        connection.release();        
+    connection.query(sql, function (err, rows, fields) {
+      if (!err) {
+        connection.release();
+        callback(null, rows);
       } else {
         connection.release();
-        console.log(t);
-        callback(null, t);
-      }
-    })
-  })
+      };
+    });
+  });
 };
 
 exports.searchPicturesByUID = function(searchFor, callback) {
