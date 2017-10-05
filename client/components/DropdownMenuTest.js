@@ -25,7 +25,7 @@ class DropDown extends React.Component {
     let menu;
     if(this.state.menuActive) {
       menu = <div>
-                <ul>
+                <ul className="testing">
                   <li>First Item </li>
                   <li>Second Item </li>
                   <li>Third Item </li>
