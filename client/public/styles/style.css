@@ -187,6 +187,7 @@ body {
     }
     #imageContainer, #imgContainer {
         width: 100%;
+
     }
     #recipeContainer {
         width: 80%;
@@ -200,7 +201,7 @@ body {
         font-size: 1.5rem;
     }
     #recipeImg {
-        max-width: 90%;
+        max-width: 45%;
         display: block;
         float: left;
         margin-right: auto;
