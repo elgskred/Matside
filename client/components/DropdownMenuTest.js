@@ -35,8 +35,8 @@ class DropDown extends React.Component {
       menu = "";
     }
     return (
-      <div id = "menu">
-        <i className = "fa fa-plus" onClick = { this.toggleMenu }/>
+      <div id = "menu" onClick = { this.toggleMenu }>
+        <a>{this.props.name}</a>
       <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
         {menu}
       </CSSTransitionGroup>
