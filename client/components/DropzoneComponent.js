@@ -28,7 +28,7 @@ export default class Example extends React.Component {
         this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
 
         // Simple callbacks work too, of course
-        this.callback = () => console.log('Hello!');
+        this.callback = () => console.log('Hello!...');
 
         //this.success = file => this.setState({ success: file});
         this.success = file => {

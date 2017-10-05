@@ -83,7 +83,6 @@ class LargeImage extends React.Component {
 		this.setState({isVisible: true});
 	}
 	onClick () {
-		console.log("disableDiv");
 	}
 
 
@@ -151,7 +150,6 @@ class ShowRecipeList extends React.Component {
 	}
 
 	componentDidMount () {
-		console.log(this.props.params.UID);
 		$.ajax ({
 	      method: 'GET',
 	      url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
@@ -163,8 +161,8 @@ class ShowRecipeList extends React.Component {
 	      	var tempRegex = "";
 	        for (var i = 0; i < data[1].length; i++) {
 	        	tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
-        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9,]/g, ''));
-        		tempRegex = data[1][i]['ingredient_amount'].replace(/([^0-9,])/g,'');
+        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9,.]/g, ''));
+        		tempRegex = data[1][i]['ingredient_amount'].replace(/([^0-9,.])/g,'');
         		tempAmountsParsed = tempAmountsParsed.concat(tempRegex.replace(/[,]/g,'.'));
 		    }
 		    for (var i = 0; i < data[2].length; i++) {
@@ -206,15 +204,11 @@ class ShowRecipeList extends React.Component {
 	}
 
 	showZoomedImage (mouseState) {
-		console.log(mouseState);
 		this.setState({index: mouseState});
 
 	}
 
 	disableDiv(e) {
-		console.log(e);
-		console.log(e.target);
-		console.log(e.target.name)
 		if (e.target.name != "largeImage") {
 			this.setState({
 		       	disableDiv:true

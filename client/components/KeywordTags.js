@@ -15,8 +15,8 @@ class Keywords extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(this.props.propTags);
-		console.log(nextProps.propTags);
+		//console.log(this.props.propTags);
+		//console.log(nextProps.propTags);
 		this.setState({tags:nextProps.propTags});
 	}
 

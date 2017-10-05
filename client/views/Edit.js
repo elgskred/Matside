@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
-import DropzoneComponent from '../components/DropzoneComponent';
+import DropzoneComponent from 'react-dropzone-component';
 import Keyword from '../components/KeywordTags';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
 import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWithText';
@@ -11,16 +11,12 @@ import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWi
 class RenderImg extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ingredient: "",
-      amount: ""
-    }
     this.onImgLoad = this.onImgLoad.bind(this);
   }
 
   onImgLoad({target:img}) {
-    console.log("Height:" + img.offsetHeight);
-    console.log("Width:" + img.offsetWidth);
+    //console.log("Height:" + img.offsetHeight);
+    //console.log("Width:" + img.offsetWidth);
   }
 
   render() {
@@ -34,7 +30,7 @@ class RenderImg extends React.Component {
     );
   }
 }
-class Example extends React.Component {
+class Example2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,16 +53,18 @@ class Example extends React.Component {
 
         // If you want to attach multiple callbacks, simply
         // create an array filled with all your callbacks.
-        this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
+        //this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
 
         // Simple callbacks work too, of course
-        this.callback = () => console.log('Hello!');
+        //this.callback = () => console.log('Hello!');
 
         //this.success = file => this.setState({ success: file});
         this.success = file => {
+            console.log('uploaded', file);
             const success = this.state.success.concat(file)
+            console.log(success);
             this.setState({success});
-            this.props.onSuccess(success);
+            this.props.successProp(success);
         }
         
 
@@ -150,10 +148,15 @@ constructor(props){
     this.setState(t);
   };  
 
-  onSuccess (imgpath) {
-    var tempArray = [];
-    for (var i = 0; i < imgpath.length; i++) {
-      tempArray = tempArray.concat(imgpath[i].xhr.response);
+  onSuccess (uploadPath) {
+    console.log(uploadPath);
+    var tempArray = this.state.imgPath;
+    for (var i = 0; i < uploadPath.length; i++){
+      console.log(uploadPath[i]['name'])
+      console.log(this.state.imgPath.indexOf(uploadPath[i]['name']))
+      if (this.state.imgPath.indexOf(uploadPath[i]['name']) == -1){
+        tempArray = this.state.imgPath.concat(uploadPath[i]['name'])
+      }
     }
     this.setState({
       imgPath: tempArray 
@@ -195,7 +198,7 @@ componentDidMount () {
     method: 'GET',
     url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
     success: (data) => {
-      console.log(data);
+      //console.log(data);
       var tempUID = [];
       var tempRecipeName = [];
       var tempRecipe = [];
@@ -222,8 +225,6 @@ componentDidMount () {
       for (var i = 0; i < data[2].length; i++) {
         tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
       }
-      console.log("data[3][0]");
-      console.log(data[3]);
       for (var i = 0; i < data[3].length; i++) {
         t = {id: i, text: data[3][i]['keyword']};
         tempKeywords = tempKeywords.concat(t);
@@ -253,13 +254,13 @@ export(content) {
 
 submitForm (e) {
   e.preventDefault();
-  console.log(this.state);
+  //console.log(this.state);
   $.ajax ({
       method: 'POST',
       url: "http://awesomesauce-gaming.net:3333/updateRecipe",
       data: this.state,
       success: (data) => {
-        console.log("Update Success");
+        //console.log("Update Success");
       }
     });
 }
@@ -267,19 +268,19 @@ submitForm (e) {
 render() {
   const ingredientsList = this.state.ingredients.map((item, index) =>{
     return(
-      <div>
+      <div key={index}>
         <TextField placeholder={this.state.ingredients[index]} id="ingredients" index={index} updateState={this.updateState} className="inputFieldDefault"/>
       </div>
       )
   });
   const amountsList = this.state.amounts.map((item, index) =>{
     return(
-      <div>
+      <div key={index}>
         <TextField placeholder={this.state.amounts[index]} id="amounts" index={index} updateState={this.updateState} className="inputFieldDefault"/>
       </div>
     )
   });  
-  console.log(ingredientsList);
+  //console.log(ingredientsList);
 
     return (
       <div id="editForm">
@@ -319,7 +320,7 @@ render() {
           <input type="submit" />
           <br />
           <br />
-          <Example onSuccess={this.onSuccess} ref="aTest"/>
+          <Example2 successProp={this.onSuccess} ref="aTest"/>
           <RenderImg img={this.state.imgPath} />
         </form>
       </div>
