@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenuTest from './DropdownMenuTest';
 import { hashHistory } from 'react-router'; //Endres til browserHistory når siden deployes se https://github.com/reactjs/react-router-tutorial/tree/master/lessons/12-navigating
 
 
@@ -54,11 +54,15 @@ class HeaderMenu extends React.Component{
 			<div onClick={this.handleBodyClick} id="HeaderMenu">
 				<ul className="headerBar">
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
-					<li className="liHeaderBar"><DropdownMenu name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
-					<li className="liSearchBar"><img src="../public/img/mag.png" id="imgMagnifyingButton" onClick={this.searchGo}/></li>
-					<li className="liSearchBar"><input type="text" className="searchBar" id="searchBar" placeholder="Search" onChange={this.onChange} onKeyPress={this.onKeyPress}/></li>
-
+					<li className="liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
+					
+                        <div className="searchBox">
+                            <li className="liSearchBar">
+                                <input type="text" className="searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress}/>
+                                <img src="../public/img/mag.png" id="imgMagnifyingButton" onClick={this.searchGo}/>
+					        </li>
+                        </div>
 				</ul>
 
 			</div>

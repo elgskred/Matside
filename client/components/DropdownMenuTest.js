@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import { hashHistory } from 'react-router';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup
 
