@@ -24,8 +24,17 @@ class DropDown extends React.Component {
   render() {
     let menu;
     if(this.state.menuActive) {
-      menu = <div>
+      menu = <div name="test-dropdown">
                 <ul className="testing">
+                  <li>First Item </li>
+                  <li>Second Item </li>
+                  <li>Third Item </li>
+                  <li>First Item </li>
+                  <li>Second Item </li>
+                  <li>Third Item </li>
+                  <li>First Item </li>
+                  <li>Second Item </li>
+                  <li>Third Item </li>
                   <li>First Item </li>
                   <li>Second Item </li>
                   <li>Third Item </li>
@@ -36,8 +45,8 @@ class DropDown extends React.Component {
     }
    return (
       <div id = "menu">
-        <i className = "fa fa-plus" onClick = { this.toggleMenu }/>
-      <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+        <i className = "fa fa-bars" onClick = { this.toggleMenu }/><p>{this.props.name}</p>
+      <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000} name="test-dropdown">
         {menu}
       </CSSTransitionGroup>
     </div>

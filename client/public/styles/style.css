@@ -95,6 +95,10 @@ body {
     /*Header*/
     
     /*Test*/
+    #test-dropdown, #menu {
+        position: absolute;
+        z-index: 1;
+    }
     .menu-enter {
         max-height: 0px;
         -webkit-transition: max-height 0.3s ease;

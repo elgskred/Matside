@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import DropdownMenuTest from './DropdownMenuTest';
+import DropdownMenu from './DropdownMenu';
 import { hashHistory } from 'react-router'; //Endres til browserHistory når siden deployes se https://github.com/reactjs/react-router-tutorial/tree/master/lessons/12-navigating
 
 
@@ -54,7 +55,7 @@ class HeaderMenu extends React.Component{
 			<div onClick={this.handleBodyClick} id="HeaderMenu">
 				<ul className="headerBar">
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
 					
                         <div className="searchBox">
