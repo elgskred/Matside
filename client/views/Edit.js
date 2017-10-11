@@ -17,11 +17,12 @@ class RenderImg extends React.Component {
   onImgLoad({target:img}) {
     //console.log("Height:" + img.offsetHeight);
     //console.log("Width:" + img.offsetWidth);
+
   }
 
   render() {
     const listImg = this.props.img.map((item, index) =>
-      <img src={'../public/uploads/' + item} alt="404.png" key={index} onLoad={this.onImgLoad} style={{width:300}}/>
+      <img src={'../public/uploads/' + item['text']} alt="404.png" key={index} onLoad={this.onImgLoad} style={{width:300}}/>
     );
     return(
       <div className="recipeImg">
@@ -191,6 +192,11 @@ constructor(props){
         this.setState(temp);
       }
     }
+    else {
+      this.setState({
+        keywordsSend:2
+      });
+    }
   }
 
 componentDidMount () {
@@ -223,7 +229,9 @@ componentDidMount () {
         tempIngredientID = tempIngredientID.concat(data[1][i]['ingredient_id']);
       }
       for (var i = 0; i < data[2].length; i++) {
-        tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
+        //tempImgPath = tempImgPath.concat(data[2][i]['imagePath']);
+        t = {id: i, text: data[2][i]['imagePath']};
+        tempImgPath = tempImgPath.concat(t);
       }
       for (var i = 0; i < data[3].length; i++) {
         t = {id: i, text: data[3][i]['keyword']};
@@ -254,15 +262,15 @@ export(content) {
 
 submitForm (e) {
   e.preventDefault();
-  //console.log(this.state);
-  $.ajax ({
-      method: 'POST',
-      url: "http://awesomesauce-gaming.net:3333/updateRecipe",
-      data: this.state,
-      success: (data) => {
-        //console.log("Update Success");
-      }
-    });
+  console.log(this.state);
+  // $.ajax ({
+  //     method: 'POST',
+  //     url: "http://awesomesauce-gaming.net:3333/updateRecipe",
+  //     data: this.state,
+  //     success: (data) => {
+  //       //console.log("Update Success");
+  //     }
+  //   });
 }
 
 render() {
@@ -314,13 +322,18 @@ render() {
           <br />
           <br />
           <br />
-          <Keyword id="keywordTags" propTags={this.state.keywordTags} ref="keywordTagComponent"/>
+          <h2>Keywords:</h2>
+          <Keyword id="keywordTags" propTags={this.state.keywordTags} updateState={this.updateState} ref="keywordTagComponent"/>
           <br />
           <br />
           <input type="submit" />
           <br />
           <br />
           <Example2 successProp={this.onSuccess} ref="aTest"/>
+          <br />
+          <h3>Image list:</h3>
+          <Keyword id="imageList" propTags={this.state.imgPath} updateState={this.updateState}/>
+          <br />
           <RenderImg img={this.state.imgPath} />
         </form>
       </div>

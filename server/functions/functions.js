@@ -549,7 +549,7 @@ exports.updateImages = function(body, callback) {
           }
           if (rows[0]['cnt'] == 0) {
             console.log("Inserting new image row");
-            insert = [body.UID, element];
+            insert = [body.UID, element['text']];
             var insertSql = mysql.format(insertQuery, insert);
             connection.query(insertSql, function(err, rows, fields) {
               if (err) {
