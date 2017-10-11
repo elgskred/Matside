@@ -95,25 +95,15 @@ body {
     /*Header*/
     
     /*Test*/
-    #test-dropdown, #menu {
-        position: absolute;
-        z-index: 1;
-    }
-    .menu-enter {
-        max-height: 0px;
-        -webkit-transition: max-height 0.3s ease;
-        overflow: hidden;
-    }
+  
 
-    .menu-enter.menu-enter-active {
-        height: auto;
-        max-height: 100px;
-        position: absolute;
+    .fa, .fa-angle-down{
+        font-family: 'Roboto', sans-serif;
     }
-
-    .menu-leave {
-        max-height: 150px;
-        -webkit-transition: max-height 0.3s ease;
+    .fa, .fa-angle-down btn{
+        border: none;
+        text-decoration: none;
+        background: #fff;
     }
 
     .menu-leave.menu-leave-active {
@@ -125,7 +115,27 @@ body {
         border: #ababab solid 1px;
         width: 70%;
     }
+    #test-dropdown, #menu {
+        /*position: absolute;*/
+        z-index: 1;
+        font-family: 'Roboto', sans-serif;
+    }
+    .menu-enter {
+        max-height: 0px;
+        /*-webkit-transition: max-height 0.3s ease;*/
+        overflow: hidden;
+    }
 
+    .menu-enter.menu-enter-active {
+        height: auto;
+        max-height: 100px;
+        position: absolute;
+    }
+
+    .menu-leave {
+        max-height: 150px;
+        /*-webkit-transition: max-height 0.3s ease;*/
+    }
     /*Test*/
     
     #HeaderMenu {

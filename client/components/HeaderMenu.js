@@ -14,12 +14,12 @@ class HeaderMenu extends React.Component{
 		this.searchGo = this.searchGo.bind(this);
 		this.state = {
 			searchBar: "",
-			DropdownName: "Placeholder",
+			DropdownName: "Kategori",
 			subNames: ["Recipes", "Categories"],
 			subLinks: []
 		};
 		this.recipe = {
-            subDropTag: "Placeholder",
+            subDropTag: "Oppskrifter",
             subDrop: ["Sunn", "Rask", "Familien", "Kos", "Gjester", "Tradisjon", "Vis alle oppskrifter"],
             subDropLink: []
         };
@@ -55,7 +55,7 @@ class HeaderMenu extends React.Component{
 			<div onClick={this.handleBodyClick} id="HeaderMenu">
 				<ul className="headerBar">
 					<li className="liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
 					
                         <div className="searchBox">
