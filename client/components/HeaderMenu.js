@@ -12,11 +12,14 @@ class HeaderMenu extends React.Component{
 		this.onChange = this.onChange.bind(this);
 		this.onKeyPress = this.onKeyPress.bind(this);
 		this.searchGo = this.searchGo.bind(this);
+        this.decreaseSearch = this.decreaseSearch.bind(this);
+        this.enlargeSearch = this.enlargeSearch.bind(this);
 		this.state = {
 			searchBar: "",
 			DropdownName: "Kategori",
 			subNames: ["Recipes", "Categories"],
-			subLinks: []
+			subLinks: [],
+            decreaseSearch: true
 		};
 		this.recipe = {
             subDropTag: "Oppskrifter",
@@ -49,8 +52,25 @@ class HeaderMenu extends React.Component{
 	    t[id] = e.target.value
 	    this.setState(t);
 	};
+    
+      decreaseSearch(e) {
+        this.setState({
+            decreaseSearch:true
+        });  
+    }
+ 
+    enlargeSearch() {
+        this.setState({
+            decreaseSearch:false
+        });
+    }
 
 	render(){
+        
+         var divStyle = {
+            width: this.state.decreaseSearch?50:200
+           
+        };
 		return(
 			<div onClick={this.handleBodyClick} id="HeaderMenu">
 				<ul className="headerBar">
@@ -60,8 +80,9 @@ class HeaderMenu extends React.Component{
 					
                         <div className="searchBox">
                             <li className="liSearchBar">
-                                <input type="text" className="searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress}/>
-                                <img src="../public/img/mag.png" id="imgMagnifyingButton" onClick={this.searchGo}/>
+                                <i id="searchMagnifying" className = "fa fa-search" />
+                                <input type="text" className="searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress} onFocus={this.enlargeSearch} onBlur={this.decreaseSearch} style={divStyle}/>
+                                
 					        </li>
                         </div>
 				</ul>

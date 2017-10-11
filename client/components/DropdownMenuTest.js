@@ -37,7 +37,7 @@ class DropDown extends React.Component {
     }
    return (
         <div id = "menu" onClick = { this.toggleMenu }>
-             <button > {this.props.name}</button><i className = "fa fa-angle-down" />
+             <button className = "dropDownBtn"> {this.props.name}</button><i className = "fa fa-angle-down" />
       <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000} name="test-dropdown">
         {menu}
       </CSSTransitionGroup>
