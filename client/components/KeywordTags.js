@@ -33,7 +33,6 @@ class Keywords extends React.Component {
 			text: tag
 		});
 		this.setState({tags: tags});
-		console.log(this.state.tags);
 	}
 
 	handleDrag (tag, currPos, newPos) {
@@ -42,6 +41,7 @@ class Keywords extends React.Component {
 		tags.splice(newPos, 0, tag);
 
 		this.setState({tags: tags});
+		this.props.updateState();
 	}
 
 	render() {

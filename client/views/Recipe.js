@@ -228,7 +228,7 @@ class ShowRecipeList extends React.Component {
 		var divStyle = {
 			display:this.state.disableDiv?'none':'block',
 			zIndex:this.state.disableDiv?'-1':'3',
-			position: "absolute",
+			position: "fixed",
         	padding:0,
         	margin:0,
         	top:0,
@@ -242,7 +242,7 @@ class ShowRecipeList extends React.Component {
 			display:this.state.disableDiv?'none':'block',
 			zIndex:this.state.disableDiv?'-1':'2',
 			backgroundColor: "grey",
-			position: "absolute",
+			position: "fixed",
         	padding:0,
         	margin:0,
         	top:0,
