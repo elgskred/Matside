@@ -6,6 +6,7 @@ import DropzoneComponent from 'react-dropzone-component';
 import Keyword from '../components/KeywordTags';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
 import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWithText';
+import LinkExample from '../components/LinkExample';
 
 
 class RenderImg extends React.Component {
@@ -263,14 +264,14 @@ export(content) {
 submitForm (e) {
   e.preventDefault();
   console.log(this.state);
-  // $.ajax ({
-  //     method: 'POST',
-  //     url: "http://awesomesauce-gaming.net:3333/updateRecipe",
-  //     data: this.state,
-  //     success: (data) => {
-  //       //console.log("Update Success");
-  //     }
-  //   });
+  $.ajax ({
+      method: 'POST',
+      url: "http://awesomesauce-gaming.net:3333/updateRecipe",
+      data: this.state,
+      success: (data) => {
+        //console.log("Update Success");
+      }
+    });
 }
 
 render() {
@@ -317,11 +318,6 @@ render() {
           </div>
           <br />
           <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <h2>Keywords:</h2>
           <Keyword id="keywordTags" propTags={this.state.keywordTags} updateState={this.updateState} ref="keywordTagComponent"/>
           <br />
@@ -335,6 +331,7 @@ render() {
           <Keyword id="imageList" propTags={this.state.imgPath} updateState={this.updateState}/>
           <br />
           <RenderImg img={this.state.imgPath} />
+          <LinkExample />
         </form>
       </div>
     );
