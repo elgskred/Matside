@@ -539,7 +539,7 @@ exports.updateImages = function(body, callback) {
     async.forEachOf(body.imgPath, function(element, i, inner_callback) {
       connection.beginTransaction(function(err) {
         if (err) {throw err;}
-        var insert = [element];
+        var insert = [element['text']];
         var sql = mysql.format(countQuery, insert);
         connection.query(sql, function(err, rows, fields) {
           if (err) {
