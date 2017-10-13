@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Dropzone from 'react-dropzone';
 import DropzoneComponent from 'react-dropzone-component';
+import UploadHandler from '../components/UploadHandler';
 import Keyword from '../components/KeywordTags';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
 import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWithText';
-import LinkExample from '../components/LinkExample';
-
 
 class RenderImg extends React.Component {
   constructor(props) {
@@ -32,68 +31,6 @@ class RenderImg extends React.Component {
     );
   }
 }
-class Example2 extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            success: []
-        }
-
-        // For a full list of possible configurations,
-        // please consult http://www.dropzonejs.com/#configuration
-        this.djsConfig = {
-            addRemoveLinks: true,
-            acceptedFiles: "image/jpeg,image/png,image/gif",
-            maxFilesize: 3
-        };
-
-        this.componentConfig = {
-            iconFiletypes: ['.jpg', '.png', '.gif'],
-            showFiletypeIcon: true,
-            postUrl: 'http://mathjørnet.net:3333/uploadHandler'
-        };
-
-        // If you want to attach multiple callbacks, simply
-        // create an array filled with all your callbacks.
-        //this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
-
-        // Simple callbacks work too, of course
-        //this.callback = () => console.log('Hello!');
-
-        //this.success = file => this.setState({ success: file});
-        this.success = file => {
-            console.log('uploaded', file);
-            const success = this.state.success.concat(file)
-            console.log(success);
-            this.setState({success});
-            this.props.successProp(success);
-        }
-        
-
-        //this.success = file => console.log('uploaded', file);
-
-        this.removedfile = file => console.log('removing...', file);
-
-        this.dropzone = null;
-    }
-
-    render() {
-        const config = this.componentConfig;
-        const djsConfig = this.djsConfig;
-
-        // For a list of all possible events (there are many), see README.md!
-        const eventHandlers = {
-            init: dz => this.dropzone = dz,
-            drop: this.callbackArray,
-            addedfile: this.callback,
-            success: this.success,
-            removedfile: this.removedfile
-        }
-
-        return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
-    }
-}
-
 
 class TextField extends React.Component {
   constructor(props) {
@@ -289,11 +226,9 @@ render() {
       </div>
     )
   });  
-  //console.log(ingredientsList);
-
     return (
       <div id="editForm">
-        <form onSubmit={this.submitForm}>
+        <form>
           <br />
           <input type="text" placeholder={this.state.recipeName} onChange={this.onChange} className="inputFieldDefault" name="recipeName"/>
           <br />
@@ -314,7 +249,7 @@ render() {
           <br />
           <br />
           <div className="editor" >
-            <RichEditorInstantiateWithText importContent={this.state.importRecipe} exportContent={this.export}/>
+            <RichEditorInstantiateWithText importContent={this.state.importRecipe} exportContent={this.export} imgPaths={this.state.imgPath}/>
           </div>
           <br />
           <br />
@@ -322,16 +257,15 @@ render() {
           <Keyword id="keywordTags" propTags={this.state.keywordTags} updateState={this.updateState} ref="keywordTagComponent"/>
           <br />
           <br />
-          <input type="submit" />
+          <input type="submit" onClick={this.submitForm}/>
           <br />
           <br />
-          <Example2 successProp={this.onSuccess} ref="aTest"/>
+          <UploadHandler successProp={this.onSuccess} ref="aTest"/>
           <br />
           <h3>Image list:</h3>
           <Keyword id="imageList" propTags={this.state.imgPath} updateState={this.updateState}/>
           <br />
           <RenderImg img={this.state.imgPath} />
-          <LinkExample />
         </form>
       </div>
     );

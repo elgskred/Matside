@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-import Dropzone from 'react-dropzone';
-import DropzoneComponent from '../components/DropzoneComponent';
+import UploadHandler from '../components/UploadHandler';
 import Keyword from '../components/KeywordTags';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
-import RichEditorExample from '../components/RichEditorExample';
-import RichEditorExampleReadOnly from '../components/RichEditorExampleReadOnly';
+import RichEditorInstantiateWithText from '../components/RichEditorInstantiateWithText';
 
 class AddIngredient extends React.Component {
   constructor(){
@@ -43,6 +41,7 @@ class Submit extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.addIngredientField = this.addIngredientField.bind(this);
     this.export = this.export.bind(this);
+    this.onSuccess = this.onSuccess.bind(this);
     
     //Inital data
     this.state = {
@@ -55,6 +54,7 @@ class Submit extends React.Component {
       ingredientList: [],
       RecipeServings: 2,
       keywordTags: [],
+      imgPath: [],
       raw: {}
     };
   };
@@ -74,6 +74,20 @@ class Submit extends React.Component {
       raw: JSON.stringify(content)
     });
   }
+  onSuccess (uploadPath) {
+    console.log(uploadPath);
+    var tempArray = this.state.imgPath;
+    for (var i = 0; i < uploadPath.length; i++){
+      console.log(uploadPath[i]['name'])
+      console.log(this.state.imgPath.indexOf(uploadPath[i]['name']))
+      if (this.state.imgPath.indexOf(uploadPath[i]['name']) == -1){
+        tempArray = this.state.imgPath.concat(uploadPath[i]['name'])
+      }
+    }
+    this.setState({
+      imgPath: tempArray 
+    });
+  } 
 
   //Preventing default submit behaviour so we can add our own
   submitForm (e) {
@@ -97,11 +111,6 @@ class Submit extends React.Component {
     }
     console.log(tempArrayK);
     //Getting successfull image uploads and placing the imageID in a array
-    var successArray = this.refs.upload.state.success;
-    console.log(successArray.length);
-    for (var j = 0; j < successArray.length; j++) {
-      tempArrayD[j] = successArray[j].xhr.response;
-    }
     var postData = {
       name: this.state.RecipeName,
       desc: this.state.ShortDescription,
@@ -109,22 +118,22 @@ class Submit extends React.Component {
       ingredients: tempArrayI,
       amount: tempArrayA,
       tags: tempArrayK,
-      files: tempArrayD,
+      files: this.state.imgPath,
       author: "",
       servings: this.state.RecipeServings
     };
     console.log(postData);
-    $.ajax ({
-      method: 'POST',
-      url: "http://mathjørnet.net:3333/recipe",
-      data: postData,
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          recipeListe: data
-        });
-      }
-    });
+    // $.ajax ({
+    //   method: 'POST',
+    //   url: "http://mathjørnet.net:3333/recipe",
+    //   data: postData,
+    //   success: (data) => {
+    //     console.log(data);
+    //     this.setState({
+    //       recipeListe: data
+    //     });
+    //   }
+    // });
 
   };
 
@@ -136,7 +145,7 @@ class Submit extends React.Component {
     return (
 
       <div id="uploadContainer">
-        <form onSubmit={this.submitForm}>
+        <form >
           <br />
           <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault" id="RecipeName"/>
           <br />
@@ -159,17 +168,19 @@ class Submit extends React.Component {
           <br />
           <br />
           <div className="editor" >
-            <RichEditorExample exportContent={this.export}/>
+            <RichEditorInstantiateWithText exportContent={this.export} imgPaths={this.state.imgPath}/>
           </div>
           <br />
           <br />
           <Keyword ref="keywords" id="keywordTags" propTags={this.state.keywordTags}/>
           <br />
           <br />
-          <input type="submit" />
+          <input type="submit" onClick={this.submitForm}/>
           <br />
           <br />
-          <DropzoneComponent ref="upload"/>
+          <UploadHandler successProp={this.onSuccess} ref="aTest"/>
+          <br />
+          <br />
         </form>
       </div>
     );

@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dropzone from 'react-dropzone';
-import DropzoneComponent from '../components/DropzoneComponent';
 import Keyword from '../components/KeywordTags';
-import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw, CompositeDecorator} from 'draft-js';
+import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw, CompositeDecorator, AtomicBlockUtils} from 'draft-js';
 
 
-class RichEditorExampleReadOnly extends React.Component {
+class RichEditorInstantiateWithText extends React.Component {
   constructor(props) {
     super(props);
 
@@ -18,9 +16,13 @@ class RichEditorExampleReadOnly extends React.Component {
     ]);
     this.state = {
       editorState: EditorState.createEmpty(decorator),
-      showURLInput: true,
+      showURLInput: false,
       urlValue: '',
       loadOnce: true,
+      showImgInput: false,
+      url: '',
+      urlType: '',
+      imgPath: [],
     };
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
@@ -30,12 +32,12 @@ class RichEditorExampleReadOnly extends React.Component {
     this.onTab = this._onTab.bind(this);
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
-
-    this.logState = () => {
-      const content = this.state.editorState.getCurrentContent();
-      console.log(convertToRaw(content));
-    };
-
+    this.onURLChange = (e) => this.setState({urlValue: e.target.value});
+    this.addImage = this.addImage.bind(this);
+    this.confirmMedia = this._confirmMedia.bind(this);
+    this.handleKeyCommand = this._handleKeyCommand.bind(this);
+    this.onURLInputKeyDown = this._onURLInputKeyDown.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.promptForLink = this._promptForLink.bind(this);
     this.onURLChange = (e) => this.setState({urlValue: e.target.value});
     this.confirmLink = this._confirmLink.bind(this);
@@ -95,7 +97,6 @@ class RichEditorExampleReadOnly extends React.Component {
       });
     }
   }
-
   _confirmLink(e) {
     e.preventDefault();
     const {editorState, urlValue} = this.state;
@@ -119,13 +120,11 @@ class RichEditorExampleReadOnly extends React.Component {
       setTimeout(() => this.refs.editor.focus(), 0);
     });
   }
-
   _onLinkInputKeyDown(e) {
     if (e.which === 13) {
       this._confirmLink(e);
     }
   }
-
   _removeLink(e) {
     e.preventDefault();
     const {editorState} = this.state;
@@ -136,18 +135,115 @@ class RichEditorExampleReadOnly extends React.Component {
       });
     }
   }
+  _confirmMedia(url) {
+    //e.preventDefault();
+    console.log(url);
+    const {editorState, urlValue, urlType} = this.state;
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      urlType,
+      'IMMUTABLE',
+      {src: url}
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(
+      editorState,
+      {currentContent: contentStateWithEntity}
+    );
+    this.setState({
+      editorState: AtomicBlockUtils.insertAtomicBlock(
+        newEditorState,
+        entityKey,
+        ' '
+      ),
+      showImgInput: false,
+      urlValue: '',
+    }, () => {
+      setTimeout(() => this.focus(), 0);
+    });
+  }
+  _onURLInputKeyDown(e) {
+    if (e.which === 13) {
+      this._confirmMedia(e);
+    }
+  }
+  _promptForMedia(type) {
+    const {editorState} = this.state;
+    this.setState({
+      showImgInput: true,
+      urlValue: '',
+      urlType: type,
+    }, () => {
+      setTimeout(() => this.refs.url.focus(), 0);
+    });
+  }
+  addImage() {
+    var tempPaths = [];
+    if(this.props.imgPaths) {
+      for (var i=0; i<this.props.imgPaths.length; i++){
+        tempPaths = tempPaths.concat(this.props.imgPaths[i]['text']);
+      }
+      this.setState({
+        imgPath: tempPaths
+      });
+      this._promptForMedia('image');
+    } 
+    
+  }
+  handleClick(e) {
+    var id = e.target.id;
+    var url = '../public/uploads/'+this.state.imgPath[id];
+    this._confirmMedia(url);
+  }
   componentWillReceiveProps(nextProps) {
-    if (this.state.loadOnce == true) {
-      var importC = convertFromRaw(JSON.parse(nextProps.importContent));
-      this.state = {
-        editorState: EditorState.createWithContent(importC),
-        loadOnce: false,
+    if (nextProps.importContent != undefined) {
+      const decorator = new CompositeDecorator([
+        {
+          strategy: findLinkEntities,
+          component: Link
+        },
+      ]);
+      if (this.state.loadOnce == true) {
+        var importC = convertFromRaw(JSON.parse(nextProps.importContent));
+        this.state = {
+          editorState: EditorState.createWithContent(importC, decorator),
+          showURLInput: false,
+          urlValue: '',
+          loadOnce: false,
+          showImgInput: false,
+          url: '',
+          urlType: '',
+          imgPath: [],
+        }
+      
       }
     }
-    
-
   }
   render() {
+    const images = this.state.imgPath.map((item, index) =>{
+      return(
+          <p id={index} key={index} onClick={this.handleClick}>{item}</p>
+        )
+    });
+    let imgInput;
+    if (this.state.showImgInput) {
+      imgInput =
+        <div style={styles.urlInputContainer}>
+          {images}
+          <br/>
+          <input
+            onChange={this.onURLChange}
+            ref="url"
+            style={styles.imgInput}
+            type="text"
+            value={this.state.urlValue}
+            onKeyDown={this.onURLInputKeyDown}
+          />
+          <button onMouseDown={this.confirmMedia}>
+            Confirm
+          </button>
+        </div>;
+    }
     let urlInput;
     if (this.state.showURLInput) {
       urlInput =
@@ -182,6 +278,7 @@ class RichEditorExampleReadOnly extends React.Component {
           <Editor
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
+            blockRendererFn={mediaBlockRenderer}
             editorState={editorState}
             handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
@@ -189,7 +286,7 @@ class RichEditorExampleReadOnly extends React.Component {
             placeholder="Slik gjør du.."
             ref="editor"
             spellCheck={true}
-            reactOnly={true}
+            readOnly={this.props.readOnly}
           />
         </div>
       </div>
@@ -238,6 +335,12 @@ const styles = {
     color: '#3b5998',
     textDecoration: 'underline',
   },
+  media: {
+    width: '25%',
+    // Fix an issue with Firefox rendering video controls
+    // with 'pre-wrap' white-space
+    whiteSpace: 'initial'
+  },
 };
 function getBlockStyle(block) {
   switch (block.getType()) {
@@ -257,7 +360,34 @@ function findLinkEntities(contentBlock, callback, contentState) {
     callback
   );
 }
-
+function mediaBlockRenderer(block) {
+  if (block.getType() === 'atomic') {
+    return {
+      component: Media,
+      editable: false,
+    };
+  }
+  return null;
+}
+const Image = (props) => {
+  return <img src={props.src} style={styles.media} />;
+};
+const Media = (props) => {
+  const entity = props.contentState.getEntity(
+    props.block.getEntityAt(0)
+  );
+  const {src} = entity.getData();
+  const type = entity.getType();
+  let media;
+  if (type === 'audio') {
+    media = <Audio src={src} />;
+  } else if (type === 'image') {
+    media = <Image src={src} />;
+  } else if (type === 'video') {
+    media = <Video src={src} />;
+  }
+  return media;
+};
 const Link = (props) => {
   const {url} = props.contentState.getEntity(props.entityKey).getData();
   return (
@@ -342,4 +472,4 @@ const InlineStyleControls = (props) => {
   );
 };
 
-module.exports = RichEditorExampleReadOnly;
+module.exports = RichEditorInstantiateWithText;
