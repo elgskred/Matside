@@ -5,6 +5,7 @@ var fs             =         require('fs');
 var app            =         express();
 var mysql          =         require('mysql');
 var sizeof         =         require('object-sizeof');
+var errLog         =         require('..functions/errorLogging.js');
 var pool = mysql.createPool({
   connectionLimit: 25,
   host     : '192.168.10.50',
@@ -27,6 +28,8 @@ exports.insertRecipe = function (body, callback) {
         callback(null, rows.insertId);
       } else {
         connection.release();
+        errLog.writeToFile('Failed to insert recipe - funct:insertRecipe');
+        errLog.writeToFile(err);
         callback(err);
       }
     });
@@ -45,12 +48,16 @@ exports.insertIngredients = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          errLog.writeToFile('Failed to insert ingredients - funct:insertIngredients');
+          errLog.writeToFile(err);
           connection.release();
           inner_callback(err);
         }
       });
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to loop through ingredients - funct:insertIngredients');
+        errLog.writeToFile(err);
         connection.release();
       } else {
         connection.release();
@@ -72,12 +79,16 @@ exports.insertKeywords = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          errLog.writeToFile('Failed to insert keywords - funct:insertKeywords');
+          errLog.writeToFile(err);
           connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to loop through keywords - funct:insertKeywords');
+        errLog.writeToFile(err);
         connection.release();
       } else {
         connection.release();
@@ -99,12 +110,16 @@ exports.insertPictures = function(body, UID, callback) {
         if(!err) {
           inner_callback(null);
         } else {
+          errLog.writeToFile('Failed to insert pictures - funct:insertPictures');
+          errLog.writeToFile(err);
           connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to loop through pictures - funct:insertPictures');
+        errLog.writeToFile(err);
         connection.release();
       } else {
         connection.release();
@@ -123,12 +138,17 @@ exports.searchSentence = function(searchSentence, callback) {
     var sql = Select + From + Where;
     sql = mysql.format(sql, inserts);
     pool.getConnection(function(err, connection) {
-      if (err) throw err;
+      if (err) {
+        errLog.writeToFile('Failed to get connection - funct:searchSentence');
+        errLog.writeToFile(err);
+      }
       connection.query(sql, function (err, rows, fields) {
           if (!err) {
             connection.release();
             callback(null, rows);
           } else {
+            errLog.writeToFile('Failed to search for sentence - funct:searchSentence');
+            errLog.writeToFile(err);
             connection.release();      
           };
         });
@@ -155,12 +175,16 @@ exports.searchTerm = function(searchTerm, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            errLog.writeToFile('Failed to search for term - funct:searchTerm');
+            errLog.writeToFile(err);
             connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
+          errLog.writeToFile('Failed to loop through terms - funct:searchTerm');
+          errLog.writeToFile(err);
           connection.release();
         } else {
           connection.release();
@@ -191,12 +215,16 @@ exports.searchIncludes = function(includes, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            errLog.writeToFile('Failed to search for includes - funct:searchIncludes');
+            errLog.writeToFile(err);
             connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
+          errLog.writeToFile('Failed to loop through includes - funct:searchIncludes');
+          errLog.writeToFile(err);
           connection.release();
         } else {
           connection.release();
@@ -227,12 +255,16 @@ exports.searchExcludes = function(excludes, callback) {
             t[i] = rows;
             inner_callback(null);
           } else {
+            errLog.writeToFile('Failed to search for excludes - funct:searchExcludes');
+            errLog.writeToFile(err);
             connection.release();
             inner_callback(err);
           }
         })
       }, function(err) {
         if (err) {
+          errLog.writeToFile('Failed to loop through excludes - funct:searchExcludes');
+          errLog.writeToFile(err);
           connection.release();
         } else {
           connection.release();
@@ -254,12 +286,14 @@ exports.searchRecipeByUID = function(searchFor, callback) {
   var sql = Select + From + Where;
   sql = mysql.format(sql, inserts);
   pool.getConnection(function(err, connection) {
-
     connection.query(sql, function (err, rows, fields) {
       if (!err) {
         connection.release();
         callback(null, rows);
       } else {
+        errLog.writeToFile('Failed to search for UID - funct:searchRecipeByUID');
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       };
     });
@@ -279,6 +313,9 @@ exports.searchIngredientsByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
+        errLog.writeToFile('Failed to search for ingredients - funct:searchIngredientsByUID')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       };
     });
@@ -298,6 +335,9 @@ exports.searchPictureByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
+        errLog.writeToFile('Failed to search for pictures - funct:searchPictureByUID')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       };
     });
@@ -318,6 +358,9 @@ exports.searchKeywordsByUID = function(searchFor, callback) {
         connection.release();
         callback(null, rows);
       } else {
+        errLog.writeToFile('Failed to search for keywords - funct:searchKeywordsByUID')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       };
     });
@@ -339,12 +382,18 @@ exports.searchPicturesByUID = function(searchFor, callback) {
           t[i] = rows;
           inner_callback(null);
         } else {
+          errLog.writeToFile('Failed to search for pictures - funct:searchPicturesByUID')
+          errLog.writeToFile(err);
+          console.log(err);
           connection.release();
           inner_callback(err);
         }
       })
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to loop through pictures - funct:searchPicturesByUID');
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       } else {
         connection.release();
@@ -370,6 +419,9 @@ exports.getPopularRecipes = function(callback) {
         console.log(rows);
         callback(null,rows);
       } else {
+        errLog.writeToFile('Failed to get popular recipes - funct:getPopularRecipes')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
         callback(null, null);
       }
@@ -400,6 +452,9 @@ exports.incrementViews = function(uid, callback) {
               connection.release();
               callback(null, "OK");
             } else {
+              errLog.writeToFile('Failed to increment views - funct:incrementViews')
+              errLog.writeToFile(err);
+              console.log(err);
               connection.release();
               callback(null, "not ok");
             };
@@ -407,7 +462,13 @@ exports.incrementViews = function(uid, callback) {
         } else {
           callback(null, "not ok");
         };
-    };
+    } else {
+      errLog.writeToFile('Failed to get recipe by UID - funct:incrementViews')
+      errLog.writeToFile(err);
+      console.log(err);
+      connection.release();
+      callback(null, "not ok");
+    }
     });
   });
 }
@@ -429,8 +490,10 @@ exports.updateRecipe = function(body, callback) {
         callback(null, "OK");
       } else {
         connection.release()
-        //console.log(err);
-        callback(null, "Error");
+        errLog.writeToFile('Failed to update recipe - funct:updateRecipe')
+        errLog.writeToFile(err);
+        console.log(err);
+        callback(null, err);
       }
     })
   });
@@ -447,13 +510,19 @@ exports.updateIngredients = function(body, callback) {
       var insert = [body.ingredient_id[i]];
       var sql = mysql.format(countQuery, insert);
       connection.beginTransaction(function(err){
-        if (err) {throw err;}
+        if (err) {
+          errLog.writeToFile('Failed to begin transaction - funct:updateIngredients')
+          errLog.writeToFile(err);
+          console.log(err);
+        }
         //No point in updating if the field is empty
         if (element != "" || body.amounts[i] != ""){
           connection.query(sql, function(err, rows, fields){
             if (err) {
               return connection.rollback(function() {
-                throw err;
+                errLog.writeToFile('Failed to get count where id = something - funct:updateIngredients')
+                errLog.writeToFile(err);
+                console.log(err);
               });
             }
             //If ingredient_id allready exists, update it.
@@ -463,13 +532,17 @@ exports.updateIngredients = function(body, callback) {
               connection.query(updateSql, function(err, rows, fields){
                 if (err) {
                   return connection.rollback(function(){
-                    throw err;
+                    errLog.writeToFile('Failed to update existing row - funct:updateIngredients')
+                    errLog.writeToFile(err);
+                    console.log(err);
                   });
                 }
                 connection.commit(function(err){
                   if (err) {
                     return connection.rollback(function(){
-                      throw err;
+                      errLog.writeToFile('Failed to commit changes - funct:updateIngredients')
+                      errLog.writeToFile(err);
+                      console.log(err);
                     })
                   }
                   console.log("Update Success");
@@ -483,12 +556,17 @@ exports.updateIngredients = function(body, callback) {
               connection.query(insertSql, function(err, rows, fields){
                 if (err) {
                   return connection.rollback(function(){
-                    throw err;
+                    errLog.writeToFile('Failed to update nonexistant field - funct:updateIngredients')
+                    errLog.writeToFile(err);
+                    console.log(err);
                   });
                 }
                 connection.commit(function(err){
                   if (err) {
                     return connection.rollback(function(){
+                      errLog.writeToFile('Failed to commit changes - funct:updateIngredients')
+                      errLog.writeToFile(err);
+                      console.log(err);
                     });
                   }
                   console.log("Insert Success");
@@ -505,12 +583,17 @@ exports.updateIngredients = function(body, callback) {
           connection.query(deleteSql, function(err, rows, fields){
             if (err) {
               return connection.rollback(function(){
-                throw err;
+                errLog.writeToFile('Failed to delete ingredients field - funct:updateIngredients')
+                errLog.writeToFile(err);
+                console.log(err);
               });
             }
             connection.commit(function(err){
               if (err) {
                 return connection.rollback(function() {
+                  errLog.writeToFile('Failed to commit changes - funct:updateIngredients')
+                  errLog.writeToFile(err);
+                  console.log(err);
                 });
               }
               console.log("Delete Success");
@@ -521,6 +604,9 @@ exports.updateIngredients = function(body, callback) {
       })
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to secure connection to db - funct:updateIngredients')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       } else {
         connection.release();
@@ -529,44 +615,52 @@ exports.updateIngredients = function(body, callback) {
     });
   });
 }
-
+//BUG Her - Fikse så man kan slette og endre rekkefølgen på bildene
 exports.updateImages = function(body, callback) {
   var countQuery = 'SELECT COUNT(imagePath) AS cnt FROM `pictures` WHERE imagePath = ?';
   var insertQuery = 'INSERT INTO `pictures` (UID, imagePath) VALUES (?, ?)';
-  var deleteQuery = 'DELETE FROM pictures WHERE imagePath = ?';
+  var deleteQuery = 'DELETE FROM pictures WHERE UID = ?';
   console.log("updating images");
   pool.getConnection(function(err, connection) {
     async.forEachOf(body.imgPath, function(element, i, inner_callback) {
       connection.beginTransaction(function(err) {
-        if (err) {throw err;}
+        if (err) {
+          errLog.writeToFile('Failed to begin transaction - funct:updateImages')
+          errLog.writeToFile(err);
+          console.log(err);
+        }
         var insert = [element['text']];
-        var sql = mysql.format(countQuery, insert);
+        var sql = mysql.format(deleteQuery, body.UID);
         connection.query(sql, function(err, rows, fields) {
           if (err) {
             return connection.rollback(function() {
-              throw err;
+              errLog.writeToFile('Failed to delete pictures where UID = ? - funct:updateImages')
+              errLog.writeToFile(err);
+              console.log(err);
             });
-          }
-          if (rows[0]['cnt'] == 0) {
+          } else {
             console.log("Inserting new image row");
             insert = [body.UID, element['text']];
             var insertSql = mysql.format(insertQuery, insert);
             connection.query(insertSql, function(err, rows, fields) {
               if (err) {
                 return connection.rollback(function(){
-                  throw err;
+                  errLog.writeToFile('Failed to insert new image - funct:updateImages')
+                  errLog.writeToFile(err);
+                  console.log(err);
                 });
               }
               connection.commit(function(err){
                 if (err) {
                   return connection.rollback(function(){
-                    throw err;
+                    errLog.writeToFile('Failed to commit changes - funct:updateImages')
+                    errLog.writeToFile(err);
+                    console.log(err);
                   });
                 }
                 console.log("Image insert Success");
                 inner_callback(null);
-              })
-              
+              })  
             })
           }
         })
@@ -574,6 +668,9 @@ exports.updateImages = function(body, callback) {
       });
     }, function(err) {
       if (err) {
+        errLog.writeToFile('Failed to loop through picutres - funct:updateImages')
+        errLog.writeToFile(err);
+        console.log(err);
         connection.release();
       } else {
         connection.release();
@@ -591,12 +688,18 @@ exports.updateKeywords = function(body, callback) {
   console.log(body.keywordTags);
   pool.getConnection(function(err, connection) {
     connection.beginTransaction( function(err) {
-      if (err) {throw err;}
+      if (err) {
+        errLog.writeToFile('Failed to begin transaction - funct:updateKeywords')
+        errLog.writeToFile(err);
+        console.log(err);
+      }
       var sql = mysql.format(deleteQuery, body.UID);
       connection.query(sql, function(err, rows, fields) {
         if (err){
           return connection.rollback(function() {
-            throw err;
+            errLog.writeToFile('Failed to delete keywords - funct:updateKeywords')
+            errLog.writeToFile(err);
+            console.log(err);
           });
         }
       })
@@ -608,13 +711,17 @@ exports.updateKeywords = function(body, callback) {
         connection.query(insertSql, function(err, rows, fields) {
           if (err) {
             return connection.rollback(function(){
-              throw err;
+              errLog.writeToFile('Failed to insert keywords - funct:updateKeywords')
+              errLog.writeToFile(err);
+              console.log(err);
             });
           }
           connection.commit(function(err){
             if (err) {
               return connection.rollback(function(){
-                throw err;
+                errLog.writeToFile('Failed to commit changes - funct:updateKeywords')
+                errLog.writeToFile(err);
+                console.log(err);
               });
             }
             console.log("Keyword insert Success");
@@ -623,6 +730,9 @@ exports.updateKeywords = function(body, callback) {
         })
       }, function(err) {
         if (err) {
+          errLog.writeToFile('Failed to loop through keywords - funct:updateKeywords')
+          errLog.writeToFile(err);
+          console.log(err);
           connection.release();
         } else {
           connection.release();
