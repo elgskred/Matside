@@ -376,7 +376,9 @@ const styles = {
     textDecoration: 'underline',
   },
   media: {
-    width: '25%',
+    width: '40%',
+    display: 'block',
+    margin: 'auto',
     // Fix an issue with Firefox rendering video controls
     // with 'pre-wrap' white-space
     whiteSpace: 'initial'

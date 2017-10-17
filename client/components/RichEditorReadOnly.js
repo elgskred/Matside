@@ -336,7 +336,9 @@ const styles = {
     textDecoration: 'underline',
   },
   media: {
-    width: '25%',
+    width: '40%',
+    display: 'block',
+    margin: 'auto',
     // Fix an issue with Firefox rendering video controls
     // with 'pre-wrap' white-space
     whiteSpace: 'initial'
@@ -370,7 +372,7 @@ function mediaBlockRenderer(block) {
   return null;
 }
 const Image = (props) => {
-  return <img src={props.src} style={styles.media} />;
+  return <img src={props.src} style={styles.media}/>;
 };
 const Media = (props) => {
   const entity = props.contentState.getEntity(
