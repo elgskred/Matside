@@ -72,16 +72,16 @@ class HeaderMenu extends React.Component{
            
         };
 		return(
-			<div onClick={this.handleBodyClick} id="HeaderMenu">
-				<ul className="headerBar">
-					<li className="liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
-					<li className="liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
+			<div onClick={this.handleBodyClick} id="HeaderMenu-HeaderMenu">
+				<ul className="HeaderMenu-headerBar">
+					<li className="HeaderMenu-liHeaderBar"><Link to="/">Home</Link></li>
+					<li className="HeaderMenu-liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="HeaderMenu-liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
 					
-                        <div className="searchBox">
-                            <li className="liSearchBar">
+                        <div className="HeaderMenu-searchBox">
+                            <li className="HeaderMenu-liSearchBar">
                                 <i id="searchMagnifying" className = "fa fa-search" />
-                                <input type="text" className="searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress} onFocus={this.enlargeSearch} onBlur={this.decreaseSearch} style={divStyle}/>
+                                <input type="text" className="HeaderMenu-searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress} onFocus={this.enlargeSearch} onBlur={this.decreaseSearch} style={divStyle}/>
                                 
 					        </li>
                         </div>

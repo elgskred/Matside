@@ -24,8 +24,8 @@ class DropDown extends React.Component {
   render() {
     let menu;
     if(this.state.menuActive) {
-      menu = <div name="test-dropdown">
-                <ul className="testing">
+      menu = <div name="DropDown-dropdown">
+                <ul className="DropDown-list">
                   <li>First Item </li>
                   <li>Second Item </li>
                   <li>Third Item </li>
@@ -36,13 +36,13 @@ class DropDown extends React.Component {
       menu = "";
     }
    return (
-        <div id = "menu" onClick = { this.toggleMenu }>
-             <button className = "dropDownBtn"> {this.props.name}</button><i className = "fa fa-angle-down" />
-      <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000} name="test-dropdown">
-        {menu}
-      </CSSTransitionGroup>
-    </div>
-       )
+      <div id = "DropDown-menu" onClick = { this.toggleMenu }>
+        <button className = "DropDown-dropDownBtn"> {this.props.name}</button><i className = "fa fa-angle-down" />
+        <CSSTransitionGroup transitionName = "menu" transitionEnterTimeout={1000} transitionLeaveTimeout={1000} name="DropDown-dropdown">
+          {menu}
+        </CSSTransitionGroup>
+      </div>
+    )
   }
 }
 
