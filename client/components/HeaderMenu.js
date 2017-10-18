@@ -68,8 +68,8 @@ class HeaderMenu extends React.Component{
 	render(){
         
          var divStyle = {
-            width: this.state.decreaseSearch?50:200
-           
+           /* width: this.state.decreaseSearch?50:200 */
+        
         };
 		return(
 			<div onClick={this.handleBodyClick} id="HeaderMenu-HeaderMenu">
@@ -80,9 +80,10 @@ class HeaderMenu extends React.Component{
 					
                         <div className="HeaderMenu-searchBox">
                             <li className="HeaderMenu-liSearchBar">
-                                <i id="searchMagnifying" className = "fa fa-search" />
                                 <input type="text" className="HeaderMenu-searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress} onFocus={this.enlargeSearch} onBlur={this.decreaseSearch} style={divStyle}/>
-                                
+                                <button className="HeaderMenu-searchMagnifying">
+                                    <i className = "fa fa-search" />
+                                </button>
 					        </li>
                         </div>
 				</ul>
