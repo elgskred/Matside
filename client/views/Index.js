@@ -153,21 +153,35 @@ class Submit extends React.Component {
           <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong" id="ShortDescription"/>
           <br />
           <br />
-          <div id="RecipeIngredients">
-            <div className="textField1"><b>Mendge:</b></div><div className="textField1"><b>Ingrediens</b></div>
-            <br />
-            { ingredientList }
-            <button onClick = {this.addIngredientField}> Add Ingredient</button>
+          <div className="v_Index-block">
+            <div className="v_Index-ingredients">
+              <div id="RecipeIngredients">
+                <div className="textField1"><b>Mendge:</b></div><div className="textField1"><b>Ingrediens</b></div>
+                <br />
+                { ingredientList }
+                <button onClick = {this.addIngredientField}> Add Ingredient</button>
+              </div>
+              <br />
+              <br />
+              <br />
+              <h4>Servings:</h4>
+              <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
+            </div>
+            <div className="v_Index-uploadDiv">
+              <UploadHandler successProp={this.onSuccess} ref="aTest"/>
+            </div>
           </div>
           <br />
           <br />
           <br />
-          Servings:
-          <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
           <br />
           <br />
           <br />
-          <div className="editor" >
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="v_Index-editor" >
             <RichEditorInstantiateWithText exportContent={this.export} imgPaths={this.state.imgPath}/>
           </div>
           <br />
@@ -178,7 +192,7 @@ class Submit extends React.Component {
           <input type="submit" onClick={this.submitForm}/>
           <br />
           <br />
-          <UploadHandler successProp={this.onSuccess} ref="aTest"/>
+          
           <br />
           <br />
         </form>

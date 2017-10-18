@@ -41,11 +41,36 @@ body {
 
     }
     /*Index page*/
+
+    #uploadContainer {
+        width: 100%;
+        font-size: 1.5rem; 
+    }
     .textField1{
         display: inline-block;
         padding-right: 138px;
-        background-color: grey;
     }
+    .v_Index-block{
+        width: 100%;
+        display: inline-flex;
+    }
+    .v_Index-ingredients{
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+    .v_Index-uploadDiv {
+        display: inline-block;
+        width: 40%;
+        float: right;
+    }
+
+
+
+
+
+
+    /*Recipe?*/
     #largeImageContainer {
         display: flex;
         position: relative; 
@@ -277,7 +302,7 @@ pre {
         text-align: center;
     }
     #sidebar {
-        position: fixed;
+        position: static;
         width: 15%;
         display: inline-block;
         float: left;
@@ -312,11 +337,7 @@ pre {
         font-size: 105%;
     } 
 
-    /*Upload page*/
-    #uploadContainer {
-        width: 100%;
-        font-size: 1.5rem; 
-    }
+
 
     /*List page*/
     #recipeListContainer{
