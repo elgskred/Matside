@@ -192,10 +192,7 @@ pre {
         -o-transition:  color 0.1s ease;
         -ms-transition:  color 0.1s ease;
         transition:  color 0.1s ease;
-    }
-   
-    /*Test*/
-    
+    }   
     #HeaderMenu-HeaderMenu {
         width: 100%;
         margin-bottom: 70px;
@@ -256,13 +253,13 @@ pre {
 
     /*Front page*/
 
-    #popImgDiv {
+    #Slideshow-popImgDiv {
         text-align: center;
         font-size: 25px;
         padding-top: 10px;
     }
 
-    #popImg {
+    #Slideshow-popImg {
         max-width: 80%;
         height: 350px;
         display: block;

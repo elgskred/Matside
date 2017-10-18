@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
-import Dropzone from 'react-dropzone';
-import DropzoneComponent from 'react-dropzone-component';
 import UploadHandler from '../components/UploadHandler';
 import Keyword from '../components/KeywordTags';
 import {Editor, EditorState, RichUtils, convertFromRaw, convertToRaw} from 'draft-js';
