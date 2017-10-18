@@ -5,7 +5,7 @@ var fs             =         require('fs');
 var app            =         express();
 var mysql          =         require('mysql');
 var sizeof         =         require('object-sizeof');
-var errLog         =         require('..functions/errorLogging.js');
+var errLog         =         require('./errorLogging.js');
 var pool = mysql.createPool({
   connectionLimit: 25,
   host     : '192.168.10.50',
