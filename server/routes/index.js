@@ -4,7 +4,7 @@ var async = require("async");
 var multer = require('multer');
 var bodyParser = require('body-parser');
 var functions = require('../functions/functions.js');
-var errLog = require('..functions/errorLogging.js');
+var errLog = require('../functions/errorLogging.js');
 var util = require('util');
 const storage = multer.diskStorage({
     destination: './public/uploads/',
