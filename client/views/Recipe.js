@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import HeaderMenu from '../components/HeaderMenu';
-import RichEditorExampleReadOnly from '../components/RichEditorExampleReadOnly';
+import RichEditorReadOnly from '../components/RichEditorReadOnly';
+
 
 class RenderArray extends React.Component {
 	constructor(props) {
@@ -38,7 +39,7 @@ class RenderRecipe extends React.Component {
 			<div>
 			{this.props.recipe.split('\n').map(function(item, index) {
 		  		return (
-		    		<span key={index}>
+		    		<span key={index} className="v_recipe-renderItems">
 		      		{item}
 		      		<br/>
 		    		</span>
@@ -53,21 +54,30 @@ class RenderIngredients extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-
 	render() {
-		const listIngredients = this.props.ingredients.map((item, index) =>
-			<span key={index}>
-				{this.props.amountsParsed[index]}{this.props.amounts[index]}    {item} <br />
-			</span>
-		);
-
+		var listIngredients = this.props.ingredients.map(function(item, index) {
+			if(item==""){
+				console.log("enter");
+				return (
+					<span key={index} className="v_Recipe-renderIngredients">
+						{this.props.amountsParsed[index]}<b>{this.props.amounts[index]}</b>    {item} <br />
+					</span>
+				)
+			} else {
+				console.log("else");
+				return(
+					<span key={index} className="v_Recipe-renderIngredients">
+						{this.props.amountsParsed[index]}{this.props.amounts[index]}    {item} <br />
+					</span>
+				)
+			}
+		}.bind(this));
 		return(
 			<div>
 				{listIngredients}
 			</div>
 		);
 	}
-
 }
 
 class LargeImage extends React.Component {
@@ -83,7 +93,6 @@ class LargeImage extends React.Component {
 		this.setState({isVisible: true});
 	}
 	onClick () {
-		console.log("disableDiv");
 	}
 
 
@@ -151,7 +160,6 @@ class ShowRecipeList extends React.Component {
 	}
 
 	componentDidMount () {
-		console.log(this.props.params.UID);
 		$.ajax ({
 	      method: 'GET',
 	      url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
@@ -163,8 +171,8 @@ class ShowRecipeList extends React.Component {
 	      	var tempRegex = "";
 	        for (var i = 0; i < data[1].length; i++) {
 	        	tempIngredients = tempIngredients.concat(data[1][i]['ingredient_name']);
-        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9,]/g, ''));
-        		tempRegex = data[1][i]['ingredient_amount'].replace(/([^0-9,])/g,'');
+        		tempAmounts = tempAmounts.concat(data[1][i]['ingredient_amount'].replace(/[0-9,.]/g, ''));
+        		tempRegex = data[1][i]['ingredient_amount'].replace(/([^0-9,.])/g,'');
         		tempAmountsParsed = tempAmountsParsed.concat(tempRegex.replace(/[,]/g,'.'));
 		    }
 		    for (var i = 0; i < data[2].length; i++) {
@@ -206,15 +214,11 @@ class ShowRecipeList extends React.Component {
 	}
 
 	showZoomedImage (mouseState) {
-		console.log(mouseState);
 		this.setState({index: mouseState});
 
 	}
 
 	disableDiv(e) {
-		console.log(e);
-		console.log(e.target);
-		console.log(e.target.name)
 		if (e.target.name != "largeImage") {
 			this.setState({
 		       	disableDiv:true
@@ -234,7 +238,7 @@ class ShowRecipeList extends React.Component {
 		var divStyle = {
 			display:this.state.disableDiv?'none':'block',
 			zIndex:this.state.disableDiv?'-1':'3',
-			position: "absolute",
+			position: "fixed",
         	padding:0,
         	margin:0,
         	top:0,
@@ -248,7 +252,7 @@ class ShowRecipeList extends React.Component {
 			display:this.state.disableDiv?'none':'block',
 			zIndex:this.state.disableDiv?'-1':'2',
 			backgroundColor: "grey",
-			position: "absolute",
+			position: "fixed",
         	padding:0,
         	margin:0,
         	top:0,
@@ -272,6 +276,8 @@ class ShowRecipeList extends React.Component {
 					<div id="ingredients">
 						<h2>Ingredienser: </h2>
 						<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
+						<br />
+						<br />
 						<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
 					</div>
 
@@ -287,7 +293,7 @@ class ShowRecipeList extends React.Component {
 						<h2>
 							Slik gjør du: <br/>
 						</h2>
-						<RichEditorExampleReadOnly importContent={this.state.recipe}/>
+						<RichEditorReadOnly importContent={this.state.recipe} readOnly={true}/>
 						<br />
 						<br />
 						<br />

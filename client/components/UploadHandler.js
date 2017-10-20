@@ -1,32 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Dropzone from 'react-dropzone';
 import DropzoneComponent from 'react-dropzone-component';
 
-export default class Example extends React.Component {
+class UploadHandler extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            success: []
+        }
 
         // For a full list of possible configurations,
         // please consult http://www.dropzonejs.com/#configuration
         this.djsConfig = {
-            addRemoveLinks: false,
-            acceptedFiles: "image/jpeg,image/png,image/gif"
+            addRemoveLinks: true,
+            acceptedFiles: "image/jpeg,image/png,image/gif",
+            maxFilesize: 3,
+            dictDefaultMessage: "Drop files here, or click me to bring up a file browser"
         };
 
         this.componentConfig = {
             iconFiletypes: ['.jpg', '.png', '.gif'],
             showFiletypeIcon: true,
-            postUrl: 'http://awesomesauce-gaming.net:3333/uploadHandler',
+            postUrl: 'http://mathjørnet.net:3333/uploadHandler'
         };
 
         // If you want to attach multiple callbacks, simply
         // create an array filled with all your callbacks.
-        this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
+        //this.callbackArray = [() => console.log('Hi!'), () => console.log('Ho!')];
 
         // Simple callbacks work too, of course
-        this.callback = () => console.log('Hello!');
+        //this.callback = () => console.log('Hello!');
 
-        this.success = file => console.log('uploaded', file);
+        //this.success = file => this.setState({ success: file});
+        this.success = file => {
+            console.log('uploaded', file);
+            const success = this.state.success.concat(file)
+            console.log(success);
+            this.setState({success});
+            this.props.successProp(success);
+        }
+        
+
+        //this.success = file => console.log('uploaded', file);
 
         this.removedfile = file => console.log('removing...', file);
 
@@ -49,3 +65,5 @@ export default class Example extends React.Component {
         return <DropzoneComponent config={config} eventHandlers={eventHandlers} djsConfig={djsConfig} />
     }
 }
+
+module.exports = UploadHandler;

@@ -80,9 +80,9 @@ export default class AdaptiveHeight extends Component {
     {console.log(window.innerWidth)};
     const elements = this.state.img.map((element, index) => {
       return (
-        <div key={index} id="popImgDiv">
+        <div key={index} id="Slideshow-popImgDiv">
           <Link key={index} to={/recipe/ + this.state.UID[index]}>
-            <img id="popImg" src={element} />
+            <img id="Slideshow-popImg" src={element} />
             <h1> {this.state.name[index]} </h1>
           </Link>
         </div>

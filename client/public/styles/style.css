@@ -9,10 +9,6 @@ body {
     background-color: #fff /*#2b3848*/;
 }
 
-.editor {
- border: 1px solid grey;
- padding: 6px;
-}
 
 
 /********************************
@@ -20,12 +16,78 @@ body {
         Edit and Upload page
 ********************************/
 
-    .filepicker.dropzone .dz-preview.dz-image-preview {
-        background: none;
+    /* Filepicker CSS */
+    .filepicker {
+        font-family: sans-serif;
     }
 
-    .filepicker.dropzone .dz-preview.dz-image-preview .dz-image {
+    div.filepicker {
+        text-align: center;
+        padding: 5px;
+        background-color: #E1E1E1;
         border-radius: 5px;
+        min-height: 60px;
+        border: 2px dashed #C7C7C7;
+    }
+
+    /* Icon */
+    .filepicker-file-icon
+    {
+        position: relative;
+
+        display: inline-block;
+
+        margin: 1.5em 0 2.5em 0;
+        padding-left: 45px;
+
+        color: black;
+    }
+    .filepicker-file-icon::before
+    {
+        position: absolute;
+        top: -7px;
+        left: 0;
+
+        width: 29px;
+        height: 34px;
+
+        content: '';
+
+        border: solid 2px #7F7F7F;
+        border-radius: 2px;
+    }
+    .filepicker-file-icon::after
+    {
+        font-size: 11px;
+        line-height: 1.3;
+
+        position: absolute;
+        top: 9px;
+        left: -4px;
+
+        padding: 0 2px;
+
+        content: 'file';
+        content: attr(data-filetype);
+        text-align: right;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        color: #fff;
+        background-color: #000;
+    }
+    .filepicker-file-icon .fileCorner
+    {
+        position: absolute;
+        top: -7px;
+        left: 22px;
+
+        width: 0;
+        height: 0;
+
+        border-width: 11px 0 0 11px;
+        border-style: solid;
+        border-color: white transparent transparent #920035;
     }
 
     /*Edit page*/
@@ -45,10 +107,42 @@ body {
 
     }
     /*Index page*/
+
+    #v_Index-uploadContainer {
+        width: 100%;
+        font-size: 1.5rem; 
+    }
     .textField1{
         display: inline-block;
         padding-right: 138px;
     }
+    .v_Index-name {
+        width: 40%;
+    }
+    .v_Index-block{
+        width: 100%;
+        display: inline-flex;
+    }
+    .v_Index-ingredients{
+        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+    .v_Index-editor {
+        width: 50%;
+    }
+    .v_Index-uploadDiv {
+        display: inline-block;
+        width: 40%;
+        float: right;
+    }
+
+
+
+
+
+
+    /*Recipe?*/
     #largeImageContainer {
         display: flex;
         position: relative; 
@@ -77,92 +171,210 @@ body {
 /********************************
 *       Stucture - Main 2600px ->     *
 ********************************/
+/* vietnamese */
+html {
+    @font-face {
+      font-family: 'Muli';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v10/Ul00HI23GehQ9qPsH_7ocQ.woff2) format('woff2');
+      unicode-range: U+0102-0103, U+1EA0-1EF9, U+20AB;
+    }
+    /* latin-ext */
+    @font-face {
+      font-family: 'Muli';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v10/jbCPU7JDvi-y7oVFF-ztAg.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Muli';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v10/z6c3Zzm51I2zB_Gi7146Bg.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+    }
 
+}
 
 @media screen and (max-width: 2600px) { 
     #app {
-    width: 75%;
+    width: 70%;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
     background: #fff;
-    font-family: 'Roboto', sans-serif;
+    
     font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
-
+    
     h1, h2, h3, h4, h5, h6 {
      font-weight: 600;  
     }
     h1 { font-size: 6rem; }
     h2 { font-size: 3.5rem; }
     h3 { font-size: 3rem; }
+    
+    h1 {
+	font-family: Muli;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+    h2 {
+    font-family: Muli;
+    font-size: 19px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 21.4px;
+}
+    h3 {
+	font-family: Muli;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 15.4px;
+}
+p {
+	font-family: Muli;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 20px;
+}
+blockquote {
+	font-family: Muli;
+	font-size: 21px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 30px;
+}
+pre {
+	font-family: Muli;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 18.5714px;
+}
 
     /*Header*/
-    #HeaderMenu {
+
+    .fa, .fa-angle-down{
+        
+    }
+    .DropDown-dropDownBtn{
+        border: none;
+        text-decoration: none;
+        background: #fff;
+    }
+
+    .DropDown-list ul {
+        border: #ababab solid 1px;
+        width: 70%;
+    }
+    #DropDown-dropdown, #DropDown-menu {
+        position: fixed;
+        z-index: 1;
+        
+    }
+
+    .DropDown-dropDownBtn:focus{
+        outline: none;
+    }
+    .DropDown-dropDownBtn:hover{
+        color: #eeb02d;
+        -webkit-transition:  color 0.1s ease;
+        -moz-transition:  color 0.1s ease;
+        -o-transition:  color 0.1s ease;
+        -ms-transition:  color 0.1s ease;
+        transition:  color 0.1s ease;
+    }   
+    #HeaderMenu-HeaderMenu {
         width: 100%;
-        margin-bottom: 150px;
+        margin-bottom: 70px;
 
     }
-    .headerBar {
+    .HeaderMenu-headerBar {
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color: #fff;
-        border-bottom: 1px solid black;
-        
-        }
-    .liSearchBar {
+        border-bottom: 0.1px solid black;
+    }
+    
+    .HeaderMenu-liSearchBar {
         float: right;
         padding-top: 25px;
     }
     
-    .searchBar {
-        border: 0.1px solid black;
-        width: 350px;
+    .HeaderMenu-searchBar {
+       /* border: 1px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
+        width: 200px;
         color:black;
+        outline: none;
     }
-    .liHeaderBar {
+    .HeaderMenu-lisearchbar .HeaderMenu-searchBar > .HeaderMenu-searchMagnifying{
+        border-left-width: 0;
+        left:-2px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+    .HeaderMenu-searchMagnifying{
+        background-color: #fff;
+        border: none;
+    }
+    
+    
+    .HeaderMenu-liHeaderBar {
         float: left;
         padding: 25px 16px;
     }
 
-    .liHeaderBar a, .liSearchBar {
+    .HeaderMenu-liHeaderBar a, .HeaderMenu-liSearchBar {
         display: inline-block;
         color: black;
         text-align: center;
         text-decoration: none;
         font-size: 1.7rem;
     }
-    .liHeaderBar a:hover {
-        background-color: red;
+    .HeaderMenu-liHeaderBar a:hover {
+        color: #eeb02d;
+        -webkit-transition:  color 0.1s ease;
+        -moz-transition:  color 0.1s ease;
+        -o-transition:  color 0.1s ease;
+        -ms-transition:  color 0.1s ease;
+        transition:  color 0.1s ease;
     }
     .dropdown-content-menu {
         position: absolute;
-        background-color: #333;
+        background-color: white;
         z-index: 1;
+        
     }
-    #imgMagnifyingButton {
-        width: 18px;
-        height: 20px;
-    }
-    .dropdown-content-menu {
-        position: absolute;
-        background-color: #333;
-    }
-
+    
 
     /*Front page*/
 
-    #popImgDiv {
+    #Slideshow-popImgDiv {
         text-align: center;
         font-size: 25px;
         padding-top: 10px;
     }
 
-    #popImg {
+    #Slideshow-popImg {
         max-width: 80%;
-        height: 500px;
+        height: 350px;
         display: block;
         margin-right: auto;
         margin-left: auto;
@@ -171,27 +383,34 @@ body {
     /*Recipe page*/
     #recipeContent {
         width: 100%;
+        font-family: Muli;
     }
     #recipeName {
         text-align: center;
     }
     #sidebar {
-        position: fixed;
-        width: 15%;
+        position: static;
+        width: 25%;
         display: inline-block;
         float: left;
         font-size: 1.5rem;  
+    }
+    .v_Recipe-renderIngredients{
+        border-bottom: 1px solid darkgrey;
+        padding-top: 5px;
+        display: block;
+        width: 50%;
     }
     #ingredients {
          
     }
     #imageContainer, #imgContainer {
-        width: 100%;
+        width: 70%;
     }
     #recipeContainer {
-        width: 80%;
+        width: 70%;
         display: inline-block;
-        float: right;
+        float: left;
     }
     #recipe {
         width: inherit;
@@ -211,11 +430,7 @@ body {
         font-size: 105%;
     } 
 
-    /*Upload page*/
-    #uploadContainer {
-        width: 100%;
-        font-size: 1.5rem; 
-    }
+
 
     /*List page*/
     #recipeListContainer{
@@ -259,382 +474,6 @@ body {
         padding-left: 15px;
     }
 }
-
-
-
-
-
-/********************************
-*       Stucture - Mobile Portrait     *
-********************************/
-@media screen and (max-width: 1028px) { 
-    #app {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    align-items: center;
-    background: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-     font-weight: 600;  
-    }
-    h1 { font-size: 6rem; }
-    h2 { font-size: 3rem; }
-    h3 { font-size: 3rem; }
-
-    /*Header*/
-    #HeaderMenu {
-        width: inherit;
-
-    }
-    .headerBar {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-        }
-    .liSearchBar {
-        float: right;
-    }
-    .searchBar {
-        width: 350px;
-        color:black;
-    }
-    .liHeaderBar {
-        float: left;
-    }
-
-    .liHeaderBar a, .liSearchBar {
-        display: inline-block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 2.7rem;
-    }
-    .liHeaderBar a:hover {
-        background-color: red;
-    }
-    .dropdown-content-menu {
-        position: absolute;
-        background-color: #333;
-        z-index: 1;
-    }
-    #imgMagnifyingButton {
-        background-color: darkgrey;
-        color: black;
-    }
-    .dropdown-content-menu {
-        position: absolute;
-        background-color: #333;
-    }
-
-    /*Front page*/
-
-    #popImgDiv {
-        padding-top: 10px;
-        text-align: center;
-        font-size: 25px;
-    }
-
-    #popImg {
-        max-width: 80%;
-        height: 500px;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    } 
-
-    /*Recipe page*/
-    #recipeContent {
-        width: 100%;
-    }
-    #recipeName {
-        text-align: center;
-    }
-    #sidebar {
-        position: fixed;
-        width: 15%;
-        display: inline-block;
-        float: left;
-        font-size: 1.5rem;  
-    }
-    #ingredients {
-         backface-visibility: 5px;
-                 backface-visibility: 5px;
-                 backface-visibility: 5px;
-
-
-    }
-    #imageContainer {
-        
-    }
-    #recipeContainer {
-        width: 80%;
-        display: inline-block;
-        float: right;
-    }
-    #recipeContainer {
-        width: 80%;
-        display: inline-block;
-        float: right;
-    }
-    #recipe {
-        width: inherit;
-        float: left;
-        margin-left: 2%;
-        font-size: 1.5rem;
-    }
-    #recipeImg {
-        max-width:80%;
-        height: 250px;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    } 
-        #inputServings {
-        width: 35%;
-        font-size: 105%;
-    }
-
-    /*Upload page*/
-    #uploadContainer {
-        width: 100%;
-        font-size: 1.5rem; 
-    }
-    /*List page*/
-    #recipeListContainer{
-    display: inline-block;
-    border-bottom: 1px solid grey;
-    width: 100%;
-    }
-
-    .recipeListing{
-        padding: 5px;
-    }
-
-    #recipeListContainer:hover {
-        background-color: darkgrey;
-    }
-    .recipeListing-img{
-        display: inline-block;
-        width:25%;
-        float:left;
-    }
-    .recipe-img {
-        width:100%;
-    }
-    .recipeListing-text{
-        display: inline-block;
-        float:left;
-        width: 60%;
-
-    }
-    .recipeListing-name{
-        font-size: 3.5rem;
-        width: 100%;
-        float: left;
-        padding-left: 5px;
-        color: black;
-    }
-    .recipeListing-desc{
-        width: 80%;
-        font-size: 2rem;
-        float: left;
-        padding-left: 15px;
-    }
-}
-
-/********************************
-*       Stucture - Mobile Landscape     *
-********************************/
-@media screen and (max-width: 1028px) and (max-height: 450px) { 
-    #app {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    align-items: center;
-    background: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-     font-weight: 600;  
-    }
-    h1 { font-size: 6rem; }
-    h2 { font-size: 3rem; }
-    h3 { font-size: 3rem; }
-
-    /*Header*/
-    #HeaderMenu {
-        width: inherit;
-
-    }
-    .headerBar {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-        }
-    .liSearchBar {
-        float: right;
-    }
-    .searchBar {
-        width: 350px;
-        color: black;
-    }
-    .liHeaderBar {
-        float: left;
-    }
-
-    .liHeaderBar a, .liSearchBar {
-        display: inline-block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 2.5rem;
-    }
-    .liHeaderBar a:hover {
-        background-color: red;
-    }
-    .dropdown-content-menu {
-        position: absolute;
-        z-index: 1;
-    }
-
-    #imgMagnifyingButton {
-        background-color: darkgrey;
-        color: black;
-    }
-    .dropdown-content-menu {
-        position: absolute;
-        background-color: #333;
-    }
-
-
-    /*Front page*/
-
-    #popImgDiv {
-        padding-top: 10px;
-        text-align: center;
-        font-size: 25px;
-        padding-top: 10px;
-    }
-
-    #popImg {
-        max-width: 80%;
-        height: 225px;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    } 
-
-    /*Recipe page*/
-    #recipeContent {
-        width: 100%;
-    }
-    #recipeName {
-        text-align: center;
-    }
-    #sidebar {
-        position: static;
-        width: 15%;
-        display: inline-block;
-        float: left;
-        font-size: 1.5rem;  
-    }
-    #ingredients {
-         
-    }
-    #imageContainer {
-        
-    }
-    #recipeContainer {
-        width: 80%;
-        display: inline-block;
-        float: right;
-    }
-    #recipeContainer {
-        width: 80%;
-        display: inline-block;
-        float: right;
-    }
-    #recipe {
-        width: inherit;
-        float: left;
-        margin-left: 2%;
-        font-size: 1.5rem;
-    }
-    #recipeImg {
-        max-width:80%;
-        height: 250px;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    } 
-
-    #inputServings {
-        width: 35%;
-        font-size: 105%;
-    }
-
-    /*Upload page*/
-    #uploadContainer {
-        width: 100%;
-        font-size: 1.5rem; 
-    }
-    /*List page*/
-    #recipeListContainer{
-    display: inline-block;
-    border-bottom: 1px solid grey;
-    width: 100%;
-    }
-
-    .recipeListing{
-        padding: 5px;
-    }
-
-    #recipeListContainer:hover {
-        background-color: darkgrey;
-    }
-    .recipeListing-img{
-        display: inline-block;
-        width:25%;
-        float:left;
-    }
-    .recipe-img {
-        width:100%;
-    }
-    .recipeListing-text{
-        display: inline-block;
-        float:left;
-        width: 60%;
-
-    }
-    .recipeListing-name{
-        font-size: 3.5rem;
-        width: 100%;
-        float: left;
-        padding-left: 5px;
-        color: black;
-    }
-    .recipeListing-desc{
-        width: 80%;
-        font-size: 2rem;
-        float: left;
-        padding-left: 15px;
-    }
-}
-
-
-
 
 
 

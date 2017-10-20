@@ -27,7 +27,6 @@ class RichEditorInstantiateWithText extends React.Component {
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => {
       this.setState({editorState});
-      this.props.exportContent(convertToRaw(this.state.editorState.getCurrentContent()));
     }
     this.handleKeyCommand = this._handleKeyCommand.bind(this);
     this.onTab = this._onTab.bind(this);
@@ -44,7 +43,6 @@ class RichEditorInstantiateWithText extends React.Component {
     this.confirmLink = this._confirmLink.bind(this);
     this.onLinkInputKeyDown = this._onLinkInputKeyDown.bind(this);
     this.removeLink = this._removeLink.bind(this);
-    this.cancel = this.cancel.bind(this);
   }
   _handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -137,8 +135,8 @@ class RichEditorInstantiateWithText extends React.Component {
       });
     }
   }
-  _confirmMedia(e, url) {
-    e.preventDefault();
+  _confirmMedia(url) {
+    //e.preventDefault();
     console.log(url);
     const {editorState, urlValue, urlType} = this.state;
     const contentState = editorState.getCurrentContent();
@@ -179,16 +177,11 @@ class RichEditorInstantiateWithText extends React.Component {
       setTimeout(() => this.refs.url.focus(), 0);
     });
   }
-  addImage(e) {
-    e.preventDefault();
+  addImage() {
     var tempPaths = [];
     if(this.props.imgPaths) {
       for (var i=0; i<this.props.imgPaths.length; i++){
-        if (this.props.imgPaths[i]['text'] == undefined){
-          tempPaths = tempPaths.concat(this.props.imgPaths[i]);
-        } else {
-          tempPaths = tempPaths.concat(this.props.imgPaths[i]['text']);
-        }  
+        tempPaths = tempPaths.concat(this.props.imgPaths[i]['text']);
       }
       this.setState({
         imgPath: tempPaths
@@ -200,19 +193,7 @@ class RichEditorInstantiateWithText extends React.Component {
   handleClick(e) {
     var id = e.target.id;
     var url = '../public/uploads/'+this.state.imgPath[id];
-    this._confirmMedia(e, url);
-  }
-  cancel(e) {
-    e.preventDefault();
-    if (e.target.id == "cancelImg") {
-      this.setState({
-        showImgInput: false,
-      });
-    } else if (e.target.id == "cancelLink") {
-      this.setState({
-        showURLInput: false,
-      });
-    }
+    this._confirmMedia(url);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.importContent != undefined) {
@@ -249,11 +230,17 @@ class RichEditorInstantiateWithText extends React.Component {
       imgInput =
         <div style={styles.urlInputContainer}>
           {images}
+          <br/>
+          <input
+            onChange={this.onURLChange}
+            ref="url"
+            style={styles.imgInput}
+            type="text"
+            value={this.state.urlValue}
+            onKeyDown={this.onURLInputKeyDown}
+          />
           <button onMouseDown={this.confirmMedia}>
             Confirm
-          </button>
-          <button onMouseDown={this.cancel} id="cancelImg">
-            Cancel
           </button>
         </div>;
     }
@@ -272,9 +259,6 @@ class RichEditorInstantiateWithText extends React.Component {
           <button onMouseDown={this.confirmLink}>
             Confirm
           </button>
-          <button onMouseDown={this.cancel} id="cancelLink">
-            Cancel
-          </button>
         </div>;
     }
 
@@ -290,30 +274,6 @@ class RichEditorInstantiateWithText extends React.Component {
     }
     return (
       <div className="RichEditor-root">
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
-        <div style={styles.buttons}>
-          <button
-            onMouseDown={this.promptForLink}
-            style={{marginRight: 10}}
-            type="button">
-            Add Link
-          </button>
-          <button onMouseDown={this.removeLink} type="button" style={{marginRight: 10}}>
-            Remove Link
-          </button>
-          <button onMouseDown={this.addImage} style={{marginRight: 10}} type="button">
-            Add Image
-          </button>
-        </div>
-        {urlInput}
-        {imgInput}
         <div className={className} onClick={this.focus}>
           <Editor
             blockStyleFn={getBlockStyle}
@@ -412,7 +372,7 @@ function mediaBlockRenderer(block) {
   return null;
 }
 const Image = (props) => {
-  return <img src={props.src} style={styles.media} />;
+  return <img src={props.src} style={styles.media}/>;
 };
 const Media = (props) => {
   const entity = props.contentState.getEntity(
