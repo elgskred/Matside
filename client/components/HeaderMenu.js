@@ -17,7 +17,7 @@ class HeaderMenu extends React.Component{
 		this.state = {
 			searchBar: "",
 			DropdownName: "Kategori ",
-			subNames: ["Recipes", "Categories"],
+			subNames: ["Placeholder1", "Placeholder2"],
 			subLinks: [],
             decreaseSearch: true
 		};
