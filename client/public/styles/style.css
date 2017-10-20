@@ -201,7 +201,7 @@ html {
 
 @media screen and (max-width: 2600px) { 
     #app {
-    width: 95%;
+    width: 70%;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
@@ -383,6 +383,7 @@ pre {
     /*Recipe page*/
     #recipeContent {
         width: 100%;
+        font-family: Muli;
     }
     #recipeName {
         text-align: center;
@@ -393,6 +394,12 @@ pre {
         display: inline-block;
         float: left;
         font-size: 1.5rem;  
+    }
+    .v_Recipe-renderIngredients{
+        border-bottom: 1px solid darkgrey;
+        padding-top: 5px;
+        display: block;
+        width: 50%;
     }
     #ingredients {
          

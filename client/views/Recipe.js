@@ -39,7 +39,7 @@ class RenderRecipe extends React.Component {
 			<div>
 			{this.props.recipe.split('\n').map(function(item, index) {
 		  		return (
-		    		<span key={index}>
+		    		<span key={index} className="v_recipe-renderItems">
 		      		{item}
 		      		<br/>
 		    		</span>
@@ -54,21 +54,30 @@ class RenderIngredients extends React.Component {
 	constructor(props) {
 		super(props);
 	}
-
 	render() {
-		const listIngredients = this.props.ingredients.map((item, index) =>
-			<span key={index}>
-				{this.props.amountsParsed[index]}{this.props.amounts[index]}    {item} <br />
-			</span>
-		);
-
+		var listIngredients = this.props.ingredients.map(function(item, index) {
+			if(item==""){
+				console.log("enter");
+				return (
+					<span key={index} className="v_Recipe-renderIngredients">
+						{this.props.amountsParsed[index]}<b>{this.props.amounts[index]}</b>    {item} <br />
+					</span>
+				)
+			} else {
+				console.log("else");
+				return(
+					<span key={index} className="v_Recipe-renderIngredients">
+						{this.props.amountsParsed[index]}{this.props.amounts[index]}    {item} <br />
+					</span>
+				)
+			}
+		}.bind(this));
 		return(
 			<div>
 				{listIngredients}
 			</div>
 		);
 	}
-
 }
 
 class LargeImage extends React.Component {
@@ -267,6 +276,8 @@ class ShowRecipeList extends React.Component {
 					<div id="ingredients">
 						<h2>Ingredienser: </h2>
 						<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
+						<br />
+						<br />
 						<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
 					</div>
 
