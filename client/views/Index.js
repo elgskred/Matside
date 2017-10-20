@@ -144,13 +144,15 @@ class Submit extends React.Component {
 
     return (
 
-      <div id="uploadContainer">
+      <div id="v_Index-uploadContainer">
         <form >
           <br />
-          <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault" id="RecipeName"/>
-          <br />
-          <br />
-          <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong" id="ShortDescription"/>
+          <div className="v_Index-name">
+            <input type="text" placeholder="RecipeName" onChange={this.onChange} value={this.state.RecipeName} className="inputFieldDefault" id="RecipeName"/>
+            <br />
+            <br />
+            <input type="text" placeholder="Short description" onChange={this.onChange} value={this.state.ShortDescription} className="inputFieldLong" id="ShortDescription"/>
+          </div>
           <br />
           <br />
           <div className="v_Index-block">
@@ -162,8 +164,6 @@ class Submit extends React.Component {
                 <button onClick = {this.addIngredientField}> Add Ingredient</button>
               </div>
               <br />
-              <br />
-              <br />
               <h4>Servings:</h4>
               <input type="number" placeholder="2" id="RecipeServings" onChange={this.onChange} value={this.state.RecipeServings} />
             </div>
@@ -171,13 +171,6 @@ class Submit extends React.Component {
               <UploadHandler successProp={this.onSuccess} ref="aTest"/>
             </div>
           </div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <br />
           <br />
           <br />

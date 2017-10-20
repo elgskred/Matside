@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import { hashHistory } from 'react-router'; //Endres til browserHistory når siden deployes se https://github.com/reactjs/react-router-tutorial/tree/master/lessons/12-navigating
+import { CSSTransitionGroup } from 'react-transition-group'
 
 class RenderArray extends React.Component {
 	constructor(props) {
@@ -96,8 +97,8 @@ class HeaderMenuButton extends React.Component {
 		};
 		return (
 			<div onMouseEnter={this.handleEnter} onMouseLeave={this.handleLeave} >
-				<a>{this.props.name}</a>
-				<HeaderMenuDropdown isVisible={this.state.isVisible} list={list}/>
+				<a>{this.props.name}<i className = "fa fa-angle-down" /></a>
+          		<HeaderMenuDropdown isVisible={this.state.isVisible} list={list}/>		
 			</div>
 		);
 	}

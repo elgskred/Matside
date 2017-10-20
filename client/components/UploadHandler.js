@@ -15,7 +15,8 @@ class UploadHandler extends React.Component {
         this.djsConfig = {
             addRemoveLinks: true,
             acceptedFiles: "image/jpeg,image/png,image/gif",
-            maxFilesize: 3
+            maxFilesize: 3,
+            dictDefaultMessage: "Drop files here, or click me to bring up a file browser"
         };
 
         this.componentConfig = {

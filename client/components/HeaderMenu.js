@@ -16,7 +16,7 @@ class HeaderMenu extends React.Component{
         this.enlargeSearch = this.enlargeSearch.bind(this);
 		this.state = {
 			searchBar: "",
-			DropdownName: "Kategori",
+			DropdownName: "Kategori ",
 			subNames: ["Recipes", "Categories"],
 			subLinks: [],
             decreaseSearch: true
@@ -75,7 +75,7 @@ class HeaderMenu extends React.Component{
 			<div onClick={this.handleBodyClick} id="HeaderMenu-HeaderMenu">
 				<ul className="HeaderMenu-headerBar">
 					<li className="HeaderMenu-liHeaderBar"><Link to="/">Home</Link></li>
-					<li className="HeaderMenu-liHeaderBar"><DropdownMenuTest name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
+					<li className="HeaderMenu-liHeaderBar"><DropdownMenu name={this.state.DropdownName} subNames={this.state.subNames} subLinks={this.state.subLinks}/></li>
 					<li className="HeaderMenu-liHeaderBar"><DropdownMenuTest name={this.recipe.subDropTag} subNames={this.recipe.subDrop} subLinks={this.recipe.subDropLink}/></li>
 					
                         <div className="HeaderMenu-searchBox">
