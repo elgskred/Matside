@@ -86,13 +86,11 @@ constructor(props){
   };  
 
   onSuccess (uploadPath) {
-    console.log(uploadPath);
     var tempArray = this.state.imgPath;
     for (var i = 0; i < uploadPath.length; i++){
-      console.log(uploadPath[i]['name'])
-      console.log(this.state.imgPath.indexOf(uploadPath[i]['name']))
-      if (this.state.imgPath.indexOf(uploadPath[i]['name']) == -1){
-        tempArray = this.state.imgPath.concat(uploadPath[i]['name'])
+      console.log(uploadPath[i]['xhr']['response'])
+      if (this.state.imgPath.indexOf(uploadPath[i]['xhr']['response']) == -1){
+        tempArray = this.state.imgPath.concat(uploadPath[i]['xhr']['response'])
       }
     }
     this.setState({
