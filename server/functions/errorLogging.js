@@ -5,7 +5,7 @@ const newLine = '\n';
 
 
 
-exports.logToFile = function(data, callback) {
+exports.writeToFile = function(data, callback) {
 	dt = new Date();
 	var yyyy = dateIn.getFullYear();
 	var mm = dateIn.getMonth()+1; // getMonth() is zero-based
