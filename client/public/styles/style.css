@@ -282,7 +282,7 @@ pre {
         width: 70%;
     }
     #DropDown-dropdown, #DropDown-menu {
-        position: fixed;
+        position: absolute;
         z-index: 1;
         
     }
