@@ -81,7 +81,7 @@ class Submit extends React.Component {
       console.log(uploadPath[i]['xhr']['response'])
       console.log(this.state.imgPath.indexOf(uploadPath[i]['xhr']['response']))
       if (this.state.imgPath.indexOf(uploadPath[i]['xhr']['response']) == -1){
-        tempArray = this.state.imgPath.concat(uploadPath[i]['xhr']['response'])
+        tempArray = this.state.imgPath.concat({id:this.state.imgPath.length + 1, text:uploadPath[i]['xhr']['response']})
       }
     }
     this.setState({
