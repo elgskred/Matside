@@ -629,7 +629,7 @@ exports.updateImages = function(body, callback) {
           errLog.writeToFile(err);
           console.log(err);
         }
-        var insert = [element['text']];
+        var insert = [element];
         var sql = mysql.format(deleteQuery, body.UID);
         connection.query(sql, function(err, rows, fields) {
           if (err) {
@@ -640,7 +640,7 @@ exports.updateImages = function(body, callback) {
             });
           } else {
             console.log("Inserting new image row");
-            insert = [body.UID, element['text']];
+            insert = [body.UID, element];
             var insertSql = mysql.format(insertQuery, insert);
             connection.query(insertSql, function(err, rows, fields) {
               if (err) {
