@@ -57,3 +57,4 @@ node_modules
 start.bat
 npm-debug.log
 *.bat
+logs/errlogs.txt
