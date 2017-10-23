@@ -5,13 +5,13 @@ const newLine = '\n';
 
 
 
-exports.logToFile = function(data, callback) {
+exports.writeToFile = function(data, callback) {
 	dt = new Date();
-	var yyyy = dateIn.getFullYear();
-	var mm = dateIn.getMonth()+1; // getMonth() is zero-based
-	var dd  = dateIn.getDate();
-	var hh = dateIn.getHours();
-	var mm = dateIn.getMinutes();
+	var yyyy = dt.getFullYear();
+	var mm = dt.getMonth()+1; // getMonth() is zero-based
+	var dd  = dt.getDate();
+	var hh = dt.getHours();
+	var mm = dt.getMinutes();
 	var timeStamp = hh+':'+mm+'-'+dd+'/'+mm+'/'+yyyy;
 
 
