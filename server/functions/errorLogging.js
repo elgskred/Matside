@@ -11,8 +11,8 @@ exports.writeToFile = function(data, callback) {
 	var mm = dt.getMonth()+1; // getMonth() is zero-based
 	var dd  = dt.getDate();
 	var hh = dt.getHours();
-	var mm = dt.getMinutes();
-	var timeStamp = hh+':'+mm+'-'+dd+'/'+mm+'/'+yyyy;
+	var min = dt.getMinutes();
+	var timeStamp = hh+':'+mm+' - '+dd+'/'+min+'/'+yyyy+' ';
 
 
 	fs.mkdir(path, (err) => {
