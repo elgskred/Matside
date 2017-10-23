@@ -50,7 +50,6 @@ exports.insertIngredients = function(body, UID, callback) {
         } else {
           errLog.writeToFile('Failed to insert ingredients - funct:insertIngredients');
           errLog.writeToFile(err);
-          connection.release();
           inner_callback(err);
         }
       });
