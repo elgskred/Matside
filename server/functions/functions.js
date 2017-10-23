@@ -80,7 +80,6 @@ exports.insertKeywords = function(body, UID, callback) {
         } else {
           errLog.writeToFile('Failed to insert keywords - funct:insertKeywords');
           errLog.writeToFile(err);
-          connection.release();
           inner_callback(err);
         }
       })
@@ -102,8 +101,8 @@ exports.insertPictures = function(body, UID, callback) {
   var Values = 'Values (?, ?)';
   var sql = Insert + Values;
   pool.getConnection(function(err, connection) {
-    async.forEachOf(body.files, function(element, i , inner_callback) {
-      var inserts = [UID, element];
+    async.forEachOf(body.imgPath, function(element, i , inner_callback) {
+      var inserts = [UID, element['text']];
       var Innersql = mysql.format(sql, inserts);
       connection.query(Innersql, function(err, rows, fields){
         if(!err) {
@@ -111,7 +110,6 @@ exports.insertPictures = function(body, UID, callback) {
         } else {
           errLog.writeToFile('Failed to insert pictures - funct:insertPictures');
           errLog.writeToFile(err);
-          connection.release();
           inner_callback(err);
         }
       })
