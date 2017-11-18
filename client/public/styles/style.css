@@ -316,13 +316,35 @@ pre {
         float: right;
         padding-top: 25px;
     }
+
     
     .HeaderMenu-searchBar {
        /* border: 1px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
-        width: 200px;
+        width: 250px;
         color:black;
         outline: none;
+        border-radius: 8px;
+        border: 1px solid black;
+        padding-left: 5px;
+        padding-right: 20px;
+        background-color: #f5f5f5;
+    }
+    .searchButton {
+        right: 20px;
+        position: relative;
+        z-index: 2;
+        color: #eeb02d;
+    }
+    .questionMark {
+        transform: scale(0.7,0.7);
+        right: 55px;
+        position: relative;
+        z-index: 2;
+        color: #eeb02d;
+    }
+    #HeaderMenu-popover{ 
+        margin-top: 15px;
     }
     .HeaderMenu-lisearchbar .HeaderMenu-searchBar > .HeaderMenu-searchMagnifying{
         border-left-width: 0;
@@ -379,6 +401,40 @@ pre {
         margin-right: auto;
         margin-left: auto;
     } 
+
+    .newRecipes{
+        width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #NewRecipes-bigContainer {
+        width: 500px;
+        float: left;
+        clear: left;
+        border: 2px solid black;
+    }
+    #NewRecipes-bigImg {
+        max-width: 500px;
+        max-height: 500px;
+    }
+    #NewRecipes-bigName {
+        text-align: center;
+
+    }
+    #NewRecipes-smallContainer {
+        width: 300px;
+        float: left;
+        border: 2px solid black;
+    }
+    #NewRecipes-smallImg {
+        max-width: 300px;
+        max-height: 300px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #NewRecipes-smallName {
+        text-align: center;
+    }
 
     /*Recipe page*/
     #recipeContent {

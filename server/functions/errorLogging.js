@@ -7,6 +7,8 @@ const newLine = '\n';
 
 exports.writeToFile = function(data, callback) {
 	dt = new Date();
+	console.log("Error data:");
+	console.log(data);
 	var yyyy = dt.getFullYear();
 	var mm = dt.getMonth()+1; // getMonth() is zero-based
 	var dd  = dt.getDate();

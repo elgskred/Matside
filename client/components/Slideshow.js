@@ -5,16 +5,15 @@ import { Link } from 'react-router';
 export default class AdaptiveHeight extends Component {
   constructor(props) {
     super(props);
+    this.updateDimensions = this.updateDimensions.bind(this);
     this.state = {
       UID: [],
       name: [],
       img: [],
-      temp: false
+      temp: false,
+      slides: 1,
     }
 
-  }
-  componentDidMount () {
-    this.getData();
   }
 
   getData() {
@@ -62,7 +61,23 @@ export default class AdaptiveHeight extends Component {
         }
       });
   }
-
+  updateDimensions() {
+    if (window.innerWidth >= 1920) {
+      this.setState({slides:3});
+    } else if (window.innerWidth > 1280) {
+      this.setState({slides:2});
+    } else if (window.innerWidth <= 1280) {
+      this.setState({slides:1});
+    }
+  }
+  componentDidMount() {
+    this.getData();
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
 
   render() {
     var settings = {
@@ -70,14 +85,12 @@ export default class AdaptiveHeight extends Component {
       dots: true,
       lazyLoad: true,
       infinite: true,
-      slidesToShow: 1,
+      slidesToShow: this.state.slides,
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 4000,
       pauseOnHover: true
     };
-    {console.log(window.innerHeight)};
-    {console.log(window.innerWidth)};
     const elements = this.state.img.map((element, index) => {
       return (
         <div key={index} id="Slideshow-popImgDiv">

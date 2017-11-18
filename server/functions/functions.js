@@ -427,6 +427,30 @@ exports.getPopularRecipes = function(callback) {
 
 }
 
+exports.getNewestRecipes = function(callback) {
+  pool.getConnection(function(err, connection) {
+    var Select = 'Select recipes.UID, recipes.recipeName ';
+    var From = 'From `recipes` ';
+    var Order = 'Order by recipes.UID DESC ';
+    var Limit = 'LIMIT 20';
+    var sql = Select + From + Order + Limit;
+    connection.query(sql, function(err, rows, fields) {
+      if(!err){
+        connection.release();
+        console.log(rows);
+        callback(null,rows);
+      } else {
+        errLog.writeToFile('Failed to get the newest recipes - funct:getNewestRecipes')
+        errLog.writeToFile(err);
+        console.log(err);
+        connection.release();
+        callback(null, null);
+      }
+    })
+  })
+}
+
+
 exports.incrementViews = function(uid, callback) {
   pool.getConnection(function(err, connection) {
     var Select = 'Select recipes.UID, recipes.views ';
