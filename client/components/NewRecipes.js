@@ -37,7 +37,7 @@ class NewRecipes extends React.Component {
     getData() {
 	    $.ajax ({
 	        method: 'GET',
-	        url: "http://awesomesauce-gaming.net:3333/popularRecipes" ,
+	        url: "http://awesomesauce-gaming.net:3333/newRecipes" ,
 	        success: (data) => {
 	          var tempUID = [];
 	          var tempName = [];
