@@ -46,6 +46,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.post('/recipe', routes.recipe); //new recipes are uploaded to this route
+app.get('/newRecipes', routes.newRecipes); //Gets the 20 newest recipes
 app.post('/updateRecipe', routes.updateRecipe);
 app.get('/search/:id', routes.search); //All searches are requested on this route
 app.post('/searchImg', routes.searchImg);//

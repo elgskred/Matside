@@ -199,6 +199,19 @@ exports.popularRecipes = function(req, res) {
     })
 }
 
+exports.newRecipes = function(req, res) {
+  async.parallel([async.apply(functions.getNewestRecipes)],
+    function done (err, results) {
+      if (err) {
+        errLog.writeToFile('Failed to find newest recipes');
+        errLog.writeToFile(err);
+        console.log(err);
+      }
+      console.log("Get popular recipes");
+      res.send(results[0]);
+  })
+}
+
 //Updates a recipe with a given UID
 exports.updateRecipe = function(req, res) {
   console.log("Update recipe with UID: %d", req.body.UID);
