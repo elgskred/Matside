@@ -408,27 +408,36 @@ pre {
         margin-left: auto;
     }
     #NewRecipes-bigContainer {
-        width: 500px;
+        width: 494px;
+        height: 494px;
+        margin-right: 2px;
+        margin-bottom: 2px;
         float: left;
         clear: left;
         border: 2px solid black;
     }
     #NewRecipes-bigImg {
-        max-width: 500px;
-        max-height: 500px;
+
+        max-width: 490px;
+        max-height: 488px;
+
     }
     #NewRecipes-bigName {
         text-align: center;
 
     }
     #NewRecipes-smallContainer {
-        width: 300px;
+        width: 246px;
+        height: 246px;
+        margin-right: 2px;
+        margin-bottom: 2px;
         float: left;
         border: 2px solid black;
     }
     #NewRecipes-smallImg {
-        max-width: 300px;
-        max-height: 300px;
+        margin-top: 1px;
+        max-width: 242px;
+        max-height: 242px;
         margin-right: auto;
         margin-left: auto;
     }

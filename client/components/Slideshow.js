@@ -62,7 +62,7 @@ export default class AdaptiveHeight extends Component {
       });
   }
   updateDimensions() {
-    if (window.innerWidth >= 1920) {
+    if (window.innerWidth >= 1910) {
       this.setState({slides:3});
     } else if (window.innerWidth > 1280) {
       this.setState({slides:2});
