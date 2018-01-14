@@ -13,8 +13,8 @@ class RenderArray extends React.Component {
 	}
 	render() {
 		const listRecipes = this.props.results.map((dict, index) =>
-			<div id="recipeListContainer">
-				<Link key={dict.UID} to={/recipe/ + dict.UID}>
+			<Link key={dict.UID} to={/recipe/ + dict.UID}>
+				<div id="recipeListContainer">
 					<div key={dict.UID} className="recipeListing">
 						<div className="recipeListing-img">
 							<img className="recipe-img" src={'../public/uploads/' + this.props.img[index]} alt="404"/>
@@ -29,8 +29,8 @@ class RenderArray extends React.Component {
 						</div>
 					
 					</div>
-				</Link>
-			</div>
+				</div>
+			</Link>
 		);
 		return(
 			<div>
@@ -216,7 +216,7 @@ class List extends React.Component {
 	}
 	render() {
 		return(
-			<div id="testDIV">
+			<div>
 				<HeaderMenu ref="searchBar"/>
 				<RenderArray results={this.state.searchResults} img={this.state.img}/>
 			</div>

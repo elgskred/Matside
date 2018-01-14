@@ -432,7 +432,7 @@ exports.getNewestRecipes = function(callback) {
     var Select = 'Select recipes.UID, recipes.recipeName ';
     var From = 'From `recipes` ';
     var Order = 'Order by recipes.UID DESC ';
-    var Limit = 'LIMIT 20';
+    var Limit = 'LIMIT 21';
     var sql = Select + From + Order + Limit;
     connection.query(sql, function(err, rows, fields) {
       if(!err){

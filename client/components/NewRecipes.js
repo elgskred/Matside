@@ -8,12 +8,12 @@ class BigContainer extends React.Component {
 	}
 	render(){
 		return(
-			<div id="NewRecipes-bigContainer">
-				<Link to={/recipe/ + this.props.UID[0]}>
+			<Link to={/recipe/ + this.props.UID[0]}>
+				<div id="NewRecipes-bigContainer">
 					<img id="NewRecipes-bigImg" src={this.props.img[0]} />
 					<h4 id="NewRecipes-bigName"> {this.props.name[0]} </h4>
-				</Link>
-			</div>
+				</div>
+			</Link>
 		)
 	}
 }
@@ -100,12 +100,12 @@ class NewRecipes extends React.Component {
     render(){
     	const smallContainer = this.state.imgContainers.map((item, index) =>{
 		    return(
-		      	<div id="NewRecipes-smallContainer" key={index}>
-		      		<Link key={index} to={/recipe/ + this.state.UID[index+1]}>
+		    	<Link key={index} to={/recipe/ + this.state.UID[index+1]}>
+		      		<div id="NewRecipes-smallContainer" key={index}>
 						<img id="NewRecipes-smallImg" src={item} />
 						<h4 id="NewRecipes-smallName"> {this.state.nameContainers[index]} </h4>
-					</Link>
-				</div>
+					</div>
+				</Link>
 		      )
 		});
     	return(

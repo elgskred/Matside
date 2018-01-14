@@ -142,24 +142,7 @@ body {
 
 
 
-    /*Recipe?*/
-    #largeImageContainer {
-        display: flex;
-        position: relative; 
-        height: 50%;
-        width: 50%;
-        top: 50%;
-        left: 50%;
-        opacity: 1.0;
-
-    }
-    #largeImage {
-        position: static;
-        height: 500px;
-        margin-top: -250px;
-        margin-left: -25%;
-        opacity: 1.0;       
-    }
+    
     .parent {
 
     }
@@ -201,13 +184,12 @@ html {
 
 @media screen and (max-width: 2600px) { 
     #app {
-    width: 70%;
-    margin-right: auto;
-    margin-left: auto;
-    align-items: center;
-    background: #fff;
-    
-    font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
+        width: 70%;
+        margin-right: auto;
+        margin-left: auto;
+        align-items: center;
+        background: #fff;
+        font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -218,56 +200,55 @@ html {
     h3 { font-size: 3rem; }
     
     h1 {
-	font-family: Muli;
-	font-size: 24px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
-}
+    	font-family: Muli;
+    	font-size: 24px;
+    	font-style: normal;
+    	font-variant: normal;
+    	font-weight: 500;
+    	line-height: 26.4px;
+    }
+
     h2 {
-    font-family: Muli;
-    font-size: 19px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 21.4px;
-}
+        font-family: Muli;
+        font-size: 19px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 21.4px;
+    }
     h3 {
-	font-family: Muli;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 15.4px;
-}
-p {
-	font-family: Muli;
-	font-size: 14px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 20px;
-}
-blockquote {
-	font-family: Muli;
-	font-size: 21px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 30px;
-}
-pre {
-	font-family: Muli;
-	font-size: 13px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 400;
-	line-height: 18.5714px;
-}
-
+    	font-family: Muli;
+    	font-size: 14px;
+    	font-style: normal;
+    	font-variant: normal;
+    	font-weight: 500;
+    	line-height: 15.4px;
+    }
+    p {
+    	font-family: Muli;
+    	font-size: 14px;
+    	font-style: normal;
+    	font-variant: normal;
+    	font-weight: 400;
+    	line-height: 20px;
+    }
+    blockquote {
+    	font-family: Muli;
+    	font-size: 21px;
+    	font-style: normal;
+    	font-variant: normal;
+    	font-weight: 400;
+    	line-height: 30px;
+    }
+    pre {
+    	font-family: Muli;
+    	font-size: 13px;
+    	font-style: normal;
+    	font-variant: normal;
+    	font-weight: 400;
+    	line-height: 18.5714px;
+    }
     /*Header*/
-
     .fa, .fa-angle-down{
         
     }
@@ -276,18 +257,16 @@ pre {
         text-decoration: none;
         background: #fff;
     }
-
     .DropDown-list ul {
         border: #ababab solid 1px;
         width: 70%;
     }
     #DropDown-dropdown, #DropDown-menu {
         position: absolute;
-        z-index: 1;
-        
+        z-index: 1; 
     }
 
-    .DropDown-dropDownBtn:focus{
+    .DropDown-dropDownBtn:focus {
         outline: none;
     }
     .DropDown-dropDownBtn:hover{
@@ -300,8 +279,7 @@ pre {
     }   
     #HeaderMenu-HeaderMenu {
         width: 100%;
-        margin-bottom: 70px;
-
+        margin-bottom: 10px;
     }
     .HeaderMenu-headerBar {
         list-style-type: none;
@@ -310,14 +288,11 @@ pre {
         overflow: hidden;
         background-color: #fff;
         border-bottom: 0.1px solid black;
-    }
-    
+    }  
     .HeaderMenu-liSearchBar {
         float: right;
         padding-top: 25px;
-    }
-
-    
+    }   
     .HeaderMenu-searchBar {
        /* border: 1px;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
@@ -355,14 +330,11 @@ pre {
     .HeaderMenu-searchMagnifying{
         background-color: #fff;
         border: none;
-    }
-    
-    
+    }    
     .HeaderMenu-liHeaderBar {
         float: left;
         padding: 25px 16px;
     }
-
     .HeaderMenu-liHeaderBar a, .HeaderMenu-liSearchBar {
         display: inline-block;
         color: black;
@@ -381,19 +353,14 @@ pre {
     .dropdown-content-menu {
         position: absolute;
         background-color: white;
-        z-index: 1;
-        
+        z-index: 1;        
     }
-    
-
     /*Front page*/
-
     #Slideshow-popImgDiv {
         text-align: center;
         font-size: 25px;
         padding-top: 10px;
     }
-
     #Slideshow-popImg {
         max-width: 80%;
         height: 350px;
@@ -401,11 +368,15 @@ pre {
         margin-right: auto;
         margin-left: auto;
     } 
-
     .newRecipes{
         width: 75%;
         margin-right: auto;
         margin-left: auto;
+    }
+    .NewRecipes-mainContainer {
+        width: 752px;
+        margin-left: auto;
+        margin-right: auto;
     }
     #NewRecipes-bigContainer {
         width: 494px;
@@ -414,17 +385,14 @@ pre {
         margin-bottom: 2px;
         float: left;
         clear: left;
-        border: 2px solid black;
+        border: 2px solid lightgray;
     }
     #NewRecipes-bigImg {
-
         max-width: 490px;
         max-height: 488px;
-
     }
     #NewRecipes-bigName {
         text-align: center;
-
     }
     #NewRecipes-smallContainer {
         width: 246px;
@@ -432,10 +400,9 @@ pre {
         margin-right: 2px;
         margin-bottom: 2px;
         float: left;
-        border: 2px solid black;
+        border: 2px solid lightgray;
     }
     #NewRecipes-smallImg {
-        margin-top: 1px;
         max-width: 242px;
         max-height: 242px;
         margin-right: auto;
@@ -444,7 +411,6 @@ pre {
     #NewRecipes-smallName {
         text-align: center;
     }
-
     /*Recipe page*/
     #recipeContent {
         width: 100%;
@@ -454,10 +420,17 @@ pre {
         text-align: center;
     }
     #sidebar {
-        position: static;
-        width: 25%;
+        position: fixed;
+        width: 20%;
         display: inline-block;
         float: left;
+        font-size: 1.5rem;  
+    }
+    #right-sidebar {
+        position: static;
+        width: 15%;
+        display: inline-block;
+        float: right;
         font-size: 1.5rem;  
     }
     .v_Recipe-renderIngredients{
@@ -466,19 +439,34 @@ pre {
         display: block;
         width: 50%;
     }
-    #ingredients {
-         
+    #ingredients {         
     }
     #imageContainer, #imgContainer {
-        width: 70%;
+        width: 100%;
+    }
+    #largeImageContainer {
+        position: relative; 
+        height: 50%;
+        opacity: 1.0;
+        top: 25%;
+    }
+    #largeImage {
+        display: block;
+        position: relative;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 1.0;       
     }
     #recipeContainer {
-        width: 70%;
+        width: 60%;
         display: inline-block;
         float: left;
+        margin-left: 20%;
+        margin-right: auto;
     }
     #recipe {
-        width: inherit;
+        width: 100%;
         float: left;
         margin-left: 2%;
         font-size: 1.5rem;
@@ -494,20 +482,17 @@ pre {
         width: 35%;
         font-size: 105%;
     } 
-
-
-
     /*List page*/
     #recipeListContainer{
-    display: inline-block;
-    border-bottom: 1px solid grey;
-    width: 100%;
+        display: inline-block;
+        padding-bottom: 5px;
+        padding-top: 0px;
+        border-bottom: 1px solid grey;
+        width: 100%;
     }
-
     .recipeListing{
-        padding: 5px;
+        padding-top: 0px;
     }
-
     #recipeListContainer:hover {
         background-color: darkgrey;
     }
@@ -540,5 +525,343 @@ pre {
     }
 }
 
+@media screen and (max-width: 1100px) { 
+    #app {
+        width: 95%;
+        margin-right: auto;
+        margin-left: auto;
+        align-items: center;
+        background: #fff;
+        font-size: 14px; /* Settes i px, alle rem verdier refereren til denne */
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+     font-weight: 600;  
+    }
+    h1 { font-size: 6rem; }
+    h2 { font-size: 3.5rem; }
+    h3 { font-size: 3rem; }
+    
+    h1 {
+        font-family: Muli;
+        font-size: 24px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 26.4px;
+    }
 
+    h2 {
+        font-family: Muli;
+        font-size: 19px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 21.4px;
+    }
+    h3 {
+        font-family: Muli;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 15.4px;
+    }
+    p {
+        font-family: Muli;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 20px;
+    }
+    blockquote {
+        font-family: Muli;
+        font-size: 21px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 30px;
+    }
+    pre {
+        font-family: Muli;
+        font-size: 13px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 18.5714px;
+    }
+    /*Header*/
+    .fa, .fa-angle-down{
+        
+    }
+    .DropDown-dropDownBtn{
+        border: none;
+        text-decoration: none;
+        background: #fff;
+    }
+    .DropDown-list ul {
+        border: #ababab solid 1px;
+        width: 70%;
+    }
+    #DropDown-dropdown, #DropDown-menu {
+        position: absolute;
+        z-index: 1; 
+    }
+
+    .DropDown-dropDownBtn:focus {
+        outline: none;
+    }
+    .DropDown-dropDownBtn:hover{
+        color: #eeb02d;
+        -webkit-transition:  color 0.1s ease;
+        -moz-transition:  color 0.1s ease;
+        -o-transition:  color 0.1s ease;
+        -ms-transition:  color 0.1s ease;
+        transition:  color 0.1s ease;
+    }   
+    #HeaderMenu-HeaderMenu {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .HeaderMenu-headerBar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #fff;
+        border-bottom: 0.1px solid black;
+    }  
+    .HeaderMenu-liSearchBar {
+        float: right;
+        padding-top: 25px;
+    }   
+    .HeaderMenu-searchBar {
+       /* border: 1px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
+        width: 250px;
+        color:black;
+        outline: none;
+        border-radius: 8px;
+        border: 1px solid black;
+        padding-left: 5px;
+        padding-right: 20px;
+        background-color: #f5f5f5;
+    }
+    .searchButton {
+        right: 20px;
+        position: relative;
+        z-index: 2;
+        color: #eeb02d;
+    }
+    .questionMark {
+        transform: scale(0.7,0.7);
+        right: 55px;
+        position: relative;
+        z-index: 2;
+        color: #eeb02d;
+    }
+    #HeaderMenu-popover{ 
+        margin-top: 15px;
+    }
+    .HeaderMenu-lisearchbar .HeaderMenu-searchBar > .HeaderMenu-searchMagnifying{
+        border-left-width: 0;
+        left:-2px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+    .HeaderMenu-searchMagnifying{
+        background-color: #fff;
+        border: none;
+    }    
+    .HeaderMenu-liHeaderBar {
+        float: left;
+        padding: 25px 16px;
+    }
+    .HeaderMenu-liHeaderBar a, .HeaderMenu-liSearchBar {
+        display: inline-block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.7rem;
+    }
+    .HeaderMenu-liHeaderBar a:hover {
+        color: #eeb02d;
+        -webkit-transition:  color 0.1s ease;
+        -moz-transition:  color 0.1s ease;
+        -o-transition:  color 0.1s ease;
+        -ms-transition:  color 0.1s ease;
+        transition:  color 0.1s ease;
+    }
+    .dropdown-content-menu {
+        position: absolute;
+        background-color: white;
+        z-index: 1;        
+    }
+    /*Front page*/
+    #Slideshow-popImgDiv {
+        text-align: center;
+        font-size: 25px;
+        padding-top: 10px;
+    }
+    #Slideshow-popImg {
+        max-width: 80%;
+        height: 350px;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    } 
+    .newRecipes{
+        width: 75%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .NewRecipes-mainContainer {
+        width: 502px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #NewRecipes-bigContainer {
+        width: 494px;
+        height: 494px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        float: left;
+        clear: left;
+        border: 2px solid lightgray;
+    }
+    #NewRecipes-bigImg {
+        max-width: 490px;
+        max-height: 488px;
+    }
+    #NewRecipes-bigName {
+        text-align: center;
+    }
+    #NewRecipes-smallContainer {
+        width: 246px;
+        height: 246px;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        float: left;
+        border: 2px solid lightgray;
+    }
+    #NewRecipes-smallImg {
+        max-width: 242px;
+        max-height: 242px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #NewRecipes-smallName {
+        text-align: center;
+    }
+    /*Recipe page*/
+    #recipeContent {
+        width: 100%;
+        font-family: Muli;
+    }
+    #recipeName {
+        text-align: center;
+    }
+    #sidebar {
+        position: fixed;
+        width: 20%;
+        display: inline-block;
+        float: left;
+        font-size: 1.5rem;  
+    }
+    #right-sidebar {
+        position: static;
+        width: 15%;
+        display: inline-block;
+        float: right;
+        font-size: 1.5rem;  
+    }
+    .v_Recipe-renderIngredients{
+        border-bottom: 1px solid darkgrey;
+        padding-top: 5px;
+        display: block;
+        width: 50%;
+    }
+    #ingredients {         
+    }
+    #imageContainer, #imgContainer {
+        width: 100%;
+    }
+    #largeImageContainer {
+        position: relative; 
+        height: 50%;
+        opacity: 1.0;
+        top: 25%;
+    }
+    #largeImage {
+        display: block;
+        position: relative;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 1.0;       
+    }
+    #recipeContainer {
+        width: 60%;
+        display: inline-block;
+        float: left;
+        margin-left: 20%;
+    }
+    #recipe {
+        width: 100%;
+        float: left;
+        margin-left: 2%;
+        font-size: 1.5rem;
+    }
+    #recipeImg {
+        max-width: 90%;
+        display: block;
+        float: left;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #inputServings {
+        width: 35%;
+        font-size: 105%;
+    } 
+    /*List page*/
+    #recipeListContainer{
+        display: inline-block;
+        border-bottom: 1px solid grey;
+        width: 100%;
+    }
+    .recipeListing{
+
+    }
+    #recipeListContainer:hover {
+        background-color: darkgrey;
+    }
+    .recipeListing-img{
+        display: inline-block;
+        width:25%;
+        float:left;
+    }
+    .recipe-img {
+        width:100%;
+    }
+    .recipeListing-text{
+        display: inline-block;
+        float:left;
+        width: 60%;
+
+    }
+    .recipeListing-name{
+        font-size: 3.5rem;
+        width: 100%;
+        float: left;
+        padding-left: 5px;
+        color: black;
+    }
+    .recipeListing-desc{
+        width: 80%;
+        font-size: 2rem;
+        float: left;
+        padding-left: 15px;
+    }
+}
 
