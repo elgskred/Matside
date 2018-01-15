@@ -280,10 +280,10 @@ class ShowRecipeList extends React.Component {
 						<br />
 						<RenderIngredients ingredients={this.state.ingredients} amounts={this.state.amount} amountsParsed={this.state.servingsCalculated}/>
 					</div>
-
+				</div>
+				<div id="right-sidebar">
+					<h2>Bilder: </h2>
 					<div id="imageContainer">
-						<br />
-						<br />
 						<RenderImg img={this.state.imgPath} imageClick={this.showZoomedImage} enable={this.enableDiv}/>
 					</div>
 				</div>
