@@ -17,8 +17,6 @@ class Home extends React.Component {
 					<div className="suggestionGallery">
 						<Slideshow />
 					</div>
-					{window.innerWidth} - 
-					{window.innerHeight}
 					<br/>
 					<br/>
 					<div className="newRecipes">

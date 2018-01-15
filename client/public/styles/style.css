@@ -1,160 +1,104 @@
-/* React Filepicker Example CSS */
 
-.slick-prev:before,
-.slick-next:before {
-  color: black;
-}
 
+/*Universal styling*/
 body {
     background-color: #fff /*#2b3848*/;
 }
+/*New recipe page*/
+#v_Index-uploadContainer {
+    width: 100%;
+    font-size: 1.5rem; 
+}
+.textField1{
+    display: inline-block;
+    padding-right: 138px;
+}
+.v_Index-name {
+    width: 40%;
+}
+.v_Index-block{
+    width: 100%;
+    display: inline-flex;
+}
+.v_Index-ingredients{
+    display: inline-block;
+    width: 50%;
+    float: left;
+}
+.v_Index-editor {
+    width: 50%;
+}
+.v_Index-uploadDiv {
+    display: inline-block;
+    width: 40%;
+    float: right;
+}
+/*New recipe - end*/
+/**/
+/**/
+/*Upload component - styling*/
+.filepicker-file-icon
+{
+    position: relative;
 
+    display: inline-block;
 
+    margin: 1.5em 0 2.5em 0;
+    padding-left: 45px;
 
-/********************************
-*       Stucture - Main 2600px ->     *
-        Edit and Upload page
-********************************/
+    color: black;
+}
+.filepicker-file-icon::before
+{
+    position: absolute;
+    top: -7px;
+    left: 0;
 
-    /* Filepicker CSS */
-    .filepicker {
-        font-family: sans-serif;
-    }
+    width: 29px;
+    height: 34px;
 
-    div.filepicker {
-        text-align: center;
-        padding: 5px;
-        background-color: #E1E1E1;
-        border-radius: 5px;
-        min-height: 60px;
-        border: 2px dashed #C7C7C7;
-    }
+    content: '';
 
-    /* Icon */
-    .filepicker-file-icon
-    {
-        position: relative;
+    border: solid 2px #7F7F7F;
+    border-radius: 2px;
+}
+.filepicker-file-icon::after
+{
+    font-size: 11px;
+    line-height: 1.3;
 
-        display: inline-block;
+    position: absolute;
+    top: 9px;
+    left: -4px;
 
-        margin: 1.5em 0 2.5em 0;
-        padding-left: 45px;
+    padding: 0 2px;
 
-        color: black;
-    }
-    .filepicker-file-icon::before
-    {
-        position: absolute;
-        top: -7px;
-        left: 0;
+    content: 'file';
+    content: attr(data-filetype);
+    text-align: right;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 
-        width: 29px;
-        height: 34px;
+    color: #fff;
+    background-color: #000;
+}
+.filepicker-file-icon .fileCorner
+{
+    position: absolute;
+    top: -7px;
+    left: 22px;
 
-        content: '';
+    width: 0;
+    height: 0;
 
-        border: solid 2px #7F7F7F;
-        border-radius: 2px;
-    }
-    .filepicker-file-icon::after
-    {
-        font-size: 11px;
-        line-height: 1.3;
-
-        position: absolute;
-        top: 9px;
-        left: -4px;
-
-        padding: 0 2px;
-
-        content: 'file';
-        content: attr(data-filetype);
-        text-align: right;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-
-        color: #fff;
-        background-color: #000;
-    }
-    .filepicker-file-icon .fileCorner
-    {
-        position: absolute;
-        top: -7px;
-        left: 22px;
-
-        width: 0;
-        height: 0;
-
-        border-width: 11px 0 0 11px;
-        border-style: solid;
-        border-color: white transparent transparent #920035;
-    }
-
-    /*Edit page*/
-    .inputFieldDefault{
-        width: 200px;
-    }
-    .inputFieldLong{
-        width: 500px;
-    }
-    #ingredientsList{
-        display: inline-block;
-    }
-    #amountsList{
-        display: inline-block;
-    }
-    #editRecipeDescription{
-
-    }
-    /*Index page*/
-
-    #v_Index-uploadContainer {
-        width: 100%;
-        font-size: 1.5rem; 
-    }
-    .textField1{
-        display: inline-block;
-        padding-right: 138px;
-    }
-    .v_Index-name {
-        width: 40%;
-    }
-    .v_Index-block{
-        width: 100%;
-        display: inline-flex;
-    }
-    .v_Index-ingredients{
-        display: inline-block;
-        width: 50%;
-        float: left;
-    }
-    .v_Index-editor {
-        width: 50%;
-    }
-    .v_Index-uploadDiv {
-        display: inline-block;
-        width: 40%;
-        float: right;
-    }
-
-
-
-
-
-
-    
-    .parent {
-
-    }
-    .parent:before {
-        opacity: 0.2;
-    }
-
-
-/********************************
-*       Stucture - Main 2600px ->     *
-********************************/
-/* vietnamese */
+    border-width: 11px 0 0 11px;
+    border-style: solid;
+    border-color: white transparent transparent #920035;
+}
+/*Upload component - end*/
+/**/
+/**/
+/*Font families*/
 html {
     @font-face {
       font-family: 'Muli';
@@ -181,8 +125,11 @@ html {
     }
 
 }
-
-@media screen and (max-width: 2600px) { 
+/*Computer screens - up to 5000 resolution*/
+@media screen and (max-width: 5000px) { 
+    /*General styling*/
+    /**/
+    /**/
     #app {
         width: 70%;
         margin-right: auto;
@@ -200,12 +147,12 @@ html {
     h3 { font-size: 3rem; }
     
     h1 {
-    	font-family: Muli;
-    	font-size: 24px;
-    	font-style: normal;
-    	font-variant: normal;
-    	font-weight: 500;
-    	line-height: 26.4px;
+        font-family: Muli;
+        font-size: 24px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 26.4px;
     }
 
     h2 {
@@ -217,40 +164,43 @@ html {
         line-height: 21.4px;
     }
     h3 {
-    	font-family: Muli;
-    	font-size: 14px;
-    	font-style: normal;
-    	font-variant: normal;
-    	font-weight: 500;
-    	line-height: 15.4px;
+        font-family: Muli;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 500;
+        line-height: 15.4px;
     }
     p {
-    	font-family: Muli;
-    	font-size: 14px;
-    	font-style: normal;
-    	font-variant: normal;
-    	font-weight: 400;
-    	line-height: 20px;
+        font-family: Muli;
+        font-size: 14px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 20px;
     }
     blockquote {
-    	font-family: Muli;
-    	font-size: 21px;
-    	font-style: normal;
-    	font-variant: normal;
-    	font-weight: 400;
-    	line-height: 30px;
+        font-family: Muli;
+        font-size: 21px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 30px;
     }
     pre {
-    	font-family: Muli;
-    	font-size: 13px;
-    	font-style: normal;
-    	font-variant: normal;
-    	font-weight: 400;
-    	line-height: 18.5714px;
+        font-family: Muli;
+        font-size: 13px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 18.5714px;
     }
-    /*Header*/
-    .fa, .fa-angle-down{
-        
+
+    /*General styling - end*/
+    /**/
+    /**/
+    /*Header styling*/
+    .fa, .fa-angle-down{        
     }
     .DropDown-dropDownBtn{
         border: none;
@@ -265,7 +215,6 @@ html {
         position: absolute;
         z-index: 1; 
     }
-
     .DropDown-dropDownBtn:focus {
         outline: none;
     }
@@ -355,7 +304,14 @@ html {
         background-color: white;
         z-index: 1;        
     }
+    /*Header styling - end*/
+    /**/
+    /**/
     /*Front page*/
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
     #Slideshow-popImgDiv {
         text-align: center;
         font-size: 25px;
@@ -411,6 +367,9 @@ html {
     #NewRecipes-smallName {
         text-align: center;
     }
+    /*Header styling - end*/
+    /**/
+    /**/
     /*Recipe page*/
     #recipeContent {
         width: 100%;
@@ -481,7 +440,10 @@ html {
     #inputServings {
         width: 35%;
         font-size: 105%;
-    } 
+    }
+    /*Recipe page - end*/
+    /**/
+    /**/
     /*List page*/
     #recipeListContainer{
         display: inline-block;
@@ -524,8 +486,9 @@ html {
         padding-left: 15px;
     }
 }
-
+/*Computer screens - up to 1100 resolution*/
 @media screen and (max-width: 1100px) { 
+    /*General styling*/
     #app {
         width: 95%;
         margin-right: auto;
@@ -591,6 +554,9 @@ html {
         font-weight: 400;
         line-height: 18.5714px;
     }
+    /*General styling - end*/
+    /**/
+    /**/
     /*Header*/
     .fa, .fa-angle-down{
         
@@ -698,7 +664,14 @@ html {
         background-color: white;
         z-index: 1;        
     }
+    /*Header styling - end*/
+    /**/
+    /**/
     /*Front page*/
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
     #Slideshow-popImgDiv {
         text-align: center;
         font-size: 25px;
@@ -824,6 +797,9 @@ html {
         width: 35%;
         font-size: 105%;
     } 
+    /*Recipe page - end*/
+    /**/
+    /**/
     /*List page*/
     #recipeListContainer{
         display: inline-block;
@@ -864,4 +840,3 @@ html {
         padding-left: 15px;
     }
 }
-
