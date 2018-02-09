@@ -100,8 +100,9 @@ exports.insertPictures = function(body, UID, callback) {
   var Insert = 'Insert Into `pictures` (UID, imagePath) ';
   var Values = 'Values (?, ?)';
   var sql = Insert + Values;
+  console.log(body);
   pool.getConnection(function(err, connection) {
-    async.forEachOf(body.imgPath, function(element, i , inner_callback) {
+    async.forEachOf(body.files, function(element, i , inner_callback) {
       var inserts = [UID, element['text']];
       var Innersql = mysql.format(sql, inserts);
       connection.query(Innersql, function(err, rows, fields){
