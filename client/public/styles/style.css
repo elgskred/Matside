@@ -97,6 +97,22 @@ body {
 }
 /*Upload component - end*/
 /**/
+/*Upload page*/
+/**/
+#editForm{
+    width: 100%;
+    display: inline-block;
+}
+#amountsList{
+    width: 150px;
+    display: inline-block;
+}
+#ingredientsList{
+    width: 250px;
+    display: inline-block;
+}
+/**/
+/*Upload page - end*/
 /**/
 /*Font families*/
 html {
