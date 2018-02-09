@@ -78,11 +78,10 @@ class HeaderMenu extends React.Component{
         
         };
         const popoverBottom = (
-        	<Popover id="HeaderMenu-popover" {...this.props}>
+        	<Popover id="HeaderMenu-popover" >
 					   Bruk + som prefix for å spesifisere ingredienser som skal inkluderes i søket. <br/>
             		   Bruk - som prefix for å spesifisere ingredienser som skal ekskluderes i søket. <br/>
             		   Eks: "is +sukker -sjokolade" <br/> "+svin"
-
             </Popover>
         );
 		return(
@@ -93,7 +92,7 @@ class HeaderMenu extends React.Component{
                     	<div className="HeaderMenu-searchBox">
                             <input type="text" className="HeaderMenu-searchBar" id="searchBar" placeholder="Søk" onChange={this.onChange} onKeyPress={this.onKeyPress} onFocus={this.enlargeSearch} onBlur={this.decreaseSearch} style={divStyle}/>
                             <span className = "fa fa-search searchButton" onClick={this.searchGo}></span>
-                        	<OverlayTrigger trigger="click" placement="bottom" overlay={popoverBottom} rootClose>
+                        	<OverlayTrigger trigger="click" placement="bottom" overlay={popoverBottom}>
                         		<i className="fa fa-question-circle-o questionMark" aria-hidden="true"></i>
                         	</OverlayTrigger>
                         </div>
