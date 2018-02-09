@@ -368,7 +368,7 @@ html {
     }
     #NewRecipes-smallImg {
         max-width: 242px;
-        max-height: 242px;
+        max-height: 200px;
         display: block;
         margin-right: auto;
         margin-left: auto;
@@ -731,7 +731,7 @@ html {
     }
     #NewRecipes-smallContainer {
         width: 246px;
-        height: 246px;
+        height: 200px;
         margin-right: 2px;
         margin-bottom: 2px;
         float: left;
