@@ -19,6 +19,11 @@ class Home extends React.Component {
 					</div>
 					<br/>
 					<br/>
+					<div id="title">
+						<h1>Nye oppskrifter:</h1>
+					</div>
+					<br/>
+					<br/>
 					<div className="newRecipes">
 						<NewRecipes />
 					</div>
