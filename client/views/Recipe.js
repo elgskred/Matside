@@ -206,8 +206,12 @@ class ShowRecipeList extends React.Component {
 			checkValue = e.target.value;
 		}
 		this.setState({servingsValue: checkValue});
+		console.log(this.state.amountParsed);
 		for (var i = 0; i < this.state.amountParsed.length; i++) {
-			newAmountParsed[i] = ((checkValue / this.state.servings) * this.state.amountParsed[i]).toFixed(2);
+			if(this.state.amountParsed[i] != ""){
+				newAmountParsed[i] = ((checkValue / this.state.servings) * this.state.amountParsed[i]).toFixed(2);
+			}
+			
 		};
 		this.setState({servingsCalculated: newAmountParsed});
 
@@ -275,6 +279,7 @@ class ShowRecipeList extends React.Component {
 				<div id="sidebar">
 					<div id="ingredients">
 						<h2>Ingredienser: </h2>
+						<p>Antall posjoner:</p>
 						<input type="number" onChange={this.onChange} value={this.state.servingsValue} id="inputServings"/>
 						<br />
 						<br />
