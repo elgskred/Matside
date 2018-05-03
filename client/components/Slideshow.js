@@ -19,7 +19,7 @@ export default class AdaptiveHeight extends Component {
   getData() {
     $.ajax ({
         method: 'GET',
-        url: "http://awesomesauce-gaming.net:3333/popularRecipes" ,
+        url: "http://mathjørnet.net:3333/popularRecipes" ,
         success: (data) => {
           var tempUID = [];
           var tempName = [];
@@ -44,7 +44,7 @@ export default class AdaptiveHeight extends Component {
     };
     $.ajax ({
         method: 'POST',
-        url: "http://awesomesauce-gaming.net:3333/searchImg",
+        url: "http://mathjørnet.net:3333/searchImg",
         data: postData,
         success: (data) => {
           console.log(data);

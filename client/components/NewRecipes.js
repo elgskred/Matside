@@ -37,7 +37,7 @@ class NewRecipes extends React.Component {
     getData() {
 	    $.ajax ({
 	        method: 'GET',
-	        url: "http://awesomesauce-gaming.net:3333/newRecipes" ,
+	        url: "http://mathjørnet.net:3333/newRecipes" ,
 	        success: (data) => {
 	          var tempUID = [];
 	          var tempName = [];
@@ -67,7 +67,7 @@ class NewRecipes extends React.Component {
 	    };
 	    $.ajax ({
 	        method: 'POST',
-	        url: "http://awesomesauce-gaming.net:3333/searchImg",
+	        url: "http://mathjørnet.net:3333/searchImg",
 	        data: postData,
 	        success: (data) => {
 	          console.log(data);

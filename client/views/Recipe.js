@@ -162,7 +162,7 @@ class ShowRecipeList extends React.Component {
 	componentDidMount () {
 		$.ajax ({
 	      method: 'GET',
-	      url: "http://awesomesauce-gaming.net:3333/recipes/" + this.props.params.UID,
+	      url: "http://mathjørnet.net:3333/recipes/" + this.props.params.UID,
 	      success: (data) => {
 	      	var tempIngredients = [];
 	      	var tempAmounts = [];
